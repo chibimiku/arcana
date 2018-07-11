@@ -15,9 +15,13 @@ include 'conf/db.inc.php';
 	<?php echo $config['site_name'].' '.$config['site_desc'];?>
 </title>
 <link type="text/css" rel="stylesheet" href="static/main.css" />
+<link type="text/css" rel="stylesheet" href="static/layui/css/layui.css" />
 </head>
 
 <body>
+<!-- 引入公用js区 -->
+<script src="static/layui/layui.js"></script>
+<script src="static/jquery/jquery-3.3.1.min.js"></script>
 <?php 
 	include 'block_header.inc.php';
 ?>

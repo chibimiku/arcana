@@ -72,3 +72,6 @@
 
 </body>
 </html>
+<?php 
+	ob_end_flush(); //最后完成输出
+?>
