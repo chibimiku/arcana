@@ -1,9 +1,10 @@
 <?php 
 
 define ('IN_ARCANA_ADMIN', true);
+define ('EDITOR', true);
 
 //simple player site on route.
-include ('../common_header.php');
+include '../common_header.php';
 include 'block/block_header.inc.php'; //引入头部
 
 //是否登录逻辑
