@@ -16,13 +16,20 @@ include 'conf/db.inc.php';
 </title>
 <link type="text/css" rel="stylesheet" href="static/main.css" />
 <link type="text/css" rel="stylesheet" href="static/layui/css/layui.css" />
+
+<?php if(defined('IN_EDITOR')){ ?>
+<!-- editor -->
+	<link href="static/froala/font-awesome.min.css" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" href="static/froala/codemirror.min.css">
+ 
+	<!-- Include Editor style. -->
+	<link href="static/froala/froala_editor.pkgd.min.css" rel="stylesheet" type="text/css" />
+	<link href="static/froala/froala_style.min.css" rel="stylesheet" type="text/css" />
+<!-- editor end -->
+<?php }?>
 </head>
 
 <body>
 <!-- 引入公用js区 -->
 <script src="static/layui/layui.js"></script>
 <script src="static/jquery/jquery-3.3.1.min.js"></script>
-<?php 
-	include 'block_header.inc.php';
-?>
-
