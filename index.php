@@ -3,11 +3,10 @@
 //simple player site on route.
 
 include ('common_header.php');
-
 ?>
 
 <div class="page_content">
-	<?php include 'block_week.inc.php'; //每周新番的block显示，remastered. ?>
+	<?php include 'block/block_week.inc.php'; //每周新番的block显示，remastered. ?>
 	
 	<!-- ad area. 好汉饶命系列 -->
 	<div class="adbox">
@@ -41,7 +40,7 @@ include ('common_header.php');
 						'last_update_title' => '123',
 						'last_update_time' => '456',
 						'link' => '/test/',
-					);
+					)
 				);
 			?>
 			<h3>最新连载的</h3>
@@ -73,18 +72,43 @@ include ('common_header.php');
 			<div id="con_one_2" class="h-lsjl fix"><a href="javascript:void(0)" onclick="$MH.showHistory(1);">我的观看历史</a></div>
 		</div>
 		
-		<!-- 横向的几类展示 -->
-		<!-- cata block start -->
+		<!-- 横向的方格类型展示，图片block -->
+		<?php $pic_block_cata_ids = array(35,58,69);?>
+		<?php foreach($pic_block_cata_ids as $cata_id){
+				$p_data = get_data_by_cata_id($cata_id, 16, 0);
+		?>
+				<!-- cata block start -->
+				<div class="page_content">
+					<div class="box_960">
+						<h3 class="title-bar"><?php echo get_cata_name_by_id($cata_id);?></h3>
+						<div class="home-plist">
+							<ul class="fix">
+								<?php foreach($p_data as $p_row){ ?>
+								<li><a href="detail.php?id=<?php echo $p_row['m_id']?>"><p><img lazy-load="<?php echo $p_row['m_pic']?>" src="<?php echo $p_row['m_pic'];?>" /></p><p><span><?php echo htmlspecialchars($p_row['m_name'])?></span></a></li>
+								<?php }?>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<!-- cata block end -->
+			<?php }?>
+		<!-- 横向的方格类型展示，图片block END -->
+		<!-- xx排行榜 -->
+		<?php $xx_rank_cata = array(69 => '无修', 51 => '后宫', 54 => '热血', 53 => '恋爱', 56 => '奇幻', 61 => '冒险');?>
 		<div class="page_content">
-			<h3 class="title-bar">最近更新</h3>
-			<div class="plist">
-				<ul class="fix">
-					<li><a href="detail.php?id=123">update title</a> - <a href="play.php?id=333"><em>new title</em></a></li>
-				</ul>
+			<h3 class="titbar">
+				<?php foreach($xx_rank_cata as $xx_key => $xx_row){?>
+					<em class="bottomrank"><?php echo $xx_row;?>排行榜</em>
+				<?php }?>
+			</h3>
+			<div class="home-top-new">
+				<?php foreach($xx_rank_cata as $xx_key => $xx_row){?>
+				
+				<?php }?>
 			</div>
 		</div>
-		<!-- cata block end -->
 		
+		<!-- xx排行榜 ends-->
 	</div>
 	<!-- 新宝岛框架 ends -->
 	

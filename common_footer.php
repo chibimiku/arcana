@@ -4,7 +4,7 @@
 //固有底部境界
 ?>
 
-<div class="flink">
+<div class="flink .box_960">
 	<h3 class="titbar"><span>&nbsp;</span><em>欢迎PR3以上、收录正常的的网站友链</em></h3>
 	<ul class="fix">
 		<li><a href="http://www.tsdm.me" target="_blank">天使动漫论坛</a></li>

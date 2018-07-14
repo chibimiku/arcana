@@ -10,6 +10,38 @@ function table($table_name){
 	return $config['table_pre'].'_'.$table_name;
 }
 
+//获取分类ID的名称
+function get_cata_name_by_id($cata_id){
+	$rs = DB::queryFirstRow('SELECT m_name FROM '.table('type')." WHERE m_id=%i", intval($cata_id));
+	if(!$rs){
+		return 'null';
+	}else{
+		return $rs['m_name'];
+	}
+}
+
+//获取按分类ID的前x条儿结果
+function get_data_by_cata_id($cata_id, $limit = 10, $by_type = -1){
+	$order_cond = '';
+	switch($by_type){
+		case 0:
+			$order_cond = 'ORDER BY m_hit DESC'; //按点击数降序
+			break;
+		case 1:
+			$order_cond = 'ORDER BY m_hit ASC'; //按点击数升序
+			break;
+		case 2:
+			$order_cond = 'ORDER BY m_datetime DESC'; //按更新时间降序
+			break;
+		case 3:
+			$order_cond = 'ORDER BY m_datetime ASC'; //按更新时间升序
+			break;
+		default:
+			$order_cond = '';
+	}
+	return DB::query('SELECT * FROM '.table('data')." WHERE m_type=%i $order_cond LIMIT $limit", intval($cata_id));
+}
+
 //根据data生成数据块儿
 function generate_ul_block($title, $data, $class='', $id=''){
 	$return_str = '<div id="'.$id.'" class="'.$class.'"><h3 class="block_title">'.htmlspecialchars($title).'</h3><ul>';
