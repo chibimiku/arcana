@@ -36,6 +36,140 @@ include 'lib/common_function.inc.php'; //一些常见的公用函数
 <script src="static/jquery/jquery-3.3.1.min.js"></script>
 
 <style>
+#head {
+    width: 960px;
+    height: 170px;
+    position: relative;
+    margin: 0 auto;
+    background: url(head_bg.jpg) no-repeat 0 0px;
+    margin-bottom: 10px;
+}
+
+#head .logo {
+    position: absolute;
+    top: 12px;
+    left: 0;
+    width: 185px;
+    height: 49px;
+    background: url(static/image/logo.gif) no-repeat;
+}
+
+#head .logo a {
+    text-indent: -9999px;
+    width: 172px;
+    height: 49px;
+    display: block;
+}
+
+.tInfo {
+    position: absolute;
+    top: 10px;
+    right: 0;
+    color: #666;
+}
+
+.tInfo a {
+    margin: 0 3px;
+}
+
+.uInfo {
+    position: absolute;
+    top: 40px;
+    left: 190px;
+    color: #999;
+}
+
+.search {
+    position: absolute;
+    top: 35px;
+    right: 0px;
+}
+
+.search-form {
+    float: left;
+    height: 24px;
+    line-height: 24px;
+    background: url(layout.css) no-repeat 0 -160px;
+}
+
+.search-form li {
+    float: left;
+    margin: 0 0 0 3px;
+    padding: 0;
+    position: relative;
+}
+
+#head #navigation {
+    width: 960px;
+    height: 74px;
+    overflow: hidden;
+    position: absolute;
+    top: 100px;
+    background: url(soo.gif) no-repeat 0 0;
+}
+
+#head #navigation ul {
+    width: 960px;
+    line-height: 33px;
+    font-size: 14px;
+    position: absolute;
+    top: 1px;
+    left: 4px;
+}
+
+#head #navigation li {
+    display: block;
+    height: 33px;
+    overflow: hidden;
+    float: left;
+    padding-left: 2px;
+    background: url(head.gif) no-repeat 0 -60px;
+    position: relative;
+    left: -2px;
+}
+
+#head #navigation li a {
+    font-weight: bold;
+    float: left;
+    padding: 0 14px;
+    color: #fff;
+}
+
+#head #submenu {
+    position: absolute;
+    top: 170px;
+    width: 960px;
+    font-size: 13px;
+    height: 35px;
+    line-height: 35px;
+    color: #999;
+    overflow: hidden;
+    background: url(cmenu.gif) no-repeat 0 0;
+}
+
+#head #submenu big {
+    display: block;
+    float: left;
+    font-size: 12px;
+    height: 35px;
+    font-weight: bold;
+    padding-left: 35px;
+    color: #333;
+    background: url(layout.css) no-repeat 10px center;
+}
+
+#head #submenu a {
+    margin: 0 7px;
+    color: #06c;
+}
+
+#head #navigation li a:hover, #head #navigation li.selected a {
+    text-decoration: none;
+    background: url(head.gif) no-repeat 50% -60px;
+}
+</style>
+
+<style>
 .page_content:after {
 	content: ".";
     display: block;
@@ -47,6 +181,10 @@ include 'lib/common_function.inc.php'; //一些常见的公用函数
 .box_960 {
 	width: 960px;
 	margin: 0 auto;
+}
+
+.box {
+	border:1px #BFE6F4 solid;
 }
 
 .titbar {
@@ -172,7 +310,7 @@ include 'lib/common_function.inc.php'; //一些常见的公用函数
     margin: 0 6px;
 }
 
-
-
-
 </style>
+
+<?php include 'block/block_header.inc.php';?>
+<?php include 'block/block_week.inc.php'; //每周新番的block显示，remastered. ?>

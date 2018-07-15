@@ -6,7 +6,6 @@ include ('common_header.php');
 ?>
 
 <div class="page_content">
-	<?php include 'block/block_week.inc.php'; //每周新番的block显示，remastered. ?>
 	
 	<!-- ad area. 好汉饶命系列 -->
 	<div class="adbox">
