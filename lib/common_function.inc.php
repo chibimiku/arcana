@@ -20,8 +20,24 @@ function get_cata_name_by_id($cata_id){
 	}
 }
 
+//输出某个数据所属分类的内容和连接A标签，用在如面包屑导航的地方.
+function output_type_a($type_id){
+	global $config;
+	return '<a href="search.php?typeid='.$type_id.'">'.$config['type'][$type_id].'</a>';
+}
+
+//返回单条数据的a标签展示
+function output_row_a($s_row, $new_window = true){
+	if($new_window){
+		return '<a href="detail.php?id='.$s_row['m_id'].'" target="_blank">'.htmlspecialchars($s_row['m_name']).'</a>';
+	}else{
+		return '<a href="detail.php?id='.$s_row['m_id'].'">'.htmlspecialchars($s_row['m_name']).'</a>';
+	}
+}
+
 //获取按分类ID的前x条儿结果
 function get_data_by_cata_id($cata_id, $limit = 10, $by_type = -1){
+	$cata_id = intval($cata_id);
 	$order_cond = '';
 	switch($by_type){
 		case 0:
@@ -39,7 +55,17 @@ function get_data_by_cata_id($cata_id, $limit = 10, $by_type = -1){
 		default:
 			$order_cond = '';
 	}
-	return DB::query('SELECT * FROM '.table('data')." WHERE m_type=%i $order_cond LIMIT $limit", intval($cata_id));
+	if($cata_id){
+		$dbrs = DB::query('SELECT * FROM '.table('data')." WHERE m_type=%i $order_cond LIMIT $limit", $cata_id);
+	}else{
+		$dbrs = DB::query('SELECT * FROM '.table('data')." $order_cond LIMIT $limit");
+	}
+	$in_line_count = 0;
+	foreach($dbrs as &$row){
+		$row['k_order'] = $in_line_count;
+		++$in_line_count;
+	}
+	return $dbrs;
 }
 
 //根据data生成数据块儿
@@ -56,23 +82,34 @@ function generate_ul_block($title, $data, $class='', $id=''){
 
 //对playdata里m_playdata那个别扭的字段进行解析
 //注意$data_2分割符是否正确按db来的.
-function parse_playdata_detail($in_str){
+function parse_playdata_detail($in_str, $debug = false){
 	$playdata = array();
 	$play_sources = explode('$$$', $in_str);
+	if($debug){
+		var_dump($play_sources);
+		$ss_tmp = explode("\n", $play_sources[0]);
+		var_dump($ss_tmp);
+		
+	}
+	$row1_count = 0; //这个是计数器，原始数据比较蠢没有做正确的索引
 	foreach($play_sources as $row1){
-		$data_1 = explode("$$", $row2);
-		$data_2 = explode("\r\n", $data_1[1]); //每个源里按行分割的数据
-		//$playdata[$data_1[0]] = array();
+		$data_1 = explode("$$", $row1);
+		//用 $$ 分割之后，前面是整个source的名字，后面是播放数据.各行以#分割
+		$data_2 = explode("#", $data_1[1]); //每个源里按行分割的数据
 		$input_array = array(); 
+		$row2_count = 0;
 		foreach($data_2 as $row3){
 			$data_3 = explode('$', $row3);
 			$input_array[] = array(
-				'name' => $row3[0],
-				'playdata' => $row3[1],
-				'playtype' => $row3[2],
+				'name' => $data_3[0],
+				'playurl' => $data_3[1],
+				'playtype' => $data_3[2],
+				'row_id' => $row2_count,
 			);
+			++$row2_count;
 		}
-		$playdata[] = array('source_name' => $data_1[0], 'data' => $input_array);
+		$playdata[] = array('source_name' => $data_1[0], 'data' => $input_array, 'source_id' => $row1_count);
+		++$row1_count;
 	}
 	return $playdata;
 }

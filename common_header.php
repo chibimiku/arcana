@@ -167,6 +167,97 @@ include 'lib/common_function.inc.php'; //一些常见的公用函数
     text-decoration: none;
     background: url(head.gif) no-repeat 50% -60px;
 }
+
+.blank5, .blank10 {
+    font-size: 0px;
+    line-height: 0;
+    clear: both;
+    overflow: hidden;
+}
+</style>
+
+<style>
+.update {
+    width: 480px;
+    float: left;
+    margin-left: 10px;
+}
+
+.serial {
+    margin-bottom: 10px;
+    width: 480px;
+    clear: both;
+    float: left;
+}
+
+.serial .tabs {
+    font-size: 13px;
+    color: #016A9F;
+    height: 30px;
+    line-height: 30px;
+    background: url(sprite.png) 0 -40px no-repeat;
+}
+
+.serial .tabs h3 {
+    width: 76px;
+    text-indent: -9999px;
+    float: left;
+    padding: 0 10px;
+    background: url(sprite.png) no-repeat 10px -143px;
+}
+
+.serial .tabs ul {
+    float: left;
+    margin-top: 6px;
+}
+
+.serial .tabs li {
+    width: 70px;
+    text-align: center;
+    font-size: 12px;
+    height: 24px;
+    line-height: 24px;
+    float: left;
+    margin: 0 2px;
+    cursor: pointer;
+    background: url(sprite.png) no-repeat 0 -90px;
+}
+
+.serial .tabs a {
+    color: #0071C7;
+    padding: 0 10px;
+}
+
+.serial ul.details {
+    width: 473px;
+    padding: 3px 0 0 5px;
+    border: 1px solid #97C3E5;
+    border-top: none;
+    display: none;
+}
+.serial ul.details li {
+    float: left;
+    width: 234px;
+    border-bottom: 1px #CAD9E3 dotted;
+    height: 27px;
+    line-height: 27px;
+    overflow: hidden;
+}
+
+.serial li span.date {
+    margin-right: 3px;
+    font-size: 11px;
+    font-family: Arial;
+}
+
+.serial li span {
+    padding: 1px;
+    color: #aaa;
+}
+
+.serial li span.setnum {
+    color: #080;
+}
 </style>
 
 <style>
