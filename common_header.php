@@ -115,4 +115,64 @@ include 'lib/common_function.inc.php'; //一些常见的公用函数
     border-top: none;
     overflow: hidden;
 }
+
+.home-top-new dl {
+    float: left;
+    margin-top: 5px;
+    padding: 0 0 0 15px;
+    width: 144px;
+    color: #666;
+    background: url(static/image/home_hotline.gif) repeat-y right;
+}
+
+.home-top-new dd {
+    height: 24px;
+    line-height: 24px;
+    overflow: hidden;
+}
+
+.home-top-new dd em {
+    padding-right: 5px;
+    color: #999;
+    font-size: 11px;
+    font-family: Arial;
+}
+
+.home-top-new dd a {
+    color: #016A9F;
+}
+
+.flink ul {
+    width: 952px;
+    height: auto;
+    padding: 3px;
+    border: 1px solid #97C3E5;
+    border-top: none;
+}
+.flink li {
+    float: left;
+    margin: 0 6px;
+    line-height: 24px;
+    white-space: nowrap;
+}
+
+.footer {
+    clear: both;
+    width: 960px;
+    text-align: center;
+    margin: 0 auto;
+    padding: 10px 0;
+    line-height: 25px;
+    color: #666;
+    font-family: Arial;
+    background: url(static/image/footer_bg.png) repeat-x top;
+}
+
+.footer div a {
+    margin: 0 6px;
+}
+
+
+
+
 </style>

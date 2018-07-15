@@ -4,19 +4,6 @@
 //固有底部境界
 ?>
 
-<div class="flink .box_960">
-	<h3 class="titbar"><span>&nbsp;</span><em>欢迎PR3以上、收录正常的的网站友链</em></h3>
-	<ul class="fix">
-		<li><a href="http://www.tsdm.me" target="_blank">天使动漫论坛</a></li>
-		<li><a href="tsdmtsdm@126.com" target="_blank">友链申请</a></li>
-		<li><a href="http://dm.tsdm.net" target="_blank">在线动漫</a></li>
-		<li><a href="http://dm.tsdm.net/list/?35.html" target="_blank">新番动漫</a></li>
-		<li><a href="http://mh.tsdm.net/" target="_blank">天使漫画网</a></li>
-		<li><a href="http://www.loli.cd/" target="_blank">最萌音</a></li>
-		<li><a href="http://ysm.yesmiao.me" target="_blank">影视喵</a></li>
-	</ul>
-</div>
-
 <div id="footer">
 	<div>
 		免责声明:本站所有内容均来自互联网收集而来，版权归原公司所有，如果侵犯了您的权益，请给邮箱来信，我们会第一时间回复并删除侵权内容，谢谢！ <a target="_blank" href="mailto:lolicd@126.com">【天使动漫联系邮箱】</a>
