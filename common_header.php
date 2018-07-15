@@ -312,5 +312,12 @@ include 'lib/common_function.inc.php'; //一些常见的公用函数
 
 </style>
 
+<?php 
+	$c_type = DB::query('SELECT * FROM '.table('type').' WHERE 1=1');
+	foreach($c_type as $row){
+		$config['type'][$row['m_id']] = $row;
+	}
+?>
 <?php include 'block/block_header.inc.php';?>
 <?php include 'block/block_week.inc.php'; //每周新番的block显示，remastered. ?>
+

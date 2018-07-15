@@ -29,46 +29,43 @@ include ('common_header.php');
 	<!-- 新宝岛框架 -->
 	<div class="page_content">
 		
-		<!-- TAB型数据显示块儿的原型畸体 -->
-		<div id="lastest_update">
-			<?php 
-				$show_data = array(
-					array(
-						'type_id' => 1,
-						'type_name' => 'type1',
-						'last_update_title' => '123',
-						'last_update_time' => '456',
-						'link' => '/test/',
-					)
-				);
-			?>
-			<h3>最新连载的</h3>
-			<div class="tabs">
-				<ul>
-					<li id="tabmenu_10">type1</li>
-					<li id="tabmenu_12">type2</li>
-				</ul>
+		<!-- 第一行 TAB展示 5格切换 大家观看/观看记录-->
+		<div class="page_content">
+			<div class="box720 fl">
+				<div id="index_ppt_box" style="float:left; width:230px; height:328px;">
+					此处应有图片轮播
+				</div>
+				<div class="update">
+					<div class="serial">
+						<div class="tabs">
+						<?php $update_data_cata = array(35, 51, 52, 53, 54);?>
+						<?php $line_count = 0;?>
+							<h3>最新连载的</h3>
+							<ul>
+								<?php foreach($update_data_cata as $c_id){?>
+									<li id="tabmenu_1<?php echo $line_count;?>" onmouseover="setTimeout('Show_TabMenu(1,<?php echo $line_count;?>)',100);"><?php echo $config['type'][$c_id]['m_name']?></li>
+								<?php ++$line_count;?>
+								<?php }?>
+							</ul>
+						</div>
+						<?php $line_count = 0;?>
+						<?php foreach($update_data_cata as $c_id){?>
+						<ul class="details fix" id="tabcontent_1<?php echo $line_count;?>">
+							<?php $d_data = get_data_by_cata_id($c_id,22,2);?>
+							<?php foreach($d_data as $d_row){?>
+								<li>
+									<span class="date"><?php echo $d_row['m_datetime'];?></span>
+									<a href="detail.php?id=<?php echo $d_row['m_id'];?>"><?php echo $d_row['m_name'];?></a>
+									<span>~</span>
+									<span class="setnum"> #最近更新 </a>
+								</li>
+							<?php }?>
+							<?php ++$line_count;?>
+						</ul>
+						<?php }?>
+					</div>
+				</div>
 			</div>
-			<ul class="details fix" id="tabcontent_10" style="display:block;">
-				<li><span class="date">07-11</span><a href="/Angolmoisyuankouhezhanji/" target="_blank">Angolmois元..</a><span>~</span><span class="setnum">第1集</span></li>
-			</ul>
-		</div>
-		<!-- TAB型数据显示块儿的原型畸体 end -->
-		
-		<!-- history -->
-				<div class="tabs2 fix">
-			<ul>
-				<li id="one1" onclick="setTab('one',1,2)"  class="hover"><a class="one1">大家关注的动漫&#8660;S-DM 新番动漫在线 BD无修动漫在线 ,最新美剧在线</a></li>
-				<li id="one2" onclick="setTab('one',2,2)" ><a class="one2">观看历史记录</a></li>
-			</ul>
-		</div>
-		<div class="tabs2cont fix">
-			<div id="con_one_1" class="hover fix">
-				<ul style="padding:5px 0;">
-					<li>sth ddddddd</li>
-				</ul>
-			</div>
-			<div id="con_one_2" class="h-lsjl fix"><a href="javascript:void(0)" onclick="$MH.showHistory(1);">我的观看历史</a></div>
 		</div>
 		
 		<!-- 横向的方格类型展示，图片block -->
