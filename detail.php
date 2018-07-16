@@ -10,10 +10,15 @@ if(!$data){
 }
 //解析数据
 $play_show_data = parse_playdata_detail($data['m_playdata'], false);
-$reviews = DB::query('SELECT * FROM '.table('review')." WHERE m_videoid=%i", $playid);
 
 //解析数据分类
 $type_info = DB::queryFirstRow('SELECT * FROM '.table('type').' WHERE m_id=%i', $data['m_type']);
+
+//评论ID
+$comment_page = 1;
+if(isset($_GET['comment_page'])){
+	$comment_page = max(1, intval($_GET['comment_page']));
+}
 
 ?>
 
@@ -89,16 +94,47 @@ $type_info = DB::queryFirstRow('SELECT * FROM '.table('type').' WHERE m_id=%i', 
 			<li><a target="_blank" href="http://www.tsdm.me/forum.php?mod=viewthread&amp;tid=852739">捐助</a></li>
 		</ul>
 	</div>
+	<div id="forum_active">
+		<a href="http://www.tsdm.me/forum.php?mod=viewthread&amp;tid=864229" style="color:#FF0000;margin-left:250px;margin-top:12px;" target="_blank">【何处是江湖】古风期刊第四期——《九州》正式发布</a>
+		<a href="http://www.tsdm.me/forum.php?mod=forumdisplay&amp;fid=8" target="_blank"><font color="#0972C0">☆★2018年1月新番动漫连载百度云网盘临时下载点★☆</font></a>
+	</div>
 	<!-- 帮助区 end -->
 	
+	<!-- 下载区 start -->
+	
+	
+	<!-- 下载区 end -->
+	<div class="box960-mid"></div>
+	
+	<!-- 介绍块 start -->
+	<div class="box960-mid-box">
+		<div class="box960-mid-minfo">
+			<div class="m-intro">
+				<div class="ctext fix">
+					<?php echo $data['m_des'];?>
+				</div>
+				<div class="cl"></div>
+			</div>
+		</div>
+	</div>
+	<!-- 介绍块 end -->
+	
+	<div class="sucks"><script type="text/javascript" language="javascript" src="static/js/ads/468_15.js"></script></div>
+	
 	<!-- 评论区 start -->
-	<h3>comments</h3>
-	<div id="comments">
-		<?php foreach($reviews as $re_row){ ?>
-			<div>
-				<p><span class="re_author"><?php echo $re_row['m_author']?></span><span class="re_timestamp"><?php echo $re_row['m_reply']?></span></p>
-				<p><?php echo htmlspecialchars($re_row['m_content'])?></p>
-				<p><a href="">agree (<?php echo $re_row['m_agree']?>)</a>|<a href="">anti (<?php echo $re_row['m_anti']?>)</a></p>
+	<div id="comment_list">
+		<?php $review_data = get_comment_data($playid, $comment_page);?>
+		<?php foreach($review_data['data'] as $re_row){ ?>
+			<div class="row">
+				<h3>
+					<span><?php echo $re_row['m_author'] ? $re_row['m_author'] : '旗鼓相当的网友';?></span>
+					<label><?php echo $re_row['m_addtime']?></label>
+				</h3>
+				<div class="con">
+					<div class="mycon">
+						<?php echo htmlspecialchars($re_row['m_content']);?>
+					</div>
+				</div>
 			</div>
 		<?php }?>
 	</div>

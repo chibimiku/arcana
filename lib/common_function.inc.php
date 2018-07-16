@@ -35,6 +35,20 @@ function output_row_a($s_row, $new_window = true){
 	}
 }
 
+//获取评论列表
+function get_comment_data($data_id, $page, $tpp = 20){
+	$lc = DB::queryFirstField('SELECT count(*) FROM '.table('review')." WHERE m_id=%i", $data_id);
+	$page = max(1, intval($page));
+	$limit_cond = 'LIMIT '.$tpp;
+	if($page > 1){
+		$limit_start = ($page - 1) * $tpp;
+		$limit_cond = 'LIMIT '.$limit_start.', '.$tpp;
+	}
+	$total_page_num = $lc / $tpp;
+	$data = DB::query('SELECT * FROM '.table('review')." WHERE m_videoid=%i ".$limit_cond, $data_id);
+	return array('total_page_num' => $total_page_num, 'data' => $data);
+}
+
 //获取按分类ID的前x条儿结果
 function get_data_by_cata_id($cata_id, $limit = 10, $by_type = -1){
 	$cata_id = intval($cata_id);
