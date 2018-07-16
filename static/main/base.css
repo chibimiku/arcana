@@ -1,16 +1,10 @@
-/* 完全公用元素和一些常见的块 */
+/* 完全公用 */
 ol, ul, li, dl, dt, dd {
     list-style: none;
 }
 
 a { color: #222;
     text-decoration: none;
-}
-
-.page_content {
-    width: 960px;
-    margin: 0 auto;
-    padding: 0 10px;
 }
 
 .blank5, .blank10 {
@@ -20,17 +14,13 @@ a { color: #222;
     overflow: hidden;
 }
 
-.cl {
-    clear: both;
-}
-
 /* 公用头部 */
 #head {
     width: 960px;
     height: 170px;
     position: relative;
     margin: 0 auto;
-    background: url(../image/head_bg.jpg) no-repeat 0 0px;
+    background: url(head_bg.jpg) no-repeat 0 0px;
     margin-bottom: 10px;
 }
 
@@ -279,16 +269,6 @@ a { color: #222;
     background: #FDF8F0;
 }
 
-.m-intro {
-    padding: 5px 15px;
-}
-
-.m-intro .ctext {
-    line-height: 1.8em;
-    font-size: 12px;
-    color: #333;
-}
-
 /* 详情页帮助区 */
 
 #forum_btn {
@@ -307,73 +287,4 @@ a { color: #222;
     line-height: 30px;
     font-size: 16px;
 }
-
-/* 评论区 */
-#comment {
-    padding: 0 15px;
-    overflow: hidden;
-}
-
-#comment .row {
-    margin-bottom: 8px;
-    border-bottom: 1px dashed #C2C3BA;
-    overflow: hidden;
-}
-
-#comment .row h3 {
-    height: 30px;
-    margin-bottom: 8px;
-    padding: 0 5px;
-    overflow: hidden;
-    font-size: 12px;
-    color: #8D8D8D;
-}
-
-#comment .row h3 span {
-    float: left;
-    height: 30px;
-    line-height: 30px;
-}
-
-#comment .row h3 label {
-    float: right;
-    height: 30px;
-    line-height: 30px;
-    font-weight: normal;
-}
-
-#comment .row .con {
-    padding: 0 15px;
-    text-align: left;
-    overflow: hidden;
-}
-
-#comment .row .con .mycon {
-    line-height: 25px;
-}
-
-#comment .row .menu {
-    height: 25px;
-    line-height: 25px;
-}
-
-#comment .row .menu a.item3 {
-    background: url(images/bg.gif) 0 -84px no-repeat;
-}
-
-#comment .row .menu a.item2 {
-    background: url(images/bg.gif) 0 -37px no-repeat;
-}
-
-#comment .row .menu a.item1 {
-    background: url(images/bg.gif) 0 4px no-repeat;
-}
-
-#comment .row .menu a {
-    float: right;
-    height: 25px;
-    margin-right: 8px;
-    padding-left: 15px;
-}
-
 
