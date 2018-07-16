@@ -1,0 +1,151 @@
+/* 完全公用 */
+ol, ul, li, dl, dt, dd {
+    list-style: none;
+}
+
+a {
+    color: #222;
+    text-decoration: none;
+}
+
+/* 详情页 */
+
+.here {
+    color: #333;
+    height: 30px;
+    line-height: 30px;
+    overflow: hidden;
+    background: #EFF8FE url(bg_repeat.png) no-repeat 0 0;
+}
+
+.here span {
+    display: block;
+    float: right;
+    padding: 8px 10px 0 0;
+    background: url(bg_repeat.png) no-repeat right -30px;
+}
+
+.here h3 {
+    padding-left: 20px;
+    background: url(icon.png) no-repeat 10px 12px;
+}
+
+.here h3 a {
+    text-decoration: underline;
+}
+
+.here big {
+    color: #008000;
+    font-size: 12px;
+}
+
+.box960-top {
+    background-position: 0 -400px;
+}
+
+.box960-mid-box {
+    width: 958px;
+    border-left: 1px solid #97C3E5;
+    border-right: 1px solid #97C3E5;
+    overflow: hidden;
+    background: #EFF8FE;
+}
+
+.box960-top, .box960-bot, .box960-mid {
+    height: 10px;
+    line-height: 0;
+    font-size: 0;
+    background: url(sprite.png) no-repeat 0 0;
+}
+
+.box960-mid {
+    height: 12px;
+    background-position: 0 -450px;
+}
+
+.box960-mid-minfo {
+    width: 948px;
+    margin: 0 auto;
+    overflow: hidden;
+    border-left: 1px solid #CFE3F4;
+    border-right: 1px solid #CFE3F4;
+    background: #fff;
+}
+
+.cl {
+    clear: both;
+}
+
+.m-info {
+    padding: 7px 0 0 10px;
+    width: 600px;
+    float: left;
+}
+
+.m-ads {
+    width: 300px;
+    float: right;
+    padding: 10px 10px 0 0;
+}
+
+/* 播放地址块 */
+.playurl {
+    padding: 5px 2px 5px 10px;
+}
+
+.playurl .bfdz {
+    width: 935px;
+    margin-bottom: 10px;
+    max-height: 315px;
+    overflow: auto;
+}
+
+.playurl .title {
+    width: 918px;
+    height: 30px;
+    line-height: 30px;
+    color: #06c;
+    margin: 0 0 5px 0;
+    background: url(static/image/dot_line.gif) repeat-x bottom;
+}
+
+.playurl .bfdz li {
+    float: left;
+    padding: 0 2px 5px;
+    text-align: center;
+}
+
+.playurl .bfdz li a {
+    display: block;
+    width: 147px;
+    height: 25px;
+    line-height: 25px;
+    overflow: hidden;
+    border: 1px solid #C9E0F8;
+    background: #F7FBFF;
+}
+
+.playurl .bfdz li a:visited {
+    border: 1px solid #ccc;
+    background: #FDF8F0;
+}
+
+/* 详情页帮助区 */
+
+#forum_btn {
+    height: 32px;
+    margin-left: 5px;
+    margin-top: 10px;
+}
+
+#forum_btn ul li {
+    width: 68px;
+    height: 30px;
+    background: url(../image/yellow_btn.gif);
+    text-align: center;
+    float: left;
+    margin-left: 30px;
+    line-height: 30px;
+    font-size: 16px;
+}
+

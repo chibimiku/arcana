@@ -15,7 +15,7 @@ include 'lib/common_function.inc.php'; //一些常见的公用函数
 <title>
 	<?php echo $config['site_name'].' '.$config['site_desc'];?>
 </title>
-<link type="text/css" rel="stylesheet" href="static/main.css" />
+<link type="text/css" rel="stylesheet" href="static/main/base.css" />
 <link type="text/css" rel="stylesheet" href="static/layui/css/layui.css" />
 
 <?php if(defined('IN_EDITOR')){ ?>

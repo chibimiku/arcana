@@ -17,89 +17,6 @@ $type_info = DB::queryFirstRow('SELECT * FROM '.table('type').' WHERE m_id=%i', 
 
 ?>
 
-<style>
-.here {
-    color: #333;
-    height: 30px;
-    line-height: 30px;
-    overflow: hidden;
-    background: #EFF8FE url(bg_repeat.png) no-repeat 0 0;
-}
-
-.here span {
-    display: block;
-    float: right;
-    padding: 8px 10px 0 0;
-    background: url(bg_repeat.png) no-repeat right -30px;
-}
-
-.here h3 {
-    padding-left: 20px;
-    background: url(icon.png) no-repeat 10px 12px;
-}
-
-.here h3 a {
-    text-decoration: underline;
-}
-
-.here big {
-    color: #008000;
-    font-size: 12px;
-}
-
-.box960-top {
-    background-position: 0 -400px;
-}
-
-.box960-mid-box {
-    width: 958px;
-    border-left: 1px solid #97C3E5;
-    border-right: 1px solid #97C3E5;
-    overflow: hidden;
-    background: #EFF8FE;
-}
-
-.box960-top, .box960-bot, .box960-mid {
-    height: 10px;
-    line-height: 0;
-    font-size: 0;
-    background: url(sprite.png) no-repeat 0 0;
-}
-
-.box960-mid {
-    height: 12px;
-    background-position: 0 -450px;
-}
-
-.box960-mid-minfo {
-    width: 948px;
-    margin: 0 auto;
-    overflow: hidden;
-    border-left: 1px solid #CFE3F4;
-    border-right: 1px solid #CFE3F4;
-    background: #fff;
-}
-
-.cl {
-    clear: both;
-}
-
-.m-info {
-    padding: 7px 0 0 10px;
-    width: 600px;
-    float: left;
-}
-
-.m-ads {
-    width: 300px;
-    float: right;
-    padding: 10px 10px 0 0;
-}
-
-
-
-</style>
-
 <div class="page_content">
 	<div class="here">
 		<span></span>
@@ -157,6 +74,22 @@ $type_info = DB::queryFirstRow('SELECT * FROM '.table('type').' WHERE m_id=%i', 
 		</div>
 	</div>
 	<!-- 播放数据区 end -->
+	
+	<!-- 帮助区 start -->
+	<div id="forum_text">
+		<a href="http://dm.tsdm.tv/gbook.asp" target="_blank"><font color="#FF0000">【求片、无法播放，点此留言】</font></a>
+		<a href="http://www.tsdm.me/forum.php?mod=forumdisplay&amp;fid=4" target="_blank"><font color="#0972C0">【每日签到,送积分兵长徽章】</font></a>
+		<a href="http://www.tsdm.me/forum.php?mod=viewthread&amp;tid=537303" target="_blank"><font color="#4BA7CC">【天使官方QQ群，来聊天吧】 </font></a>
+		<a href="http://www.tsdm.me/forum.php?gid=21" target="_blank"><font color="#FF0000">【1月新番版主大量招募中】 </font></a>
+	</div>
+	<div id="forum_btn">
+		<ul>
+			<li><a target="_blank" href="http://www.tsdm.me/forum.php?mod=forumdisplay&amp;fid=8">下载</a></li>
+			<li><a target="_blank" href="http://www.tsdm.me/forum.php?mod=forumdisplay&amp;fid=247">主题歌</a></li>
+			<li><a target="_blank" href="http://www.tsdm.me/forum.php?mod=viewthread&amp;tid=852739">捐助</a></li>
+		</ul>
+	</div>
+	<!-- 帮助区 end -->
 	
 	<!-- 评论区 start -->
 	<h3>comments</h3>
