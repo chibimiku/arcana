@@ -4,6 +4,70 @@ if(!defined('IN_ARCANA')){
 	exit('Access Deined.');
 }
 
+//借用discuz的分页函数
+
+function multi($num, $perpage, $curpage, $mpurl, $maxpages = 0, $page = 10, $autogoto = TRUE, $simple = FALSE) {
+	//参考 https://blog.csdn.net/zyyr365/article/details/4083053 不过这个人注释写的不是很好
+	//$num 为总共的条数   比如说这个分类下共有15篇文章
+	//$perpage为每页要显示的条数
+	//$curpage为当前的页数
+	//$mpurl为url的除去表示页数变量的一部分
+	//$page为$multipage这个字符串中要显示的表示页数的变量个数
+	//$maxpages为最大的页数值   此函数最后有一句$maxpage = $realpages;    
+    global $maxpage;    
+    $ajaxtarget = !empty($_GET['ajaxtarget']) ? " ajaxtarget=/"".dhtmlspecialchars($_GET['ajaxtarget'])."/" " : '';    
+   
+    $multipage = '';    
+    $mpurl .= strpos($mpurl, '?') ? '&' : '?';    
+    $realpages = 1;    
+     //判断总条数是否大于设置的每页要显示的条数    
+    if($num > $perpage) {    
+		//设置在$multipage中当前页数之前还要输出几个页数    
+        $offset = 2;    
+        $realpages = @ceil($num / $perpage);    
+		//$realpages 为实际总共的页数，$maxpages 为最大显示的页数，如果结果总数太多可以限制只能访问前 xx 页结果。
+        $pages = $maxpages && $maxpages < $realpages ? $maxpages : $realpages;    
+		//如果总页数小于multipage中要输出的页数$page，则只输出到实际页数为止      
+        if($page > $pages){
+            $from = 1;    
+            $to = $pages;    
+		//如果大于的话，就要输出$page个页数（我们假设的的15条数据就符合这个条件）    
+        } else {
+            $from = $curpage - $offset; //from 为当前的页号减去偏移量2（当前页数之前），如果$curpage 为1，这里 $from 是-1，为2则是0。这两种情况小于1。
+            $to = $from + $page - 1;    
+            //假设curpage为4，目前为止，from为2，to为11    
+             //下面假设$curpage为1    
+            if($from < 1) {
+                $to = $curpage + 1 - $from; //处理当前选中第1页或第2页的情况。其中$curpage == 1的时候，$to 为3，若为2则还是3。搞这么复杂弄个毛。
+				$from = 1;
+                //目前为止from为1，to为3    
+                if($to - $from < $page) {    
+                    //因为这里的前提条件是总条数大于$page，所以，如果$to-$from小于$page的话显然达不到目的，应把$to设置为$page    
+                    $to = $page;    
+                 }//目前为止 from为1 ，to为10    
+            } elseif($to > $pages) {//to是不可以大于总页数的    
+                $from = $pages - $page + 1;    
+                $to = $pages;    
+             }    
+         }    
+   
+        $multipage = ($curpage - $offset > 1 && $pages > $page ? '<a href="'.$mpurl.'page=1" mce_href="'.$mpurl.'page=1" class="first"'.$ajaxtarget.'>1 ...</a>' : '').    
+             ($curpage > 1 && !$simple ? '<a href="'.$mpurl.'page='.($curpage - 1).'" mce_href="'.$mpurl.'page='.($curpage - 1).'" class="prev"'.$ajaxtarget.'>‹‹</a>' : '');    
+         for($i = $from; $i <= $to; $i++) {    
+            $multipage .= $i == $curpage ? '<strong>'.$i.'</strong>' :    
+                '<a href="'.$mpurl.'page='.$i.($ajaxtarget && $i == $pages && $autogoto ? '#' : '').'" mce_href="'.$mpurl.'page='.$i.($ajaxtarget && $i == $pages && $autogoto ? '#' : '').'"'.$ajaxtarget.'>'.$i.'</a>';    
+         }    
+   
+        $multipage .= ($curpage < $pages && !$simple ? '<a href="'.$mpurl.'page='.($curpage + 1).'" mce_href="'.$mpurl.'page='.($curpage + 1).'" class="next"'.$ajaxtarget.'>››</a>' : '').    
+             ($to < $pages ? '<a href="'.$mpurl.'page='.$pages.'" mce_href="'.$mpurl.'page='.$pages.'" class="last"'.$ajaxtarget.'>... '.$realpages.'</a>' : '').    
+             (!$simple && $pages > $page && !$ajaxtarget ? '<kbd><input type="text" name="custompage" size="3"   /></kbd>' : '');    
+   
+        $multipage = $multipage ? '<div class="pages">'.(!$simple ? '<em> '.$num.' </em>' : '').$multipage.'</div>' : '';    
+    }    
+	$maxpage = $realpages;    
+	return $multipage;    
+}
+
  //拼接表名
 function table($table_name){
 	global $config;

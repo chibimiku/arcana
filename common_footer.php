@@ -38,8 +38,8 @@
 		<br />
 		<br />
 		<a href="http://dm.tsdm.tv" target="_blank"> 您现在访问的是旧网址 DM.TSDM<font color="Blue">.NET</font>&nbsp;&nbsp;准备暂停使用<br>
-	现在准备为您跳转到<font color="Red">新网址</font> DM.TSDM<font color="Red">.TV</font><br>
-	请记好新网址后缀<font color="Red">.tv</font> 并修改好收藏夹网址</a>
+		现在准备为您跳转到<font color="Red">新网址</font> DM.TSDM<font color="Red">.TV</font><br>
+		请记好新网址后缀<font color="Red">.tv</font> 并修改好收藏夹网址</a>
 	</font>
 	<br />
 	<br />
