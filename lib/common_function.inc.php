@@ -14,8 +14,7 @@ function multi($num, $perpage, $curpage, $mpurl, $maxpages = 0, $page = 10, $aut
 	//$mpurl为url的除去表示页数变量的一部分
 	//$page为$multipage这个字符串中要显示的表示页数的变量个数
 	//$maxpages为最大的页数值   此函数最后有一句$maxpage = $realpages;    
-    global $maxpage;    
-    $ajaxtarget = !empty($_GET['ajaxtarget']) ? " ajaxtarget=/"".dhtmlspecialchars($_GET['ajaxtarget'])."/" " : '';    
+    global $maxpage;
    
     $multipage = '';    
     $mpurl .= strpos($mpurl, '?') ? '&' : '?';    
@@ -51,16 +50,16 @@ function multi($num, $perpage, $curpage, $mpurl, $maxpages = 0, $page = 10, $aut
              }    
          }    
    
-        $multipage = ($curpage - $offset > 1 && $pages > $page ? '<a href="'.$mpurl.'page=1" mce_href="'.$mpurl.'page=1" class="first"'.$ajaxtarget.'>1 ...</a>' : '').    
-             ($curpage > 1 && !$simple ? '<a href="'.$mpurl.'page='.($curpage - 1).'" mce_href="'.$mpurl.'page='.($curpage - 1).'" class="prev"'.$ajaxtarget.'>‹‹</a>' : '');    
+        $multipage = ($curpage - $offset > 1 && $pages > $page ? '<a href="'.$mpurl.'page=1" mce_href="'.$mpurl.'page=1" class="first">1 ...</a>' : '').    
+             ($curpage > 1 && !$simple ? '<a href="'.$mpurl.'page='.($curpage - 1).'" mce_href="'.$mpurl.'page='.($curpage - 1).'" class="prev">‹‹</a>' : '');    
          for($i = $from; $i <= $to; $i++) {    
             $multipage .= $i == $curpage ? '<strong>'.$i.'</strong>' :    
-                '<a href="'.$mpurl.'page='.$i.($ajaxtarget && $i == $pages && $autogoto ? '#' : '').'" mce_href="'.$mpurl.'page='.$i.($ajaxtarget && $i == $pages && $autogoto ? '#' : '').'"'.$ajaxtarget.'>'.$i.'</a>';    
+                '<a href="'.$mpurl.'page='.$i.'" mce_href="'.$mpurl.'page='.$i.'">'.$i.'</a>';    
          }    
    
-        $multipage .= ($curpage < $pages && !$simple ? '<a href="'.$mpurl.'page='.($curpage + 1).'" mce_href="'.$mpurl.'page='.($curpage + 1).'" class="next"'.$ajaxtarget.'>››</a>' : '').    
-             ($to < $pages ? '<a href="'.$mpurl.'page='.$pages.'" mce_href="'.$mpurl.'page='.$pages.'" class="last"'.$ajaxtarget.'>... '.$realpages.'</a>' : '').    
-             (!$simple && $pages > $page && !$ajaxtarget ? '<kbd><input type="text" name="custompage" size="3"   /></kbd>' : '');    
+        $multipage .= ($curpage < $pages && !$simple ? '<a href="'.$mpurl.'page='.($curpage + 1).'" mce_href="'.$mpurl.'page='.($curpage + 1).'" class="next">››</a>' : '').    
+             ($to < $pages ? '<a href="'.$mpurl.'page='.$pages.'" mce_href="'.$mpurl.'page='.$pages.'" class="last">... '.$realpages.'</a>' : '').    
+             (!$simple && $pages > $page ? '<kbd><input type="text" name="custompage" size="3" /></kbd>' : '');    
    
         $multipage = $multipage ? '<div class="pages">'.(!$simple ? '<em> '.$num.' </em>' : '').$multipage.'</div>' : '';    
     }    
