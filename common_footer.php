@@ -2,6 +2,8 @@
 
 //footer~
 //固有底部境界
+//计算整个页面的耗时
+$page_cost = time() - TIMESTAMP;
 ?>
 
 <div id="footer">
@@ -60,5 +62,6 @@
 </body>
 </html>
 <?php 
-	ob_end_flush(); //最后完成输出
+
+ob_end_flush(); //最后完成输出
 ?>

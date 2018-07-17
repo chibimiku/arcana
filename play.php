@@ -30,6 +30,21 @@ $rs = $play_show_data[intval($source_id)][$col_id];
 
 <?php 
 
+//播放器函数
+//player_id为数据库里播放器name，因为历史问题这里用的name方式来检索.
+function make_player_by_name($player_name, $player_vars, $insert_key = '__P_VAR__'){
+	global $config;
+	$player_info = DB::queryFirstRow('SELECT * FROM '.table('player')." WHERE player_id=%s", $player_name);
+	if(!$player_info){
+		return "<span>无法找到 ".$player_name."</span>";
+	}
+	//依次用 $player_var 里的数据对模板进行替换.
+	foreach($player_vars as $player_var){
+		$player_info['html'] = str_replace($insert_key, $row, $player_info['html'], 1);
+	}
+	return $player_info['html'];
+}
+
 include ('common_footer.php');
 
 ?>
