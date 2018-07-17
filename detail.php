@@ -14,11 +14,6 @@ $play_show_data = parse_playdata_detail($data['m_playdata'], false);
 //解析数据分类
 $type_info = DB::queryFirstRow('SELECT * FROM '.table('type').' WHERE m_id=%i', $data['m_type']);
 
-//评论ID
-$comment_page = 1;
-if(isset($_GET['comment_page'])){
-	$comment_page = max(1, intval($_GET['comment_page']));
-}
 
 ?>
 
@@ -120,25 +115,7 @@ if(isset($_GET['comment_page'])){
 	<!-- 介绍块 end -->
 	
 	<div class="sucks"><script type="text/javascript" language="javascript" src="static/js/ads/468_15.js"></script></div>
-	
-	<!-- 评论区 start -->
-	<div id="comment_list">
-		<?php $review_data = get_comment_data($playid, $comment_page);?>
-		<?php foreach($review_data['data'] as $re_row){ ?>
-			<div class="row">
-				<h3>
-					<span><?php echo $re_row['m_author'] ? $re_row['m_author'] : '旗鼓相当的网友';?></span>
-					<label><?php echo $re_row['m_addtime']?></label>
-				</h3>
-				<div class="con">
-					<div class="mycon">
-						<?php echo htmlspecialchars($re_row['m_content']);?>
-					</div>
-				</div>
-			</div>
-		<?php }?>
-	</div>
-	<!-- 评论区 end -->
+	<?php include 'block/block_comment.inc.php'; ?>
 </div>
 
 <?php 

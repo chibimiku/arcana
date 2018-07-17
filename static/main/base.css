@@ -600,4 +600,104 @@ a { color: #222;
     padding-left: 15px;
 }
 
+/* 评论区底部 */
+#comment_footer {
+    width: 100%;
+    overflow: hidden;
+}
+
+#comment_footer h5 {
+    height: 30px;
+    line-height: 30px;
+    margin-bottom: 8px;
+    padding: 8px 0 0 8px;
+    font-size: 14px;
+    text-align: left;
+    border-bottom: 1px solid #ccc;
+}
+
+#comment_footer h5 span {
+    font-size: 12px;
+    font-weight: normal;
+}
+
+#talk {
+    width: 100%;
+    margin-right: 15px;
+    text-align: left;
+}
+
+.isad {
+    float: left;
+    width: 300px;
+}
+
+#talk #uploadpic {
+    width: 450px;
+    padding: 5px;
+    border-bottom: 0;
+    display: none;
+}
+
+#talk div {
+    margin: 0;
+    border: 1px solid #ccc;
+    background: #fff;
+}
+
+#talk #face {
+    /* width: 500px; */
+    padding: 5px;
+    border-bottom: 0;
+}
+
+#talk #face img {
+    cursor: pointer;
+    margin-right: 3px;
+}
+
+#talk .tc {
+    /* width: 510px; */
+    border-bottom: 0;
+    overflow: hidden;
+}
+
+#talk .tc textarea {
+    width: 99.5%;
+    height: 137px;
+    border: 0;
+    background: #fff;
+    font-size: 12px;
+}
+
+#talk #cancel {
+    /* width: 500px; */
+    padding: 5px;
+    display: none;
+    border-bottom: 0;
+}
+
+#talk .captcha {
+    /* width: 500px; */
+    padding: 5px;
+    border-bottom: 0;
+}
+
+#talk .captcha input {
+    width: 50px;
+}
+
+#talk .captcha #getcode {
+    border: 0;
+    display: none;
+}
+
+#talk .btn {
+    /* width: 500px; */
+    padding: 5px;
+}
+
+
+
+
 

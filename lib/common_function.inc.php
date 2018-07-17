@@ -19,7 +19,7 @@ function multi($num, $perpage, $curpage, $mpurl, $maxpages = 0, $page = 10, $aut
     $multipage = '';    
     $mpurl .= strpos($mpurl, '?') ? '&' : '?';    
     $realpages = 1;    
-     //判断总条数是否大于设置的每页要显示的条数    
+     //判断总条数是否大于设置的每页要显示的条数
     if($num > $perpage) {    
 		//设置在$multipage中当前页数之前还要输出几个页数    
         $offset = 2;    
@@ -86,7 +86,7 @@ function get_cata_name_by_id($cata_id){
 //输出某个数据所属分类的内容和连接A标签，用在如面包屑导航的地方.
 function output_type_a($type_id){
 	global $config;
-	return '<a href="search.php?typeid='.$type_id.'">'.$config['type'][$type_id].'</a>';
+	return '<a href="search.php?typeid='.$type_id.'">'.$config['type'][$type_id]['m_name'].'</a>';
 }
 
 //返回单条数据的a标签展示
@@ -98,9 +98,18 @@ function output_row_a($s_row, $new_window = true){
 	}
 }
 
+//带limit的替换
+//来自https://stackoverflow.com/questions/8510223
+function str_replace_limit($find, $replacement, $subject, $limit = 0){
+  if ($limit == 0)
+    return str_replace($find, $replacement, $subject);
+  $ptn = '/' . preg_quote($find,'/') . '/';
+  return preg_replace($ptn, $replacement, $subject, $limit);
+}
+
 //获取评论列表
 function get_comment_data($data_id, $page, $tpp = 20){
-	$lc = DB::queryFirstField('SELECT count(*) FROM '.table('review')." WHERE m_id=%i", $data_id);
+	$lc = DB::queryFirstField('SELECT count(*) FROM '.table('review')." WHERE m_videoid=%i", $data_id);
 	$page = max(1, intval($page));
 	$limit_cond = 'LIMIT '.$tpp;
 	if($page > 1){
@@ -109,7 +118,7 @@ function get_comment_data($data_id, $page, $tpp = 20){
 	}
 	$total_page_num = $lc / $tpp;
 	$data = DB::query('SELECT * FROM '.table('review')." WHERE m_videoid=%i ".$limit_cond, $data_id);
-	return array('total_page_num' => $total_page_num, 'data' => $data);
+	return array('total_num' => $lc, 'total_page_num' => $total_page_num, 'data' => $data);
 }
 
 //获取按分类ID的前x条儿结果
