@@ -26,6 +26,7 @@ $data_cols['m_des']['Big'] = true; //big表示用较大的textarea.
 ?>
 
 <form action="<?php echo $_SERVER['PHP_SELF'].'?action=edit';?>" method="post">
+	<input name="steel" type="hidden" value="" />
 	<?php foreach($data_cols as $key => $row){
 			switch($row['Type']):
 				case 'int':
