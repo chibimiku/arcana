@@ -89,6 +89,50 @@ function output_type_a($type_id){
 	return '<a href="search.php?typeid='.$type_id.'">'.$config['type'][$type_id]['m_name'].'</a>';
 }
 
+//从mysql原始数据里取需要的字段进行拼装
+function make_data_table($in_data, $index_data, $primary_key = ''){
+	$new_array = array();
+	foreach($in_data as $row){ //遍历原始mysql的每一行
+		$new_insert_array = array();
+		foreach($index_data as $i_row){
+			
+		}
+	}
+}
+
+//绘制table的html并返回
+function draw_table($table_head, $table_data, $table_class = ''){
+	$num_diff = count($table_head) - count($table_data);
+	$return_str = '<table class="'.$table_class.'"><thead><tr>';
+	foreach($table_head as $row){
+		$return_str = $return_str.'<td>'.htmlspecialchars($row).'</td>';
+		/*
+		if($num_diff < 0){
+			$n_d = abs($num_diff);
+			for($i=0;$i<$n_d;++$i){
+				$return_str = $return_str.'<td></td>';
+			}
+		}
+		*/
+	}
+	$return_str = $return_str.'</tr></thead><tbody>';
+	foreach($table_data as $key => $row){
+		$return_str = $return_str.'<tr>';
+		foreach($row as $col){
+			$return_str = $return_str.'<td>'.$col.'</td>';
+		}
+		$return_str = $return_str.'</tr>';
+	}
+	$return_str = $return_str.'</tbody></table>';
+	return $return_str;
+}
+
+//制作a标签的html
+function create_link($content, $url, $new_window = false){
+	$addtional_blank = $new_window ? ' target="_blank "' : '';
+	return '<a href="'.$url.'"'.$addtional_blank.'>'.htmlspecialchars($content).'</a>';
+}
+
 //返回单条数据的a标签展示
 function output_row_a($s_row, $new_window = true){
 	if($new_window){
