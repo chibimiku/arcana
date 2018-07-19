@@ -116,7 +116,7 @@ include ('common_header.php');
 					<ul class="fix">
 						<?php foreach($ht_data as $row){?>
 							<li><a href="detail.php?id=<?php echo $row['m_id'];?>" target="_blank">
-								<img src="echo htmlspecialchars($row['m_pic']);" title="<?php echo htmlspecialchars($row['m_name']);?>"/>
+								<img src="<?php echo htmlspecialchars($row['m_pic']);?>" title="<?php echo htmlspecialchars($row['m_name']);?>"/>
 								<span><?php echo htmlspecialchars($row['m_name']);?></span>
 								<em>#最近更新</em>
 							</li></a>
@@ -203,6 +203,15 @@ include ('common_header.php');
 	<!-- 新宝岛框架 ends -->
 	
 </div>
+
+<script language="javascript" type="text/javascript">
+		function Show_TabMenu(tabid_num,tabnum){
+			for(var i=0;i<5;i++){document.getElementById("tabcontent_"+tabid_num+i).style.display="none";}
+			for(var i=0;i<5;i++){document.getElementById("tabmenu_"+tabid_num+i).className="";}
+			document.getElementById("tabmenu_"+tabid_num+tabnum).className="TabsOn";
+			document.getElementById("tabcontent_"+tabid_num+tabnum).style.display="block";
+		}
+		</script>
 
 <div class="flink .box_960">
 	<h3 class="titbar"><span>&nbsp;</span><em>欢迎PR3以上、收录正常的的网站友链</em></h3>

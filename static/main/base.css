@@ -206,7 +206,7 @@ a { color: #222;
     color: #016A9F;
     height: 30px;
     line-height: 30px;
-    background: url(sprite.png) 0 -40px no-repeat;
+    background: url(../image/sprite.png) 0 -40px no-repeat;
 }
 
 .serial .tabs h3 {
@@ -214,7 +214,7 @@ a { color: #222;
     text-indent: -9999px;
     float: left;
     padding: 0 10px;
-    background: url(sprite.png) no-repeat 10px -143px;
+    background: url(../image/sprite.png) no-repeat 10px -143px;
 }
 
 .serial .tabs ul {
@@ -231,7 +231,7 @@ a { color: #222;
     float: left;
     margin: 0 2px;
     cursor: pointer;
-    background: url(sprite.png) no-repeat 0 -90px;
+    background: url(../image/sprite.png) no-repeat 0 -90px;
 }
 
 .serial .tabs a {
@@ -292,7 +292,7 @@ a { color: #222;
     color: rgb(0, 113, 199);
     height: 31px;
     line-height: 31px;
-    background: url(static/image/sprite.png) left top no-repeat;
+    background: url(../image/sprite.png) left top no-repeat;
 }
 
 .home-plist {
@@ -360,7 +360,7 @@ a { color: #222;
     padding: 0 0 0 15px;
     width: 144px;
     color: #666;
-    background: url(static/image/home_hotline.gif) repeat-y right;
+    background: url(../image/home_hotline.gif) repeat-y right;
 }
 
 .home-top-new dd {
@@ -428,7 +428,7 @@ a { color: #222;
     height: 10px;
     line-height: 0;
     font-size: 0;
-    background: url(sprite.png) no-repeat 0 0;
+    background: url(../image/sprite.png) no-repeat 0 0;
 }
 
 .box960-mid {
@@ -479,7 +479,7 @@ a { color: #222;
     line-height: 30px;
     color: #06c;
     margin: 0 0 5px 0;
-    background: url(static/image/dot_line.gif) repeat-x bottom;
+    background: url(../image/dot_line.gif) repeat-x bottom;
 }
 
 .playurl .bfdz li {
@@ -582,15 +582,15 @@ a { color: #222;
 }
 
 #comment .row .menu a.item3 {
-    background: url(images/bg.gif) 0 -84px no-repeat;
+    background: url(../image/bg.gif) 0 -84px no-repeat;
 }
 
 #comment .row .menu a.item2 {
-    background: url(images/bg.gif) 0 -37px no-repeat;
+    background: url(../images/bg.gif) 0 -37px no-repeat;
 }
 
 #comment .row .menu a.item1 {
-    background: url(images/bg.gif) 0 4px no-repeat;
+    background: url(../images/bg.gif) 0 4px no-repeat;
 }
 
 #comment .row .menu a {
