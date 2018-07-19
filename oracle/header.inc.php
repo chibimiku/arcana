@@ -15,6 +15,24 @@ include '../lib/common_function.inc.php'; //一些常见的公用函数
 <html lang="cn">
 <head>
 	<title>神奇的后台</title>
-	 <meta charset="utf-8">
+	<meta charset="utf-8" />
+	<link rel="stylesheet" href="../static/layui/css/layui.css" />
 </head>
 <body>
+
+<script src="../static/layui/layui.js"></script>
+
+<!-- 导航 -->
+<ul class="layui-nav" lay-filter="">
+  <li class="layui-nav-item"><a href="./index.php">首页</a></li>
+  <li class="layui-nav-item"><a href="./index.php?action=list&type=video">视频编辑</a></li>
+</ul>
+ 
+<script>
+//注意：导航 依赖 element 模块，否则无法进行功能性操作
+layui.use('element', function(){
+  var element = layui.element;
+  
+  //…
+});
+</script>
