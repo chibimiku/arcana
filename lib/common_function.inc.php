@@ -70,7 +70,7 @@ function multi($num, $perpage, $curpage, $mpurl, $maxpages = 0, $page = 10, $aut
 //解析表情符号
 function parse_comment_face($in_str){
 	$start_tag = '[em:';
-	$end_tag = ']';
+	$end_tag = ':]';
 	$find_start_pos = 0;
 	$find_end_pos = 0;
 	$find_last_pos = 0; //在 $find end_tag 之前做标志位。
@@ -87,8 +87,8 @@ function parse_comment_face($in_str){
 				$find_last_pos_tail = $find_last_pos > 0 ? $find_last_pos + strlen($end_tag) : 0;
 				$return_str = $return_str.substr($in_str, $find_last_pos_tail, $find_start_pos - $find_last_pos_tail);
 				$return_str = $return_str.'<img src="static/image/cmt/';
-				$return_str = $return_str.substr($in_str, $find_start_pos_tail, $find_end_pos - $find_start_pos_tail);
-				$return_str = $return_str.'" />';
+				$return_str = $return_str.intval(substr($in_str, $find_start_pos_tail , $find_end_pos - $find_start_pos_tail));
+				$return_str = $return_str.'.gif" />';
 				$find_start_pos = $find_end_pos + strlen($end_tag); //让 start 标记归位
 				$never_found = false;
 			}else{

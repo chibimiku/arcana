@@ -16,6 +16,12 @@ $play_show_data = parse_playdata_detail($data['m_playdata']);
 //获取parse之后的playdata里面的数据
 $rs = $play_show_data[$source_id]['data'][$row_id];
 
+//var_dump($play_show_data);
+echo '<br />';
+echo '<br />';
+echo '<br />';
+var_dump($rs);
+
 ?>
 
 <div class="phere">
@@ -28,7 +34,7 @@ $rs = $play_show_data[$source_id]['data'][$row_id];
 	<div class="play-box">
 		<div class="play">
 			<div id="ccplay">
-				<?php echo 'Play here.';?>
+				<?php echo make_player_by_name($rs['playtype'], array($rs['playurl']));?>
 			</div>
 			<div class="playable_box">
 				<div style="margin-top:-18px;">
@@ -71,11 +77,13 @@ $rs = $play_show_data[$source_id]['data'][$row_id];
 	<!-- 播放box end -->
 	<!-- 公告区 start -->
 	<div class="page_content">
-	
+		
 	</div>
 	<!-- 公告区 end -->
 	<!-- 评论区 start -->
-	<?php include 'block/block_comment.inc.php'; ?>
+	<div class="page_content">
+		<?php include 'block/block_comment.inc.php'; ?>
+	</div>
 	<!-- 评论区 end -->
 </div>
 
@@ -86,13 +94,13 @@ $rs = $play_show_data[$source_id]['data'][$row_id];
 //player_id为数据库里播放器name，因为历史问题这里用的name方式来检索.
 function make_player_by_name($player_name, $player_vars, $insert_key = '__P_VAR__'){
 	global $config;
-	$player_info = DB::queryFirstRow('SELECT * FROM '.table('player')." WHERE player_id=%s", $player_name);
+	$player_info = DB::queryFirstRow('SELECT * FROM '.table('player')." WHERE m_name=%s", $player_name);
 	if(!$player_info){
 		return "<span>无法找到 ".$player_name."</span>";
 	}
 	//依次用 $player_var 里的数据对模板进行替换.
 	foreach($player_vars as $player_var){
-		$player_info['html'] = str_replace_limit($insert_key, $row, $player_info['html'], 1);
+		$player_info['html'] = str_replace_limit($insert_key, $player_var, $player_info['html'], 1);
 	}
 	return $player_info['html'];
 }
