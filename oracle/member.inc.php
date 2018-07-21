@@ -15,7 +15,7 @@ switch($op){
 		$member_data = DB::queryFirstRow('SELECT * FROM '.table('manager')." WHERE m_id=%i", $edit_uid);
 		?>
 		
-		<form class="layui-form" action="index.php?action=member&op=edit" method="post">
+		<form class="layui-form" action="index.php?action=member&op=edit_submit" method="post">
 			<h3>正在修改 <?php echo $member_data['m_username'];?> 的数据</h3>
 			<div class="blank10"></div>
 			<input type="hidden" name="modify_uid" value="<?php echo $edit_uid;?>" />
@@ -39,30 +39,29 @@ switch($op){
 		</form>
 		
 		<?php
-	break;
+		break;
+	case 'edit_submit':
+		$new_pwd = $_POST['password'];
+		if(!$new_pwd){
+			showmessage('错误：提交的密码为空。');
+		}
+		$modify_uid = intval($_POST['modify_uid']);
+		if(!$modify_uid){
+			showmessage('错误：提交的UID为空。');
+		}
+		$new_pwd_hash = password_hash($new_pwd, PASSWORD_DEFAULT); //php5.5以后才有这个方法，没有的自己build个或者升级。
+		DB::update(table('manager'), array('m_new_pwd' => $new_pwd_hash), "m_id=%i", $modify_uid);
+		showmessage('修改成功', 'index.php');
+		break;
 	default:
-		$member_data = DB::query('SELECT * FROM '.table('manager'));
-
+		$member_data = DB::query('SELECT m_id, m_username, m_logintime, m_loginip FROM '.table('manager'));
+		$table_head = array('ID', '用户名', '登录时间', '登录IP', '');
+		foreach($member_data as &$row){
+			$row['link'] = '<a href="index.php?action=member&op=edit&uid='.$row['m_id'].'">编辑</a>';
+		}
+		echo draw_table($table_head, $member_data, 'layui-table');
 		?>
 
-		<table class="layui-table">
-			<colgroup>
-				<col width="150">
-				<col width="200">
-				<col>
-			</colgroup>
-			<thead><tr><td>ID</td><td>用户名</td><td>登录时间</td><td>登录IP</td><td></td></tr></thead>
-			<tbody>
-				<?php foreach($member_data as $row){?>
-					<tr>
-					<td><?php echo $row['m_id']?></td>
-					<td><?php echo $row['m_username']?></td>
-					<td><?php echo $row['m_logintime']?></td>
-					<td><?php echo $row['m_loginip']?></td>
-					<td><a href="index.php?action=member&op=edit&uid=<?php echo $row['m_id']?>">编辑</a></td>
-					</tr>
-				<?php }?>
-			</tbody>
-		</table>
+		
 
 <?php }?>

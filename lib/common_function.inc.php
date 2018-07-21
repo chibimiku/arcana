@@ -281,11 +281,15 @@ function parse_playdata_detail($in_str, $debug = false){
 }
 
 //显示错误信息
-function showmessage($message, $title = ''){
+function showmessage($message, $jump_url = '', $title = ''){
 	ob_end_clean();
 	echo "<div id=\"error\"><h3>$title</h3><div id=\"error_content\">";
 	echo htmlspecialchars($message);
 	echo '</div>';
+	echo '<button onclick="goBack()">点击返回</button><script>function goBack(){window.history.back();}</script>';
+	if($jump_url){
+		echo '<script>setTimeout(function(){window.location.href = "'.$jump_url.'"}, 3000);</script>';
+	}
 	echo '</body></html>';
 	exit();
 }

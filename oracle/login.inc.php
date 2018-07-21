@@ -6,14 +6,25 @@ if(!defined('IN_ARCANA_ADMIN')){
 
 //检查是否已处于登录状态
 if($uid){
-	echo "<script type=\"text/javascript\">setTimeout(\"window.location.href='index.php'\",3000);</script>";
+	showmessage('你已经处于登录状态。');
 }else{
 	if(isset($_POST['p_login']) && isset($_POST['u'])){
 		//检查登录
-		$userinfo = DB::queryFirstRow('SELECT * FROM '.table('manager')." m_username=%s", $_POST['u']);
+		$userinfo = DB::queryFirstRow('SELECT * FROM '.table('manager')." WHERE m_username=%s", $_POST['u']);
 		if($userinfo){
 			$check_result = password_verify($_POST['p'], $userinfo['m_new_pwd']);
-			var_dump($check_result);
+			if($check_result){
+				$new_ssid = rand(100000,999999).'_'.rand(100000,999999).md5(rand(100,999));
+				//生成ssid并写入cookie和DB
+				DB::update(table('manager'), array('m_ssid' => $new_ssid), "m_id=%i", $userinfo['m_id']);
+				setcookie('ssid', $new_ssid);
+				setcookie('uid', $userinfo['m_id']);
+				showmessage('登录成功。');
+			}else{
+				showmessage('登录失败，用户名或者密码错误。');
+			}
+		}else{
+			showmessage('登录失败，用户名或者密码错误。');
 		}
 	}
 ?>

@@ -19,6 +19,9 @@ switch($_GET['action']){
 	case 'login':
 		include 'login.inc.php';
 		break;
+	case 'logout':
+		include 'logout.inc.php';
+		break;
 	case 'member':
 		include 'member.inc.php';
 		break;
