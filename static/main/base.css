@@ -24,6 +24,24 @@ a { color: #222;
     clear: both;
 }
 
+.box250 {
+    width: 250px;
+    overflow: hidden;
+}
+
+.fr {
+    float: right;
+}
+
+.box700 {
+    width: 700px;
+    overflow: hidden;
+}
+
+.fl {
+    float: left;
+}
+
 /* 翻页按钮 */
 .pager a, .pager span, .pager strong{
     float: left;
@@ -891,4 +909,32 @@ a { color: #222;
     color: #ED1B23;
     font-size: 12px;
     font-style: normal;
+}
+
+.search_right_box {
+	border: 1px #BFE6F4 solid;
+    width: 248px;
+    height: 198px;
+}
+
+.list-rec {
+    width: 248px;
+    border: 1px solid #97C3E5;
+    border-top: none;
+    overflow: hidden;
+}
+
+.list-rec ul {
+    width: 92%;
+    margin: 0 auto;
+    padding: 3px 0 3px;
+}
+
+.list-rec li {
+    height: 22px;
+    line-height: 22px;
+    overflow: hidden;
+    color: #666;
+    padding-left: 8px;
+    background: url(../image/icon.png) no-repeat 0 -21px;
 }

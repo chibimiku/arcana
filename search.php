@@ -113,9 +113,29 @@ $result_array= array_slice($result_array, $offset, $tpp, true);
 			<?php }?>
 			</ul><div class="blank10 cl"></div>
 		</div>
-		<div class="pager">
-			<?php echo multi($total_item, $tpp, $page, 'search.php?'.$search_url);?>
+	</div>
+	<!-- 右侧推荐 start -->
+	<div class="box250 fr">
+		<div class="search_right_box">
+			<script type="text/javascript" language="javascript" src="static/js/ads/250200.js"></script>
 		</div>
+		<div class="blank10"></div>
+		<h3 class="titbar"><span>&nbsp;</span><em class="hkdsj">推荐</em></h3>
+		<div class="list-rec fix">
+			<?php $recommend_data_1 = get_data_by_cata_id(0)?>
+			<ul class="fix">
+				<?php foreach($recommend_data_1 as $row){?>
+					<li><a href="detail.php?id=<?php echo $row['m_id'];?>"><?php echo $row['m_name'];?></a> <span><?php echo $row['m_note']?></span></li>
+				<?php }?>
+			</ul>
+		</div>
+	</div>
+	<!-- 右侧推荐 emd -->
+	<div class="cl"></div>
+</div>
+<div class="page_content">
+	<div class="pager">
+		<?php echo multi($total_item, $tpp, $page, 'search.php?'.$search_url);?>
 	</div>
 </div>
 
