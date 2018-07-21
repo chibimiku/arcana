@@ -74,7 +74,7 @@ include ('common_header.php');
 									<span class="date"><?php echo $d_row['m_datetime'];?></span>
 									<a href="detail.php?id=<?php echo $d_row['m_id'];?>"><?php echo $d_row['m_name'];?></a>
 									<span>~</span>
-									<span class="setnum"> #最近更新 </a>
+									<span class="setnum"><?php echo $d_row['m_note'];?></a>
 								</li>
 							<?php }?>
 							<?php ++$line_count;?>
@@ -128,7 +128,7 @@ include ('common_header.php');
 						<?php foreach($lt_data as $row){?>
 							<dd>
 								<small><?php echo($row['k_order'] + 1);?></small>
-								<a href="detail.php?id=<?php echo $row['m_id'];?>"><?php echo htmlspecialchars($row['m_name']);?><em>#最近更新</em></a>
+								<a href="detail.php?id=<?php echo $row['m_id'];?>"><?php echo htmlspecialchars($row['m_name']);?><em><?php echo $row['m_note']?></em></a>
 							</dd>
 						<?php }?>
 					</dl>
@@ -213,17 +213,19 @@ include ('common_header.php');
 		}
 		</script>
 
-<div class="flink .box_960">
-	<h3 class="titbar"><span>&nbsp;</span><em>欢迎PR3以上、收录正常的的网站友链</em></h3>
-	<ul class="fix">
-		<li><a href="http://www.tsdm.me" target="_blank">天使动漫论坛</a></li>
-		<li><a href="tsdmtsdm@126.com" target="_blank">友链申请</a></li>
-		<li><a href="http://dm.tsdm.net" target="_blank">在线动漫</a></li>
-		<li><a href="http://dm.tsdm.net/list/?35.html" target="_blank">新番动漫</a></li>
-		<li><a href="http://mh.tsdm.net/" target="_blank">天使漫画网</a></li>
-		<li><a href="http://www.loli.cd/" target="_blank">最萌音</a></li>
-		<li><a href="http://ysm.yesmiao.me" target="_blank">影视喵</a></li>
-	</ul>
+<div class="page_content">
+	<div class="flink .box_960">
+		<h3 class="titbar"><span>&nbsp;</span><em>欢迎PR3以上、收录正常的的网站友链</em></h3>
+		<ul class="fix">
+			<li><a href="http://www.tsdm.me" target="_blank">天使动漫论坛</a></li>
+			<li><a href="tsdmtsdm@126.com" target="_blank">友链申请</a></li>
+			<li><a href="http://dm.tsdm.net" target="_blank">在线动漫</a></li>
+			<li><a href="http://dm.tsdm.net/list/?35.html" target="_blank">新番动漫</a></li>
+			<li><a href="http://mh.tsdm.net/" target="_blank">天使漫画网</a></li>
+			<li><a href="http://www.loli.cd/" target="_blank">最萌音</a></li>
+			<li><a href="http://ysm.yesmiao.me" target="_blank">影视喵</a></li>
+		</ul>
+	</div>
 </div>
 
 <?php 

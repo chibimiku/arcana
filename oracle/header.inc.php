@@ -10,13 +10,26 @@ include '../lib/meekrodb.2.3.class.php'; //db lib需要在db conf前面加载
 include '../conf/db.inc.php';
 include '../lib/common_function.inc.php'; //一些常见的公用函数
 
+$uid = 0;
+$username = '';
+//检查是否登录
+if(isset($_COOKIE['ssid'])){
+	$rs = DB::queryFirstRow('SELECT * FROM '.table('manager')." WHERE ssid=%s", $_COOKIE['ssid']);
+	if($rs){
+		$uid = $rs['m_id'];
+		$username = $rs['m_username'];
+	}
+	unset($rs);
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="cn">
 <head>
-	<title>神奇的后台</title>
+	<title>Misty sky 先知后台系统</title>
 	<meta charset="utf-8" />
 	<link rel="stylesheet" href="../static/layui/css/layui.css" />
+	<link rel="stylesheet" href="mcv.css" />
 </head>
 <body>
 
@@ -26,6 +39,7 @@ include '../lib/common_function.inc.php'; //一些常见的公用函数
 <ul class="layui-nav" lay-filter="">
   <li class="layui-nav-item"><a href="./index.php">首页</a></li>
   <li class="layui-nav-item"><a href="./index.php?action=list&type=video">视频编辑</a></li>
+  <li class="layui-nav-item"><a href="./index.php?action=member">成员编辑</a></li>
 </ul>
  
 <script>
@@ -36,3 +50,4 @@ layui.use('element', function(){
   //…
 });
 </script>
+<div class="blank10"></div>

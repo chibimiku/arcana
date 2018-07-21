@@ -317,6 +317,19 @@ a { color: #222;
     background: url(../image/sprite.png) left top no-repeat;
 }
 
+
+/* 首页 */
+
+.box720 {
+    width: 720px;
+    overflow: hidden;
+}
+
+.box230 {
+    width: 230px;
+    overflow: hidden;
+}
+
 .home-plist {
     width: 718px;
     height: auto;
@@ -364,6 +377,29 @@ a { color: #222;
     color: #0071C7;
 }
 
+.home-plist dd {
+    display: block;
+    float: left;
+    width: 212px;
+    font-size: 14px;
+    height: 25px;
+    line-height: 25px;
+    overflow: hidden;
+    padding: 0px 10px 0px 16px;
+    background: url(home.css) 10px 12px no-repeat;
+}
+
+.home-plist dd small {
+    font-size: 11px;
+    font-family: Arial;
+    color: rgb(153, 153, 153);
+}
+
+.home-plist dd a em {
+    font-size: 12px;
+    color: rgb(102, 102, 102);
+}
+
 .home-top-new {
     width: 958px;
     height: auto;
@@ -401,6 +437,37 @@ a { color: #222;
 .home-top-new dd a {
     color: #016A9F;
 }
+
+.top_other {
+    width: 228px;
+    height: auto;
+    border-width: 1px 1px 1px;
+    border-style: none solid solid;
+    border-color: rgb(151, 195, 229) rgb(151, 195, 229) rgb(151, 195, 229);
+    border-image: initial;
+    border-top: none;
+    overflow: hidden;
+}
+
+.top_other ul {
+    width: 92%;
+    margin: 0px auto;
+    padding: 5px 0px 6px;
+}
+
+.top_other li {
+    display: block;
+    height: 27px;
+    line-height: 27px;
+    cursor: default;
+    overflow: hidden;
+    background: url(dot_line2.png) -10px 4px no-repeat;
+}
+
+.n1 {
+    background-position: 0px 0px;
+}
+
 
 
 /* 详情页 */
