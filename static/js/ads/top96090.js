@@ -1,0 +1,1 @@
+document.writeln("<a class=\"topban_1\" id=\"topban\" href=\"http://www.acmoba.com/download.html?from=tssp\"target=\"_blank\"><img id=\"topbanimg\" src=\"http://wx3.sinaimg.cn/large/7044f931gy1fqi9hducgwj20qo02imz7.jpg\" alt=\"ÌìÊ¹¶¯Âþ\" width=\"960\" height=\"90\" \/><\/a>")

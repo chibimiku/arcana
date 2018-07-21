@@ -1,0 +1,1 @@
+document.writeln("<a class=\"topban_1\" id=\"topban\" href=\"http://redirect.rigengjihua.cn/rltfh\"target=\"_blank\"><img id=\"topbanimg\" src=\"http://static.rigengjihua.cn/banner1/youxi/tstv.png\" alt=\"ÌìÊ¹¶¯Âþ\" width=\"960\" height=\"90\" \/><\/a>")

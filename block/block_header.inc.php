@@ -52,16 +52,15 @@ $navi_array = array(
 			<big>按字母检索：</big>
 			<p>
 			<?php 
-				for($i=97;$i<122;$i++){  
+				for($i=65;$i<91;$i++){  
 					echo '<a href="search.php?letter='.$i.'" target="_blank">'.chr($i).'</a>'; //输出字母检索栏
 				}
 			?>
 			</p>
+
 		</div>	
 	</div>
-	
-	
-
+	<div class="cl"></div>
 </div>
 
 <!-- block header end -->

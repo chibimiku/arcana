@@ -1,0 +1,1 @@
+document.writeln("<a href=\"http://s-dm.com\"target=\\\"_blank\\\"><img src=\"http://wx4.sinaimg.cn/large/7044f931gy1ftdu1ztxqzj201r01p0gk.jpg\" alt=\"ÌìÊ¹¶¯Âþ\" width=\"300\" height=\"250\" \/><\/a>")

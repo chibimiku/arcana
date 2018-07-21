@@ -1,0 +1,1 @@
+document.writeln("<a class=\"topban_1\"  href=\"https://shop211165910.taobao.com\"target=\"_blank\"><img src=\"http://wx4.sinaimg.cn/large/7044f931gy1fhin2x1tlvg20qo023jsh.gif\" alt=\"ÌìÊ¹¶¯Âþ\" width=\"930\" height=\"80\" \/><\/a>")

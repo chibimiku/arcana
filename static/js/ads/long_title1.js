@@ -1,0 +1,1 @@
+document.writeln("<a href=\"http://dm.tsdm.tv/xinfandongman/\" target=\"_blank\"><img src=\"http://wx4.sinaimg.cn/large/7044f931gy1ffh4vf6bfog20qo02iae3.gif\" width=\"960\" height=\"90\" \/><\/a>")
