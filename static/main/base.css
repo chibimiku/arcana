@@ -837,4 +837,58 @@ a { color: #222;
 }
 
 
+/* 搜索结果 */
+.movie-chrList {
+    width: 698px;
+    height: auto;
+    border: 1px solid #97C3E5;
+    border-top: none;
+    overflow: hidden;
+}
 
+.movie-chrList ul li {
+    float: left;
+    width: 146px;
+    height: 285px;
+    margin: 15px 0 0 21px;
+    overflow: hidden;
+    border: 1px solid #ddd;
+}
+
+.movie-chrList div.cover {
+    padding: 11px 11px 5px;
+}
+
+.movie-chrList div.cover a img {
+    display: block;
+    width: 120px;
+    height: 150px;
+    text-align: left;
+    padding: 1px;
+    border: 1px solid #dedede;
+}
+
+.movie-chrList div.intro h6 {
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    height: 21px;
+    line-height: 21px;
+    overflow: hidden;
+    padding-bottom: 3px;
+}
+
+.movie-chrList div.intro em {
+    padding: 0 10px;
+    display: block;
+    font-style: normal;
+    line-height: 22px;
+    height: 22px;
+    overflow: hidden;
+}
+
+.movie-chrList div.intro em span {
+    color: #ED1B23;
+    font-size: 12px;
+    font-style: normal;
+}
