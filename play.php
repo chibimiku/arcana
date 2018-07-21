@@ -15,13 +15,7 @@ $data = DB::queryFirstRow('SELECT * FROM '.table('data')." WHERE m_id=%i", intva
 $play_show_data = parse_playdata_detail($data['m_playdata']);
 //获取parse之后的playdata里面的数据
 $rs = $play_show_data[$source_id]['data'][$row_id];
-
-//var_dump($play_show_data);
-echo '<br />';
-echo '<br />';
-echo '<br />';
-var_dump($rs);
-
+echo '<br /><br />';
 ?>
 
 <div class="phere">
@@ -30,62 +24,60 @@ var_dump($rs);
 		<?php echo output_type_a($data['m_type']);?>» 
 		<h1 id="playtitle"><?php echo $data['m_name'];?></h1>
 	</div>
-	
-	<div class="play-box">
-		<div class="play">
-			<div id="ccplay">
-				<?php echo make_player_by_name($rs['playtype'], array($rs['playurl']));?>
-			</div>
-			<div class="playable_box">
-				<div style="margin-top:-18px;">
-					<div>
-						<script type="text/javascript" language="javascript" src="/js/ads/play_640-40-2.js"></script>
-						<a class="topban_1" id="topban" href="http://www.acmoba.com/download.html?from=tssp" target="_blank">
-							<img id="topbanimg" src="http://wx3.sinaimg.cn/large/7044f931gy1fqi9hcwr4hj20go02iq4i.jpg" alt="天使动漫" width="640" height="90" />
-						</a>
-					</div>
-					<br />
-					<div style="margin:-12px 0 0 650px;width:450px;position:absolute">
-						<a href="javascript:pgup()">
-							<img src="http://dm.tsdm.tv//template/dy12/images/shang.gif">
-						</a> 
-						<a href="http://dm.tsdm.tv/ToLOVEDarknessOAD/">
-							<img src="http://dm.tsdm.tv//template/dy12/images/mulu.gif">
-						</a>
-						<a href="javascript:pgdn()">
-							<img src="http://dm.tsdm.tv//template/dy12/images/xia.gif">
-						</a>
-					</div>
+</div>
+<div class="play-box">
+	<div class="play">
+		<div id="ccplay" class="ccplay_norm">
+			<?php echo make_player_by_name($rs['playtype'], array($rs['playurl']));?>
+		</div>
+		<div class="playable_box">
+			<div>
+				<div>
+					<script type="text/javascript" language="javascript" src="/js/ads/play_640-40-2.js"></script>
+					<a class="topban_1" id="topban" href="http://www.acmoba.com/download.html?from=tssp" target="_blank">
+						<img id="topbanimg" src="http://wx3.sinaimg.cn/large/7044f931gy1fqi9hcwr4hj20go02iq4i.jpg" alt="天使动漫" width="640" height="90" />
+					</a>
+				</div>
+				<div id="play_control">
+					<a href="javascript:pgup()">
+						<img src="static/image/shang.gif">
+					</a> 
+					<a href="detail.php?id=<?php echo $playid;?>">
+						<img src="static/image/mulu.gif">
+					</a>
+					<a href="javascript:pgdn()">
+						<img src="static/image/xia.gif">
+					</a>
 				</div>
 			</div>
 		</div>
-		<div class="a300 something_to_be_fixed">
-			<div><script type="text/javascript" language="javascript" src="/js/ads/play_300-250.js"></script><a class="topban_1" id="topban" href="https://show.bilibili.com/platform/detail.html?id=12967&amp;from=pc" target="_blank"><img id="topbanimg" src="http://wx1.sinaimg.cn/large/7044f931gy1ft5pl8wfkbj208c06yace.jpg" alt="天使动漫" width="300" height="250"></a>
-			</div><table border="0" cellpadding="0" cellspacing="0" width="100%">
-			<tbody><tr>
+	</div>
+	<div class="a300 something_to_be_fixed">
+		<div><script type="text/javascript" language="javascript" src="/js/ads/play_300-250.js"></script><a class="topban_1" id="topban" href="https://show.bilibili.com/platform/detail.html?id=12967&amp;from=pc" target="_blank"><img id="topbanimg" src="http://wx1.sinaimg.cn/large/7044f931gy1ft5pl8wfkbj208c06yace.jpg" alt="天使动漫" width="300" height="250"></a>
+		</div><table border="0" cellpadding="0" cellspacing="0" width="100%">
+		<tbody><tr>
 
-			</tr>
-			<tr>
-			<td>
-			<div><script type="text/javascript" language="javascript" src="/js/ads/play_300-250-2.js"></script><script src="http://js.wo-x.cn/29604"></script>
-			</div>
-			</td>
-			</tr></tbody></table>
+		</tr>
+		<tr>
+		<td>
+		<div><script type="text/javascript" language="javascript" src="/js/ads/play_300-250-2.js"></script><script src="http://js.wo-x.cn/29604"></script>
 		</div>
-		<div class="cl"></div>
+		</td>
+		</tr></tbody></table>
 	</div>
-	<!-- 播放box end -->
-	<!-- 公告区 start -->
-	<div class="page_content">
-		
-	</div>
-	<!-- 公告区 end -->
-	<!-- 评论区 start -->
-	<div class="page_content">
-		<?php include 'block/block_comment.inc.php'; ?>
-	</div>
-	<!-- 评论区 end -->
+	<div class="cl"></div>
 </div>
+<!-- 播放box end -->
+<!-- 公告区 start -->
+<div class="page_content">
+	
+</div>
+<!-- 公告区 end -->
+<!-- 评论区 start -->
+<div class="page_content">
+	<?php include 'block/block_comment.inc.php'; ?>
+</div>
+<!-- 评论区 end -->
 
 
 <?php 

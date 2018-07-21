@@ -281,9 +281,12 @@ function parse_playdata_detail($in_str, $debug = false){
 }
 
 //显示错误信息
-function showmessage($message){
+function showmessage($message, $title = ''){
 	ob_end_clean();
-	echo $message;
+	echo "<div id=\"error\"><h3>$title</h3><div id=\"error_content\">";
+	echo htmlspecialchars($message);
+	echo '</div>';
+	echo '</body></html>';
 	exit();
 }
 

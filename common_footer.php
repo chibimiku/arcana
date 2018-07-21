@@ -6,13 +6,12 @@
 $page_cost = time() - TIMESTAMP;
 ?>
 
-<div id="footer">
+<div class="footer">
 	<div>
-		免责声明:本站所有内容均来自互联网收集而来，版权归原公司所有，如果侵犯了您的权益，请给邮箱来信，我们会第一时间回复并删除侵权内容，谢谢！ <a target="_blank" href="mailto:lolicd@126.com">【天使动漫联系邮箱】</a>
+	免责声明:本站所有内容均来自互联网收集而来，版权归原公司所有，如果侵犯了您的权益，请给邮箱来信，我们会第一时间回复并删除侵权内容，谢谢！ 
+	<a target="_blank" href="mailto:lolicd@126.com">【天使动漫联系邮箱】</a>
 	</div>
-	<div>
-	&copy; 2010-2018 <a href="http://www.tsdm.me">S-DM 新番动漫在线 BD无修动漫在线 ,最新美剧在线</a>
-	</div>
+	© 2010-2018 <a href="http://www.tsdm.me">S-DM 新番动漫在线 BD无修动漫在线 ,最新美剧在线</a>
 </div>
 
 <div id="said_calculation">

@@ -6,6 +6,7 @@ include 'conf/config.inc.php';
 include 'lib/meekrodb.2.3.class.php'; //db lib需要在db conf前面加载
 include 'conf/db.inc.php';
 include 'lib/common_function.inc.php'; //一些常见的公用函数
+ob_start();
 ?>
 
 <!DOCTYPE html><html>
@@ -36,6 +37,8 @@ include 'lib/common_function.inc.php'; //一些常见的公用函数
 <!-- 引入公用js区 -->
 <script src="static/layui/layui.js"></script>
 <script src="static/jquery/jquery-3.3.1.min.js"></script>
+
+<?php ob_flush(); //输出头部?>
 
 <?php 
 	$c_type = DB::query('SELECT * FROM '.table('type').' WHERE 1=1');
