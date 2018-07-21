@@ -24,6 +24,21 @@ a { color: #222;
     clear: both;
 }
 
+/* 翻页按钮 */
+.pager a, .pager span, .pager strong{
+    float: left;
+    font-family: Tahoma;
+    height: 22px;
+    line-height: 22px;
+    padding: 0 8px;
+    margin-left: 3px;
+    border: 1px solid #296cb3;
+}
+
+.pager em, .pager kbd{
+	display:none;
+}
+
 /* 公用头部 */
 #head {
     width: 960px;
@@ -580,6 +595,36 @@ a { color: #222;
 }
 
 /* 评论区 */
+
+#comment_header {
+    height: 60px;
+    margin-bottom: 15px;
+}
+
+#comment_header h1 {
+    height: 30px;
+    padding: 0 5px 0 8px;
+    border-bottom: 1px solid #ccc;
+}
+
+#comment_header h1 span {
+    float: left;
+    height: 30px;
+    line-height: 30px;
+}
+
+#comment_header h1 a {
+    float: left;
+    background: url(../image/comment_bg.gif) 0 -186px no-repeat;
+    padding: 0 15px 0 27px;
+}
+
+#comment_header h1 span, #comment_header h1 a {
+    height: 30px;
+    line-height: 30px;
+    font-size: 14px;
+}
+
 #comment {
     padding: 0 15px;
     overflow: hidden;
@@ -629,15 +674,15 @@ a { color: #222;
 }
 
 #comment .row .menu a.item3 {
-    background: url(../image/bg.gif) 0 -84px no-repeat;
+    background: url(../image/comment_bg.gif) 0 -84px no-repeat;
 }
 
 #comment .row .menu a.item2 {
-    background: url(../images/bg.gif) 0 -37px no-repeat;
+    background: url(../image/comment_bg.gif) 0 -37px no-repeat;
 }
 
 #comment .row .menu a.item1 {
-    background: url(../images/bg.gif) 0 4px no-repeat;
+    background: url(../image/comment_bg.gif) 0 4px no-repeat;
 }
 
 #comment .row .menu a {

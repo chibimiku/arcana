@@ -7,6 +7,9 @@ if(!defined('IN_ARCANA')){
 ?>
 
 <!-- 评论区 start -->
+<div id="comment_header">
+	<h1><span id="tit"></span><a href="#cmt">我要发言</a></h1>
+</div>
 <?php 
 //评论ID
 	$comment_page = 1;
@@ -26,13 +29,13 @@ if(!defined('IN_ARCANA')){
 				</h3>
 				<div class="con">
 					<div class="mycon">
-						<?php echo htmlspecialchars($re_row['m_content']);?>
+						<?php echo parse_comment_face(htmlspecialchars($re_row['m_content']));?>
 					</div>
 				</div>
 				<div class="menu">
 					<a href="#" onclick="return clk(this,<?php echo $re_row['m_id']?>,0,3);" class="item3">反对[-<?php echo $re_row['m_anti'];?>]</a>
 					<a href="#" onclick="return clk(this,<?php echo $re_row['m_id']?>,1,2);" class="item2">同意[+<?php echo $re_row['m_agree']?>]</a>
-					<a href="#cmt" onclick="reply(<?php echo $re_row['m_id']?>,'<?php echo htmlspecialchars($re_row['m_content'])?>');" class="item1">回复</a>
+					<a href="#cmt" onclick="reply(<?php echo $re_row['m_id']?>,'<?php echo htmlspecialchars($re_row['m_content']);?>');" class="item1">回复</a>
 				</div>
 			</div>
 		<?php }?>
@@ -59,7 +62,7 @@ if(!defined('IN_ARCANA')){
 			<input type="hidden" name="pvote" id="pvote" value="1">
 			<input type="hidden" name="anony" id="anony" value="0">
 			<input type="hidden" name="captcha" id="captcha" value="">
-			<div class="tc"><textarea name="talkwhat" id="talkwhat"></textarea></div>
+			<div class="tc"><textarea name="talkwhat" id="talkwhat" placeholder="说点儿什么吧…"></textarea></div>
 		</form>
 		<div class="captcha">验证码：<input type="text" name="gcaptcha" id="gcaptcha" onfocus="getcaptcha();">&nbsp;<div id="getcode"><a href="#cmt" onclick="return getcaptcha();"><span id="codeimg"></span> 看不清？</a></div>&nbsp;请点击后输入四位验证码，字母不区分大小写 [Ctrl+Enter]键快速回复</div>
 		<div class="btn"><input type="button" name="submit1" id="submit1" value=" 发表评论 " onclick="submitform();" style="*padding-top:2px;cursor:pointer;">&nbsp;&nbsp;<input type="checkbox" name="anonymous" id="anonymous" value="1"><label for="anony" id="anonylabel">匿名</label></div>

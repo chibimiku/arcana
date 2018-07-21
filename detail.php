@@ -139,8 +139,13 @@ $type_info = DB::queryFirstRow('SELECT * FROM '.table('type').' WHERE m_id=%i', 
 	</div>
 	<!-- 介绍块 end -->
 	
+	<div class="box960-mid"></div>
 	<div class="sucks"><script type="text/javascript" language="javascript" src="static/js/ads/468_15.js"></script></div>
-	<?php include 'block/block_comment.inc.php'; ?>
+	<div class="box960-mid-box">
+		<div class="box960-mid-minfo">
+		<?php include 'block/block_comment.inc.php'; ?>
+		</div>
+	</div>
 </div>
 
 <?php 

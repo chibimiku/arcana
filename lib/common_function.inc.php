@@ -67,6 +67,42 @@ function multi($num, $perpage, $curpage, $mpurl, $maxpages = 0, $page = 10, $aut
 	return $multipage;    
 }
 
+//解析表情符号
+function parse_comment_face($in_str){
+	$start_tag = '[em:';
+	$end_tag = ']';
+	$find_start_pos = 0;
+	$find_end_pos = 0;
+	$find_last_pos = 0; //在 $find end_tag 之前做标志位。
+	$return_str = '';
+	$never_found = true;
+	while($find_start_pos !== false){
+		$find_start_pos = strpos($in_str, $start_tag, $find_start_pos); //找到开头
+		if($find_start_pos !== false){
+			$find_start_pos_tail = $find_start_pos + strlen($start_tag);
+			$find_last_pos = $find_end_pos; //先寄存上次最后找到 end 的位置.
+			$find_end_pos = strpos($in_str, $end_tag, $find_start_pos_tail); //从end开始查找
+			if($find_end_pos !== false){
+				//切割这一段字符
+				$find_last_pos_tail = $find_last_pos > 0 ? $find_last_pos + strlen($end_tag) : 0;
+				$return_str = $return_str.substr($in_str, $find_last_pos_tail, $find_start_pos - $find_last_pos_tail);
+				$return_str = $return_str.'<img src="static/image/cmt/';
+				$return_str = $return_str.substr($in_str, $find_start_pos_tail, $find_end_pos - $find_start_pos_tail);
+				$return_str = $return_str.'" />';
+				$find_start_pos = $find_end_pos + strlen($end_tag); //让 start 标记归位
+				$never_found = false;
+			}else{
+				//只找到了开头，说明可以结束了
+				$return_str = $return_str.substr($in_str, $find_start_pos);
+			}
+		}
+	}
+	if($never_found){ //如果从未找到进行替换则直接返回
+		return $in_str;
+	}
+	return $return_str;
+}
+
  //拼接表名
 function table($table_name){
 	global $config;
