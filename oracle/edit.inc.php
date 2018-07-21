@@ -9,6 +9,7 @@ $data = DB::queryFirstRow('SELECT * FROM '.table('data')." WHERE m_id=%i", $data
 
 //编辑器介绍
 //https://www.jianshu.com/p/23532c7424ce
+//这个依靠的弱智jq需要woff2字体，记得加mime配置
 
 $data_cols_name_rs = DB::query('SHOW columns FROM '.table('data'));
 $data_cols = array();
@@ -23,6 +24,8 @@ foreach($data_cols_name_rs as $row){
 //根据需要赋予特殊属性
 $data_cols['m_id']['Disabled'] = true;
 $data_cols['m_des']['Big'] = true; //big表示用较大的textarea.
+
+$field_dict = array(); //字段的中文名称词典。
 
 ?>
 
@@ -47,7 +50,7 @@ $data_cols['m_des']['Big'] = true; //big表示用较大的textarea.
 						<div class="layui-form-item layui-form-text">
 							<label class="layui-form-label"><?php echo $key;?></label>
 							<div class="layui-input-block">
-								<textarea name="<?php echo $key;?>" placeholder="" class="layui-textarea"><?php echo htmlspecialchars($data[$key]);?></textarea>
+								<textarea name="<?php echo $key;?>" id="<?php echo $key;?>" placeholder="" class="layui-textarea"><?php echo htmlspecialchars($data[$key]);?></textarea>
 							</div>
 						</div>
 					<?php
@@ -76,7 +79,7 @@ layui.use('form', function(){
 <!-- Initialize the editor. -->
 <script>
 	$(function() { 
-		$('#desc').froalaEditor() 
+		$('#m_des').froalaEditor() 
 	}); 
 </script>
 <form action="./upload.php" method="post">

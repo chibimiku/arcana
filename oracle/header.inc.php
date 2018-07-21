@@ -30,10 +30,26 @@ if(isset($_COOKIE['ssid']) && isset($_COOKIE['uid'])){
 	<meta charset="utf-8" />
 	<link rel="stylesheet" href="../static/layui/css/layui.css" />
 	<link rel="stylesheet" href="mcv.css" />
+	<!-- Include external CSS. -->
+    <link href="../static/froala/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="../static/froala/codemirror.min.css">
+ 
+    <!-- Include Editor style. -->
+    <link href="../static/froala/froala_editor.pkgd.min.css" rel="stylesheet" type="text/css" />
+    <link href="../static/froala/froala_style.min.css" rel="stylesheet" type="text/css" />
+	
 </head>
 <body>
 
 <script src="../static/layui/layui.js"></script>
+
+<!-- Include external JS libs. -->
+<script type="text/javascript" src="../static/jquery/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="../static/froala/codemirror.min.js"></script>
+<script type="text/javascript" src="../static/froala/xml.min.js"></script>
+
+<!-- Include Editor JS files. -->
+<script type="text/javascript" src="../static/froala/froala_editor.pkgd.min.js"></script>
 
 <!-- 导航 -->
 <ul class="layui-nav" lay-filter="">
