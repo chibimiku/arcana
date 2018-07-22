@@ -317,6 +317,36 @@ function parse_playdata_detail($in_str, $debug = false){
 	return $playdata;
 }
 
+//读入post变量
+//0是post，1是get
+function read_user_info($var_names, $var_type = 0){
+	$ret_array = array();
+	foreach($var_names as $row){
+		if($var_type == 0){
+			if(isset($_POST[$row])){
+				$ret_array[$row] = $_POST[$row];
+			}else{
+				$ret_array[$row] = '';
+			}
+		}else{
+			if(isset($_GET[$row])){
+				$ret_array[$row] = $_GET[$row];
+			}else{
+				$ret_array[$row] = '';
+			}
+		}
+	}
+	return $ret_array;
+}
+
+//把部分数据转化为intval，提高安全性
+function set_intval($in_array, $intval_keys){
+	foreach($intval_keys as $row){
+		$in_array[$row] = intval($in_array[$row]);
+	}
+	return $in_array;
+}
+
 //显示错误信息
 function showmessage($message, $jump_url = '', $title = ''){
 	ob_end_clean();
@@ -328,6 +358,23 @@ function showmessage($message, $jump_url = '', $title = ''){
 		echo '<script>setTimeout(function(){window.location.href = "'.$jump_url.'"}, 3000);</script>';
 	}
 	echo '</body></html>';
+	exit();
+}
+
+function showmessage_json($message, $status = 0){
+	show_data_json(array('status' => $status, 'message' => $message));
+}
+
+//向客户端发送json
+function show_data_json($j_data){
+	ob_end_clean();
+	header('Content-type: application/json'); //返回json结果
+	$json_result = json_encode($j_data);
+	if(!$json_result){
+		echo '{"message" : "输入的json不正确。"}';
+	}else{
+		echo $json_result;
+	}
 	exit();
 }
 

@@ -56,6 +56,10 @@ if(isset($_COOKIE['ssid']) && isset($_COOKIE['uid'])){
   <li class="layui-nav-item"><a href="./index.php">首页</a></li>
   <li class="layui-nav-item"><a href="./index.php?action=list&type=video">视频编辑</a></li>
   <li class="layui-nav-item"><a href="./index.php?action=member">成员编辑</a></li>
+  <li class="layui-nav-item"><a href="./index.php?action=links&type=banner">布告栏编辑</a></li>
+  <li class="layui-nav-item"><a href="./index.php?action=links&type=player">播放器编辑</a></li>
+  <li class="layui-nav-item"><a href="./index.php?action=links&type=pic">首页图编辑</a></li>
+  <li class="layui-nav-item"><a href="./index.php?action=links&type=nav">导航编辑</a></li>
   <?php if($uid){?>
 	<li class="layui-nav-item login_btn"><a href="./index.php?action=logout"><?php echo $username?></a></li>
   <?php }else{?>

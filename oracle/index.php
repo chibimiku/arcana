@@ -25,6 +25,9 @@ switch($_GET['action']){
 	case 'member':
 		include 'member.inc.php';
 		break;
+	case 'links':
+		include 'links.inc.php';
+		break;
 	default:
 		include 'main.inc.php';
 }

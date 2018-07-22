@@ -44,28 +44,40 @@ if(!defined('IN_ARCANA')){
 		</div>
 	</div>
 </div>
+
 <div id="comment_footer">
 	<h5><a name="cmt"></a>发表评论&nbsp;<span style="display:none">本站为防止低俗内容出现，用户发表的评论需本站审核后才能显示出来</span></h5>
 	<div id="talk">
 		<div id="uploadpic"></div>
 		<div id="face"><?php for($i=0;$i<20;++$i){echo '<img src="static/image/cmt/'.($i+1).'.gif" />';}?></div>
 		<div id="cancel"></div>
-		<form name="form2" id="form2" action="api/send.asp?action=1" method="post" target="myiframe">
-			<input type="hidden" name="ctype" id="ctype" value="1">
-			<input type="hidden" name="cparent" id="cparent" value="0">
-			<input type="hidden" name="gid" id="gid" value="35289">
-			<input type="hidden" name="uid" id="uid" value="0">
-			<input type="hidden" name="uname" id="uname" value="">
-			<input type="hidden" name="unick" id="unick" value="">
-			<input type="hidden" name="utmpname" id="utmpname" value="">
-			<input type="hidden" name="ppath" id="ppath" value="">
-			<input type="hidden" name="pvote" id="pvote" value="1">
-			<input type="hidden" name="anony" id="anony" value="0">
-			<input type="hidden" name="captcha" id="captcha" value="">
-			<div class="tc"><textarea name="talkwhat" id="talkwhat" placeholder="说点儿什么吧…"></textarea></div>
+		<form name="comment_form" id="comment_form" action="guest.php?action=comment_post" method="post">
+			<input type="hidden" name="ajax" value="1" />
+			<input id="i_videoid" type="hidden" name="videoid" value="<?php echo $playid;?>" />
+			<input id="i_reply" type="hidden" name="reply" value="0" />
+			<div class="tc">
+				<textarea name="content" id="content" placeholder="说点儿什么吧…"></textarea></div>
+			<div class="captcha">验证码：<input type="text" name="gcaptcha" id="gcaptcha" onfocus="getcaptcha();">&nbsp;<div id="getcode"><a href="#cmt" onclick="return getcaptcha();"><span id="codeimg"></span> 看不清？</a></div>&nbsp;请点击后输入四位验证码，字母不区分大小写 [Ctrl+Enter]键快速回复</div>
+			<div class="btn">
+				<input type="submit" name="submit1" id="submit1" value=" 发表评论" style="*padding-top:2px;cursor:pointer;">
+				<span id="re_message"></span>
+			</div>
 		</form>
-		<div class="captcha">验证码：<input type="text" name="gcaptcha" id="gcaptcha" onfocus="getcaptcha();">&nbsp;<div id="getcode"><a href="#cmt" onclick="return getcaptcha();"><span id="codeimg"></span> 看不清？</a></div>&nbsp;请点击后输入四位验证码，字母不区分大小写 [Ctrl+Enter]键快速回复</div>
-		<div class="btn"><input type="button" name="submit1" id="submit1" value=" 发表评论 " onclick="submitform();" style="*padding-top:2px;cursor:pointer;">&nbsp;&nbsp;<input type="checkbox" name="anonymous" id="anonymous" value="1"><label for="anony" id="anonylabel">匿名</label></div>
+		<script>
+			//http://malsup.com/jquery/form/#ajaxForm
+			var s_options = {
+				success: showResponse
+			}
+			function showResponse(responseText, statusText, xhr, $form){
+				console.log(responseText);
+				$('#re_message').text(responseText.message);
+			}
+			$('#comment_form').submit(function() {
+				$(this).ajaxSubmit(s_options);
+				// return false to prevent normal browser submit and page navigation
+				return false;
+			});
+		</script>
 	</div>
 	<div class="isad"></div>
 	<div class="clean"></div>

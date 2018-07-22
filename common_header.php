@@ -37,8 +37,9 @@ ob_start();
 <!-- 引入公用js区 -->
 <script src="static/layui/layui.js"></script>
 <script src="static/jquery/jquery-3.3.1.min.js"></script>
+<script src="static/jquery/jquery.form.min.js"></script>
 
-<?php ob_flush(); //输出头部?>
+<?php if(!isset($_POST['ajax']) && !isset($_GET['ajax'])){ob_flush();} //输出头部?>
 
 <?php 
 	$c_type = DB::query('SELECT * FROM '.table('type').' WHERE 1=1');
