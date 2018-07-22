@@ -256,6 +256,17 @@ a { color: #222;
     background: url(../image/sprite.png) no-repeat 0 -90px;
 }
 
+.serial .tabs li.TabsOn a {
+    color: #008000;
+    font-weight: bold;
+}
+
+.serial .tabs li.TabsOn {
+    height: 24px;
+    background: url(../image/sprite.png) no-repeat -100px -90px;
+}
+
+
 .serial .tabs a {
     color: #0071C7;
     padding: 0 10px;
@@ -328,6 +339,60 @@ a { color: #222;
 .box230 {
     width: 230px;
     overflow: hidden;
+}
+
+.tabs2 {
+    width: 230px;
+    height: 30px;
+    background: url(../image/sprite.png) no-repeat -220px -90px;
+}
+.tabs2 li {
+    float: left;
+    width: 115px;
+    height: 30px;
+    cursor: pointer;
+}
+
+.tabs2 li.hover a.one1 {
+    background: url(../image/sprite.png) no-repeat -460px -90px;
+}
+
+.tabs2 li a {
+    text-indent: -9999px;
+    display: block;
+    width: 115px;
+    height: 30px;
+}
+
+.tabs2cont {
+    width: 228px;
+    height: 297px;
+    border: 1px solid #97C3E5;
+    border-top: none;
+    overflow: hidden;
+}
+
+.h-lsjl {
+    display: none;
+}
+
+.h-lsjl a {
+    color: #016A9F;
+}
+
+.tabs2cont ul {
+    width: 92%;
+    margin: 0 auto;
+    padding: 3px 0 3px;
+}
+
+.tabs2cont li {
+    height: 22px;
+    line-height: 22px;
+    overflow: hidden;
+    color: #666;
+    padding-left: 8px;
+    background: url(../image/icon.png) no-repeat 0 -21px;
 }
 
 .home-plist {

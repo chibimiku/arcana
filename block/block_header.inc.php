@@ -7,9 +7,13 @@ if(!defined('IN_ARCANA')){
 //公用头部导航
 //导航栏内容
 $navi_array = array(
-	'首 页' => '/',
-	'comic' =>  'http://mh.tsdm.tv',
+	array('m_name' => '首 页', 'm_link' => '/'),
 );
+
+$nav_tmp = DB::query('SELECT * FROM '.table('nav')," ORDER BY m_displayorder DESC");
+foreach($nav_tmp as $row){
+	$navi_array[] = $row;
+}
 
 ?>
 
@@ -46,7 +50,7 @@ $navi_array = array(
 		<div id="navigation" class="box">
 			<ul id="naviul">
 				<?php foreach($navi_array as $key => $row){?>
-					<li><a href="<?php echo $row;?>"><span><?php echo $key;?></span></a></li>
+					<li><a href="<?php echo $row['m_link'];?>"><span><?php echo $row['m_name'];?></span></a></li>
 				<?php }?>
 			</ul>
 		</div>

@@ -4,8 +4,45 @@ if(!defined('IN_ARCANA')){
 	exit('Access Deined.');
 }
 
-//借用discuz的分页函数
+function get_playlist(){
+	//保存数据结构：每条key是di， array('name' => 名称, 'note' => 进度, 'timestamp' => 当时看的时间)
+	if(!isset($_COOKIE['playlist'])){
+		return array();
+	}else{
+		return unserialize($_COOKIE['playlist']);
+	}
+}
 
+function insert_playlist($g_data){
+	$max_saving = 10;
+	//$g_data = DB::queryFirstRow('SELECT m_id, m_name, m_note FROM '.table('data')." WHERE m_id=%i", intval($data_id));
+	if(!$g_data){
+		return false;
+	}
+	$my_data = get_playlist();
+	if(!isset($my_data[$g_data['m_id']])){
+		if(count($my_data) >= 10){
+			$ages_time = TIMESTAMP; //记录最远古一条的时间
+			$ages_id = 0;
+			foreach($my_data as $key => $row){
+				if($row['timestamp'] <= $ages_time){
+					$ages_time = $row['timestamp']; //记录最远古一条的时间
+					$ages_id = $key;
+				}
+			}
+			if($ages_id > 0){
+				$my_data[$ages_id] = array('name' => $g_data['m_name'], 'note' => $g_data['m_note'], 'timestamp' => TIMESTAMP); //替换最古老的数据
+			}
+		}
+	}else{
+		//最近看过的数据里有这条，只更新观看时间
+		$my_data[$g_data['m_id']]['timestamp'] = TIMESTAMP;
+	}
+	setcookie('playlist', serialize($my_data));
+}
+
+
+//借用discuz的分页函数
 function multi($num, $perpage, $curpage, $mpurl, $maxpages = 0, $page = 10, $autogoto = TRUE, $simple = FALSE) {
 	//参考 https://blog.csdn.net/zyyr365/article/details/4083053 不过这个人注释写的不是很好
 	//$num 为总共的条数   比如说这个分类下共有15篇文章
@@ -164,9 +201,9 @@ function draw_table($table_head, $table_data, $table_class = ''){
 }
 
 //制作a标签的html
-function create_link($content, $url, $new_window = false){
+function create_link($content, $url, $new_window = false, $color = ''){
 	$addtional_blank = $new_window ? ' target="_blank "' : '';
-	return '<a href="'.$url.'"'.$addtional_blank.'>'.htmlspecialchars($content).'</a>';
+	return '<a style="color:'.$color.'" href="'.$url.'"'.$addtional_blank.'>'.htmlspecialchars($content).'</a>';
 }
 
 //返回单条数据的a标签展示

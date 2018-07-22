@@ -1,8 +1,8 @@
 <?php 
-//simple player site on route.
 include ('common_header.php');
 
-//should submit by 
+//用户留言板
+
 ?>
 
 <?php 

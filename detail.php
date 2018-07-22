@@ -14,6 +14,7 @@ $play_show_data = parse_playdata_detail($data['m_playdata'], false);
 //解析数据分类
 $type_info = DB::queryFirstRow('SELECT * FROM '.table('type').' WHERE m_id=%i', $data['m_type']);
 
+insert_playlist($data);
 
 ?>
 

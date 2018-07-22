@@ -71,7 +71,7 @@ include ('common_header.php');
 							<?php $d_data = get_data_by_cata_id($c_id,22,2);?>
 							<?php foreach($d_data as $d_row){?>
 								<li>
-									<span class="date"><?php echo $d_row['m_datetime'];?></span>
+									<span class="date"><?php echo substr($d_row['m_datetime'], 5,5); //这里只取日期，不算年份和后面的时间?></span>
 									<a href="detail.php?id=<?php echo $d_row['m_id'];?>"><?php echo $d_row['m_name'];?></a>
 									<span>~</span>
 									<span class="setnum"><?php echo $d_row['m_note'];?></a>
@@ -86,6 +86,16 @@ include ('common_header.php');
 			
 			<!-- 大家关注的/观看记录 -->
 			<div class="box230 fr">
+				<script>
+				function setTab(name,cursel,n){
+					for(i=1;i<=n;i++){
+						var menu=document.getElementById(name+i);
+						var con=document.getElementById("con_"+name+"_"+i);
+						menu.className=i==cursel?"hover":"";
+						con.style.display=i==cursel?"block":"none";
+					}
+				}
+				</script>
 				<div class="tabs2 fix">
 					<ul>
 						<li id="one1" onclick="setTab('one',1,2)" class="hover"><a class="one1">大家关注的动漫⇔S-DM 新番动漫在线 BD无修动漫在线 ,最新美剧在线</a></li>
@@ -101,7 +111,12 @@ include ('common_header.php');
 							<?php }?>
 						</ul>
 					</div>
-					<div id="con_one_2" class="h-lsjl fix" style="display: none;"><a href="javascript:void(0)" onclick="$MH.showHistory(1);">我的观看历史</a></div>
+					<div id="con_one_2" class="h-lsjl fix" style="display: none;">
+						<?php $my_playlist = get_playlist();?>
+						<?php foreach($my_playlist as $key => $row){?>
+								<li><?php echo create_link($row['name'], 'detail.php?id='.$key);?></li>
+						<?php }?>
+					</div>
 				</div>
 			</div>
 		</div>
