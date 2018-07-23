@@ -29,20 +29,31 @@ switch($type){
 		$table_head = array('ID', '中文名称', '链接', '颜色(#CCCCCC)', '新窗口打开', '显示顺序(从大到小)', '提交');
 		break;
 	default:
-		
+		showmesage('错误：空的类型');
 }
 
-$data = DB::query('SELECT * FROM '.table($table_name));
-foreach($data as &$row){
-	$row[] = '<a href="#">编辑</a>';
-}
-
+if(isset($_GET['editid'])){
+	//get field
+	$data_cols = get_table_field($table_name);
+	$editid = intval($_GET['editid']);
+	$data = DB::queryFirstRow('SELECT * FROM '.table($table_name)." WHERE m_id=%i", $editid);
+	$data_r = array();
+	foreach($data as $key => $value){
+		$data_r[] = array('name' => $key, 'value' => $value, 'type' => $data_cols[$key]['Type']);
+	}
+	echo draw_form($data_r, 'action=links&type='.$type."");
+	//var_dump($data_cols);
+	//var_dump($data_r);
+}else{
+	$data = DB::query('SELECT * FROM '.table($table_name));
+	foreach($data as &$row){
+		$row[] = '<a href="index.php?action=links&type='.$type.'&editid='.$row['m_id'].'">编辑</a>';
+	}
 ?>
-
-<form action="" method="post">
 
 <?php
-echo draw_table($table_head, $data, 'layui-table');
-?>
+	echo draw_table($table_head, $data, 'layui-table');
+}
 
-</form>
+
+?>

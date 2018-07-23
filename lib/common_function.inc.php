@@ -173,6 +173,42 @@ function make_data_table($in_data, $index_data, $primary_key = ''){
 	}
 }
 
+function get_table_field($table_name){
+	$data_cols_name_rs = DB::query('SHOW columns FROM '.table($table_name));
+	$data_cols = array();
+	foreach($data_cols_name_rs as $row){
+		$s_pos = strpos($row['Type'], '(');
+		if($s_pos !== false){
+			$row['Type'] = substr($row['Type'] ,0, $s_pos);
+		}
+		$data_cols[$row['Field']] = $row;
+	}
+	return $data_cols;
+}
+
+//绘制编辑某块DATA的form的html并返回
+//注意这里上layui的block了
+function draw_form($data, $action, $label_data = array(), $form_class = ''){
+	$return_str = '<form class="'.$form_class.'" method="post">';
+	foreach($data as $row){
+		if(!isset($row['name']) || empty($row['name'])){
+			continue;
+		}
+		$label = isset($label_data[$row['name']]) ? $label_data[$row['name']] : $row['name'];
+		$return_str = $return_str.'<div class="layui-form-item"><label class="layui-form-label" for="'.$row['name'].'">'.$label.'</label><div class="layui-input-block" type="'.$row['type'].'">';
+		switch($row['type']){
+			case 'text':
+				$return_str = $return_str.'<textarea class="layui-textarea" name="'.$row['name'].'">'.htmlspecialchars($row['value']).'</textarea>';
+				break;
+			default:
+				$return_str = $return_str.'<input class="layui-input" name="'.$row['name'].'" type="text" value="'.htmlspecialchars($row['value']).'" />';
+		}
+		$return_str = $return_str.'</div></div>';
+	}
+	$return_str = $return_str.'</form>';
+	return $return_str;
+}
+
 //绘制table的html并返回
 function draw_table($table_head, $table_data, $table_class = ''){
 	$num_diff = count($table_head) - count($table_data);

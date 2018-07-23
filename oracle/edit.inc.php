@@ -11,6 +11,7 @@ $data = DB::queryFirstRow('SELECT * FROM '.table('data')." WHERE m_id=%i", $data
 //https://www.jianshu.com/p/23532c7424ce
 //这个依靠的弱智jq需要woff2字体，记得加mime配置
 
+/*
 $data_cols_name_rs = DB::query('SHOW columns FROM '.table('data'));
 $data_cols = array();
 foreach($data_cols_name_rs as $row){
@@ -20,6 +21,8 @@ foreach($data_cols_name_rs as $row){
 	}
 	$data_cols[$row['Field']] = $row;
 }
+*/
+$data_cols = get_table_field('data');
 
 //根据需要赋予特殊属性
 $data_cols['m_id']['Disabled'] = true;

@@ -92,9 +92,9 @@ function make_player_by_name($player_name, $player_vars, $insert_key = '__P_VAR_
 	}
 	//依次用 $player_var 里的数据对模板进行替换.
 	foreach($player_vars as $player_var){
-		$player_info['html'] = str_replace_limit($insert_key, $player_var, $player_info['html'], 1);
+		$player_info['m_html'] = str_replace_limit($insert_key, $player_var, $player_info['m_html'], 1);
 	}
-	return $player_info['html'];
+	return $player_info['m_html'];
 }
 
 include ('common_footer.php');
