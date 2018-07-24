@@ -41,14 +41,23 @@ if(isset($_GET['editid'])){
 	foreach($data as $key => $value){
 		$data_r[] = array('name' => $key, 'value' => $value, 'type' => $data_cols[$key]['Type']);
 	}
-	echo draw_form($data_r, 'action=links&type='.$type."");
+	echo draw_form($data_r, 'index.php?action=links&type='.$type."&update_id=".$editid);
 	//var_dump($data_cols);
 	//var_dump($data_r);
+}else if(isset($_GET['update_id'])){
+	$update_id = intval($_GET['update_id']);
+	$update_array = array();
+	$data_cols = get_table_field($table_name);
+	foreach($data_cols as $key => $row){
+		$update_array[$key] = $_POST[$key];
+	}
+	DB::update(table($table_name),$update_array ,"m_id=%i", $update_id);
+	echo 'task done';
 }else{
 	$data = DB::query('SELECT * FROM '.table($table_name));
 	foreach($data as &$row){
 		$row[] = '<a href="index.php?action=links&type='.$type.'&editid='.$row['m_id'].'">编辑</a>';
-	}
+}
 ?>
 
 <?php

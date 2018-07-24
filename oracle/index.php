@@ -5,6 +5,7 @@ define ('IN_ARCANA_ADMIN', true);
 define ('EDITOR', true);
 define ('TIMESTAMP', time());
 
+header('X-XSS-Protection: 0'); //对提交iframe做容错，风险微增
 //simple player site on route.
 include 'header.inc.php';
 

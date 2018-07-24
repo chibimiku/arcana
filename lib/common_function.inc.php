@@ -189,7 +189,7 @@ function get_table_field($table_name){
 //绘制编辑某块DATA的form的html并返回
 //注意这里上layui的block了
 function draw_form($data, $action, $label_data = array(), $form_class = ''){
-	$return_str = '<form class="'.$form_class.'" method="post">';
+	$return_str = '<form class="'.$form_class.'" method="post" action="'.$action.'">';
 	foreach($data as $row){
 		if(!isset($row['name']) || empty($row['name'])){
 			continue;
@@ -205,6 +205,7 @@ function draw_form($data, $action, $label_data = array(), $form_class = ''){
 		}
 		$return_str = $return_str.'</div></div>';
 	}
+	$return_str = $return_str.'<input class="layui-btn" type="submit" value="提交" />';
 	$return_str = $return_str.'</form>';
 	return $return_str;
 }
