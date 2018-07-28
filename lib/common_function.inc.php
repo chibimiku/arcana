@@ -407,7 +407,7 @@ function showmessage_json($message, $status = 0){
 function show_data_json($j_data){
 	ob_end_clean();
 	header('Content-type: application/json'); //返回json结果
-	$json_result = json_encode($j_data);
+	$json_result = json_encode($j_data, JSON_UNESCAPED_SLASHES);
 	if(!$json_result){
 		echo '{"message" : "输入的json不正确。"}';
 	}else{

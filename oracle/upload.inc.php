@@ -83,7 +83,7 @@ if($_GET['action'] == 'upload'){
 
 }
 $return_json_array = array('upload_done' => $upload_done, 'dir' => $my_dir, 'msg' => $msg, 'mime' => $my_mime, 'blob' => $blob);
-show_data_json(json_encode($return_json_array));
+show_data_json($return_json_array);
 
 function binary_to_file($file, $need_base64 = false){  
 	$content = '';

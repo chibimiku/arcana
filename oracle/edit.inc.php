@@ -34,7 +34,7 @@ $field_dict = array(); //字段的中文名称词典。
 		?>
 						<label class="layui-form-label" for="<?php echo $key;?>"><?php echo $key?></label>
 						<div class="layui-input-block">
-							<input <?php if($key=='m_id'){echo 'disabled="disabled"';}?>class="layui-input" name="<?php echo $key;?>" value="<?php echo htmlspecialchars($data[$key]);?>" size="40" />
+							<input <?php if($key=='m_id'){echo 'disabled="disabled"';}?>class="layui-input" id="<?php echo $key;?>" name="<?php echo $key;?>" value="<?php echo htmlspecialchars($data[$key]);?>" size="40" />
 						</div>
 					<?php
 						break;
@@ -89,12 +89,7 @@ reader.readAsDataURL(file);
 
 // base64地址图片加载完毕后
 img.onload = function () {
-	var image_type_str = 'image/png';
-	if(file == null){
-		
-	}else{
-		image_type_str = file.type;
-	}
+	image_type_str = file.type;
 	console.log(image_type_str);
 	// canvas转为blob并上传
 	// 图片ajax上传
@@ -106,9 +101,9 @@ img.onload = function () {
 			var j_res = JSON.parse(xhr.responseText);
 			console.log(j_res);
 			var remote_url = j_res.dir;
-			$("#image_url").val(remote_url);
+			$("#m_pic").val(remote_url);
 			if(j_res.upload_done == 1){
-				$("#upload_tip").html('上传成功…');
+				$("#upload_tip").html('上传成功，上方 m_pic 路径已改变。');
 			}else{
 				$("#upload_tip").html('上传失败…' + j_res.msg);
 			}
