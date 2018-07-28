@@ -5,7 +5,6 @@ if(!defined('IN_ARCANA')){
 }
 
 //每周新番动画数据推荐的格子
-date_default_timezone_set('Asia/Shanghai');
 
 $week_data = DB::query('SELECT m_id,m_name,m_week,m_color FROM '.table('data')." WHERE m_show_week>0");
 $week_show_data = array();

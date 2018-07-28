@@ -34,16 +34,14 @@ switch($type){
 
 if(isset($_GET['editid'])){
 	//get field
-	$data_cols = get_table_field($table_name);
+	$data_cols = get_table_field($table_name); //获取表格的titles
 	$editid = intval($_GET['editid']);
-	$data = DB::queryFirstRow('SELECT * FROM '.table($table_name)." WHERE m_id=%i", $editid);
-	$data_r = array();
+	$data = DB::queryFirstRow('SELECT * FROM '.table($table_name)." WHERE m_id=%i", $editid); //获取具体数据
+	$data_r = array(); 
 	foreach($data as $key => $value){
 		$data_r[] = array('name' => $key, 'value' => $value, 'type' => $data_cols[$key]['Type']);
 	}
-	echo draw_form($data_r, 'index.php?action=links&type='.$type."&update_id=".$editid);
-	//var_dump($data_cols);
-	//var_dump($data_r);
+	echo draw_form($data_r, 'index.php?action=links&type='.$type."&update_id=".$editid, array(), '', array('m_id'));
 }else if(isset($_GET['update_id'])){
 	$update_id = intval($_GET['update_id']);
 	$update_array = array();
@@ -52,7 +50,30 @@ if(isset($_GET['editid'])){
 		$update_array[$key] = $_POST[$key];
 	}
 	DB::update(table($table_name),$update_array ,"m_id=%i", $update_id);
-	echo 'task done';
+	showmessage('任务完成。', 'index.php');
+}else if(isset($_GET['add'])){
+	$data_cols = get_table_field($table_name);
+	$data_r = array(); 
+	/*
+	foreach($data as $key => $value){
+		$data_r[] = array('name' => $key, 'value' => $value, 'type' => $data_cols[$key]['Type']);
+	}
+	*/
+	foreach($data_cols as $row){
+		$data_r[] = array('name' => $row['Field'], 'value' => '', 'type' => $row['Type']);
+	}
+	echo draw_form($data_r, 'index.php?action=links&type='.$type.'&add_submit=1', array(), '', array('m_id'));
+}else if(isset($_GET['add_submit'])){
+	$update_array = array();
+	$data_cols = get_table_field($table_name);
+	foreach($data_cols as $key => $row){
+		if($row['Key'] == 'PRI'){
+			continue;//跳过primary key
+		}
+		$update_array[$key] = $_POST[$key];
+	}
+	DB::insert(table($table_name),$update_array);
+	showmessage('添加完成。', 'index.php');
 }else{
 	$data = DB::query('SELECT * FROM '.table($table_name));
 	foreach($data as &$row){

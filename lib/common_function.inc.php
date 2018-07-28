@@ -188,20 +188,21 @@ function get_table_field($table_name){
 
 //绘制编辑某块DATA的form的html并返回
 //注意这里上layui的block了
-function draw_form($data, $action, $label_data = array(), $form_class = ''){
+function draw_form($data, $action, $label_data = array(), $form_class = '', $disabled_key = array()){
 	$return_str = '<form class="'.$form_class.'" method="post" action="'.$action.'">';
 	foreach($data as $row){
 		if(!isset($row['name']) || empty($row['name'])){
 			continue;
 		}
+		$disabled_str = in_array($row['name'], $disabled_key) ? 'disabled="disabled"' : '';
 		$label = isset($label_data[$row['name']]) ? $label_data[$row['name']] : $row['name'];
 		$return_str = $return_str.'<div class="layui-form-item"><label class="layui-form-label" for="'.$row['name'].'">'.$label.'</label><div class="layui-input-block" type="'.$row['type'].'">';
 		switch($row['type']){
 			case 'text':
-				$return_str = $return_str.'<textarea class="layui-textarea" name="'.$row['name'].'">'.htmlspecialchars($row['value']).'</textarea>';
+				$return_str = $return_str.'<textarea '.$disabled_str.' class="layui-textarea" name="'.$row['name'].'">'.htmlspecialchars($row['value']).'</textarea>';
 				break;
 			default:
-				$return_str = $return_str.'<input class="layui-input" name="'.$row['name'].'" type="text" value="'.htmlspecialchars($row['value']).'" />';
+				$return_str = $return_str.'<input '.$disabled_str.' class="layui-input" name="'.$row['name'].'" type="text" value="'.htmlspecialchars($row['value']).'" />';
 		}
 		$return_str = $return_str.'</div></div>';
 	}

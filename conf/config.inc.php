@@ -12,6 +12,7 @@ $config = array(
 	'type' => array(), //存放播放数据的type
 );
 
+date_default_timezone_set('Asia/Shanghai'); //设置时区，让那个warning闭嘴
 
 
 ?>
