@@ -19,3 +19,11 @@ body {
 .login_btn {
 	float:right;
 }
+
+.pages strong {
+    padding: 2px 6px;
+}
+
+.pages a {
+    padding: 2px 6px;
+}

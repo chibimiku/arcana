@@ -8,7 +8,7 @@ if(!defined('IN_ARCANA_ADMIN')){
 include '../conf/config.inc.php';
 include '../lib/meekrodb.2.3.class.php'; //db lib需要在db conf前面加载
 include '../conf/db.inc.php';
-include '../lib/common_function.inc.php'; //一些常见的公用函数
+include '../lib/function_common.inc.php'; //一些常见的公用函数
 
 $uid = 0;
 $username = '';
@@ -61,7 +61,12 @@ if(isset($_COOKIE['ssid']) && isset($_COOKIE['uid'])){
   <li class="layui-nav-item"><a href="./index.php?action=links&type=pic">首页图编辑</a></li>
   <li class="layui-nav-item"><a href="./index.php?action=links&type=nav">导航编辑</a></li>
   <?php if($uid){?>
-	<li class="layui-nav-item login_btn"><a href="./index.php?action=logout"><?php echo $username?></a></li>
+	<li class="layui-nav-item login_btn">
+		 <a href="javascript:;"><?php echo $username?></a>
+		<dl class="layui-nav-child">
+		<dd><a href="./index.php?action=logout">登出</a></dd>
+		</dl>
+	</li>
   <?php }else{?>
 	<li class="layui-nav-item login_btn"><a href="./index.php?action=login">登录</a></li>
   <?php }?>

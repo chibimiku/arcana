@@ -34,6 +34,7 @@ switch($type){
 
 if(isset($_GET['editid'])){
 	//get field
+	layui_load_module('form');
 	$data_cols = get_table_field($table_name); //获取表格的titles
 	$editid = intval($_GET['editid']);
 	$data = DB::queryFirstRow('SELECT * FROM '.table($table_name)." WHERE m_id=%i", $editid); //获取具体数据
@@ -41,7 +42,7 @@ if(isset($_GET['editid'])){
 	foreach($data as $key => $value){
 		$data_r[] = array('name' => $key, 'value' => $value, 'type' => $data_cols[$key]['Type']);
 	}
-	echo draw_form($data_r, 'index.php?action=links&type='.$type."&update_id=".$editid, array(), '', array('m_id'));
+	echo draw_form($data_r, 'index.php?action=links&type='.$type."&update_id=".$editid, array(), 'layui-form', array('m_id'));
 }else if(isset($_GET['update_id'])){
 	$update_id = intval($_GET['update_id']);
 	$update_array = array();

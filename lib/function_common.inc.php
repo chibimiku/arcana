@@ -186,9 +186,13 @@ function get_table_field($table_name){
 	return $data_cols;
 }
 
+function layui_load_module($module_name){
+	echo "<script>layui.use(['".$module_name."'],function(){var ".$module_name."=layui.".$module_name.";});</script>";
+}
+
 //绘制编辑某块DATA的form的html并返回
 //注意这里上layui的block了
-function draw_form($data, $action, $label_data = array(), $form_class = '', $disabled_key = array()){
+function draw_form($data, $action, $label_data = array(), $form_class = 'layui-form', $disabled_key = array()){
 	$return_str = '<form class="'.$form_class.'" method="post" action="'.$action.'">';
 	foreach($data as $row){
 		if(!isset($row['name']) || empty($row['name'])){
@@ -206,7 +210,10 @@ function draw_form($data, $action, $label_data = array(), $form_class = '', $dis
 		}
 		$return_str = $return_str.'</div></div>';
 	}
-	$return_str = $return_str.'<input class="layui-btn" type="submit" value="提交" />';
+	//删除按钮
+	$return_str = $return_str."\n".'<div class="layui-form-item"><label class="layui-form-label" for="k_delete">删除？</label><div class="layui-input-block"><input name="k_delete" lay-skin="primary" type="checkbox" value="1" title="删除" /></div></div>'."\n";
+	//提交按钮
+	$return_str = $return_str.'<div class="layui-form-item"><label class="layui-form-label" for=""></label><input class="layui-btn" type="submit" value="提交" /></div>';
 	$return_str = $return_str.'</form>';
 	return $return_str;
 }
@@ -217,14 +224,6 @@ function draw_table($table_head, $table_data, $table_class = ''){
 	$return_str = '<table class="'.$table_class.'"><thead><tr>';
 	foreach($table_head as $row){
 		$return_str = $return_str.'<td>'.htmlspecialchars($row).'</td>';
-		/*
-		if($num_diff < 0){
-			$n_d = abs($num_diff);
-			for($i=0;$i<$n_d;++$i){
-				$return_str = $return_str.'<td></td>';
-			}
-		}
-		*/
 	}
 	$return_str = $return_str.'</tr></thead><tbody>';
 	foreach($table_data as $key => $row){
@@ -296,8 +295,9 @@ function get_data_by_cata_id($cata_id, $limit = 10, $by_type = -1){
 		default:
 			$order_cond = '';
 	}
+	//m_enabled 标志是否隐藏
 	if($cata_id){
-		$dbrs = DB::query('SELECT * FROM '.table('data')." WHERE m_type=%i $order_cond LIMIT $limit", $cata_id);
+		$dbrs = DB::query('SELECT * FROM '.table('data')." WHERE m_enabled>0 AND m_type=%i $order_cond LIMIT $limit", $cata_id);
 	}else{
 		$dbrs = DB::query('SELECT * FROM '.table('data')." $order_cond LIMIT $limit");
 	}

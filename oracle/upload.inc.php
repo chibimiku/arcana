@@ -4,7 +4,7 @@ if(!defined('IN_ARCANA_ADMIN')){
 	exit('Access Deined.');
 }
 
-define ('UPLOAD_TMP_DIR', 'd:/tmp/upload/');
+define ('UPLOAD_TMP_DIR', $config['upload_temp_dir']);
 
 $upload_done = 0;
 $my_dir = '';
