@@ -49,6 +49,7 @@ foreach($pg_data as &$row){
 			<input value="<?php echo $query;?>" class="layui-input" size="60" name="query" type="text" name="title" lay-verify="required" placeholder="搜索数据" autocomplete="off" class="layui-input" />
 		</div>
 		<button class="layui-btn" lay-submit lay-filter="formDemo">搜索</button>
+		<a href="index.php?action=edit&data_id=0">【添加数据】</a>
 	</div>
 </form>
 

@@ -186,13 +186,14 @@ function get_table_field($table_name){
 	return $data_cols;
 }
 
+//输出layui加载某个组的js指令
 function layui_load_module($module_name){
 	echo "<script>layui.use(['".$module_name."'],function(){var ".$module_name."=layui.".$module_name.";});</script>";
 }
 
 //绘制编辑某块DATA的form的html并返回
 //注意这里上layui的block了
-function draw_form($data, $action, $label_data = array(), $form_class = 'layui-form', $disabled_key = array()){
+function draw_form($data, $action, $label_data = array(), $form_class = 'layui-form', $disabled_key = array(), $delete_key = ''){
 	$return_str = '<form class="'.$form_class.'" method="post" action="'.$action.'">';
 	foreach($data as $row){
 		if(!isset($row['name']) || empty($row['name'])){
@@ -210,8 +211,10 @@ function draw_form($data, $action, $label_data = array(), $form_class = 'layui-f
 		}
 		$return_str = $return_str.'</div></div>';
 	}
-	//删除按钮
-	$return_str = $return_str."\n".'<div class="layui-form-item"><label class="layui-form-label" for="k_delete">删除？</label><div class="layui-input-block"><input name="k_delete" lay-skin="primary" type="checkbox" value="1" title="删除" /></div></div>'."\n";
+	if($delete_key){
+		//删除按钮
+		$return_str = $return_str."\n".'<div class="layui-form-item"><label class="layui-form-label" for="'.$delete_key.'">删除？</label><div class="layui-input-block"><input name="'.$delete_key.'" lay-skin="primary" type="checkbox" value="1" title="删除" /></div></div>'."\n";
+	}
 	//提交按钮
 	$return_str = $return_str.'<div class="layui-form-item"><label class="layui-form-label" for=""></label><input class="layui-btn" type="submit" value="提交" /></div>';
 	$return_str = $return_str.'</form>';
@@ -220,6 +223,9 @@ function draw_form($data, $action, $label_data = array(), $form_class = 'layui-f
 
 //绘制table的html并返回
 function draw_table($table_head, $table_data, $table_class = ''){
+	if(!is_array($table_data)){
+		return '';
+	}
 	$num_diff = count($table_head) - count($table_data);
 	$return_str = '<table class="'.$table_class.'"><thead><tr>';
 	foreach($table_head as $row){
@@ -227,11 +233,17 @@ function draw_table($table_head, $table_data, $table_class = ''){
 	}
 	$return_str = $return_str.'</tr></thead><tbody>';
 	foreach($table_data as $key => $row){
+
 		$return_str = $return_str.'<tr>';
-		foreach($row as $col){
-			$return_str = $return_str.'<td>'.$col.'</td>';
+		if(is_array($row)){
+			foreach($row as $col){
+				$return_str = $return_str.'<td>'.$col.'</td>';
+			}
+		}else{
+			$return_str = $return_str.'<td>'.$row.'</td>';
 		}
 		$return_str = $return_str.'</tr>';
+		
 	}
 	$return_str = $return_str.'</tbody></table>';
 	return $return_str;
@@ -386,12 +398,15 @@ function set_intval($in_array, $intval_keys){
 }
 
 //显示错误信息
-function showmessage($message, $jump_url = '', $title = ''){
+function showmessage($message, $jump_url = '', $title = '提示'){
 	ob_end_clean();
 	echo "<div id=\"error\"><h3>$title</h3><div id=\"error_content\">";
-	echo htmlspecialchars($message);
+	echo '<span>'.htmlspecialchars($message).'</span>';
 	echo '</div>';
-	echo '<button onclick="goBack()">点击返回</button><script>function goBack(){window.history.back();}</script>';
+	if($jump_url){
+		echo '<div><a href="'.$jump_url.'">等待3秒页面自动跳转，或者点击此处立即跳转。</a></div>';
+	}
+	echo '<button onclick="goBack()">点击返回</button><script>function goBack(){window.location.href="'.$jump_url.'";}</script>';
 	if($jump_url){
 		echo '<script>setTimeout(function(){window.location.href = "'.$jump_url.'"}, 3000);</script>';
 	}

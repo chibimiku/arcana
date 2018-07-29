@@ -4,8 +4,13 @@ if(!defined('IN_ARCANA_ADMIN')){
 	exit('Access Deined.');
 }
 
+$add_data = false;
 $data_id = intval($_GET['data_id']);
 $data = DB::queryFirstRow('SELECT * FROM '.table('data')." WHERE m_id=%i", $data_id);
+if(!$data){
+	$data = array();
+	$add_data = true; //如果没有原来的data则认为是添加。
+}
 
 //编辑器介绍
 //https://www.jianshu.com/p/23532c7424ce
@@ -19,13 +24,21 @@ $data_cols['m_des']['Big'] = true; //big表示用较大的textarea.
 
 $field_dict = array(); //字段的中文名称词典。
 
-
 ?>
 
 <form action="<?php echo $_SERVER['PHP_SELF'].'?action=edit_submit&data_id='.$data_id; ?>" method="post" class="layui-form">
 	<div class="layui-form-item">
 	<input name="steel" type="hidden" value="" />
 		<?php foreach($data_cols as $key => $row){
+				if(!isset($data[$key])){
+					if($row['Field'] == 'm_addtime' || $row['Field'] == 'm_datetime'){
+						$data[$key] = date('Y-m-d H:i:s', TIMESTAMP);
+					}else if($row['Default'] != '(NULL)'){
+						$data[$key] = $row['Default'];
+					}else{
+						$data[$key] = '';
+					}
+				}
 				switch($row['Type']){
 					case 'int':
 					case 'tinyint':
