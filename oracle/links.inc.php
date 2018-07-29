@@ -45,7 +45,7 @@ if(isset($_GET['editid'])){
 	foreach($data as $key => $value){
 		$data_r[] = array('name' => $key, 'value' => $value, 'type' => $data_cols[$key]['Type']);
 	}
-	echo draw_form($data_r, 'index.php?action=links&type='.$type."&update_id=".$editid, array(), 'layui-form', array('m_id'), 'k_delete');
+	echo draw_form($data_r, 'index.php?action=links&type='.$type."&update_id=".$editid, $table_name, 'layui-form', array('m_id'), 'k_delete');
 }else if(isset($_GET['update_id'])){
 	$update_id = intval($_GET['update_id']);
 	$update_array = array();
@@ -74,7 +74,7 @@ if(isset($_GET['editid'])){
 	foreach($data_cols as $row){
 		$data_r[] = array('name' => $row['Field'], 'value' => '', 'type' => $row['Type']);
 	}
-	echo draw_form($data_r, 'index.php?action=links&type='.$type.'&add_submit=1', array(), '', array('m_id'));
+	echo draw_form($data_r, 'index.php?action=links&type='.$type.'&add_submit=1', $table_name, '', array('m_id'));
 }else if(isset($_GET['add_submit'])){
 	$update_array = array();
 	$data_cols = get_table_field($table_name);

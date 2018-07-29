@@ -3,6 +3,16 @@
 //simple player site on route.
 include ('common_header.php');
 
+define('SEARCH_INTERVAL_MAX_COUNT', 3);
+define('SEARCH_INTERVAL_TIME', 2000);
+
+//检查该IP以前的查询记录
+$last_timestamp = TIMESTAMP - SEARCH_INTERVAL_TIME;
+$search_times = DB::query('SELECT * FROM '.table('search_log')." WHERE from_ip=%s AND timestamp > ".$last_timestamp, $info['userip']);
+if(count($search_times) >= SEARCH_INTERVAL_MAX_COUNT){
+	showmessage('您搜索太过频繁，请过几秒再来吧。');
+}
+
 //对传入query做加工
 if(isset($_GET['query'])){
 	$query = trim($_GET['query']);
@@ -72,7 +82,7 @@ switch ($mode){
 		}
 		$query_part = explode(' ', $query, 5);
 		foreach($query_part as $query_single){
-			$result_tmp = DB::query('SELECT '.implode(',', $query_field).' FROM '.table('m_data')." WHERE m_name LIKE %ss", $query_single); //依次query出来所有的数据
+			$result_tmp = DB::query('SELECT '.implode(',', $query_field).' FROM '.table('data')." WHERE m_name LIKE %ss", $query_single); //依次query出来所有的数据
 			foreach($result_tmp as $result_row){
 				if(!isset($result_array[$result_row['m_id']])){
 					$result_array['m_id'] = $result_row;
@@ -91,6 +101,8 @@ $total_item = count($result_array);
 $offset = ($page - 1) * $tpp;
 $result_array= array_slice($result_array, $offset, $tpp, true);
 
+//记录日志
+DB::insert(table('search_log'), array('query' => $query, 'from_ip' => $info['userip'], 'timestamp' => TIMESTAMP));
 ?>
 
 <div class="page_content">

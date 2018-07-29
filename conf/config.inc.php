@@ -15,5 +15,8 @@ $config = array(
 
 date_default_timezone_set('Asia/Shanghai'); //设置时区，让那个warning闭嘴
 
+//设置用户IP
+global $info;
+$info['userip'] = $_SERVER['REMOTE_ADDR'];
 
 ?>

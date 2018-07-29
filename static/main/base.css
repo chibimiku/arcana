@@ -116,6 +116,16 @@ a { color: #222;
     position: relative;
 }
 
+.head_info, .head_info a {
+	color: white;
+    text-shadow: 2px 2px 4px #000000;
+}
+
+.head_info:hover , .head_info a:hover {
+	color: #a0e060;
+    text-shadow: 2px 2px 4px #000000;
+}
+
 #head #navigation {
     width: 960px;
     height: 74px;
@@ -176,6 +186,28 @@ a { color: #222;
 #head #navigation li a:hover, #head #navigation li.selected a {
     text-decoration: none;
     background: url(../image/head.gif) no-repeat 50% -60px;
+}
+
+
+/* 新番布告栏 */
+.anime_1 {
+	background-color: #A9D7EE;
+}
+
+.anime_2 {
+	background-color: #E5F1FF;
+}
+
+.anime_3 {
+	background-color: #CEEDCA;
+}
+
+.week_box {
+	padding: 4px 6px ;
+}
+
+.week_box span {
+	padding: 0 4px 0 2px;
 }
 
 /* 公用底部样式 */

@@ -33,15 +33,15 @@ function show_day_link($data){
 
 <div class="page_content">
 	<h3 class="titbar"><span></span><em>动漫新番更新</em></h3>
-	<div class="anime_1">
+	<div class="anime_1 week_box">
 		<span><?php echo $index_array[$before_order];?></span>
 		<?php echo show_day_link($week_show_data[$before_order]);?>
 	</div>
-	<div class="anime_2">
+	<div class="anime_2 week_box">
 		<span><?php echo $index_array[$today_order];?></span>
 		<?php echo show_day_link($week_show_data[$today_order]);?>
 	</div>
-	<div class="anime_3">
+	<div class="anime_3 week_box">
 		<span><?php echo $index_array[$after_order];?></span>
 		<?php echo show_day_link($week_show_data[$after_order]);?>
 	</div>

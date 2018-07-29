@@ -193,16 +193,16 @@ function layui_load_module($module_name){
 
 //绘制编辑某块DATA的form的html并返回
 //注意这里上layui的block了
-function draw_form($data, $action, $label_data = array(), $form_class = 'layui-form', $disabled_key = array(), $delete_key = ''){
+function draw_form($data, $action, $table_name = '', $form_class = 'layui-form', $disabled_key = array(), $delete_key = ''){
 	$return_str = '<form class="'.$form_class.'" method="post" action="'.$action.'">';
 	foreach($data as $row){
 		if(!isset($row['name']) || empty($row['name'])){
 			continue;
 		}
 		$disabled_str = in_array($row['name'], $disabled_key) ? 'disabled="disabled"' : '';
-		$label = isset($label_data[$row['name']]) ? $label_data[$row['name']] : $row['name'];
-		$return_str = $return_str.'<div class="layui-form-item"><label class="layui-form-label" for="'.$row['name'].'">'.$label.'</label><div class="layui-input-block" type="'.$row['type'].'">';
+		$return_str = $return_str.'<div class="layui-form-item"><label class="layui-form-label" for="'.$row['name'].'">'.get_fieldname_dict_show($row['name'], $table_name).'</label><div class="layui-input-block" type="'.$row['type'].'">';  //get_fieldname_dict_show() 在data_fieldname.inc.php中，定义了数据标签的中文名称.
 		switch($row['type']){
+			case 'longtext':
 			case 'text':
 				$return_str = $return_str.'<textarea '.$disabled_str.' class="layui-textarea" name="'.$row['name'].'">'.htmlspecialchars($row['value']).'</textarea>';
 				break;

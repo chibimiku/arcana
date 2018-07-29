@@ -23,50 +23,61 @@ $data_cols['m_id']['Disabled'] = true;
 $data_cols['m_des']['Big'] = true; //big表示用较大的textarea.
 
 $field_dict = array(); //字段的中文名称词典。
-
+layui_load_module('form');
 ?>
 
 <form action="<?php echo $_SERVER['PHP_SELF'].'?action=edit_submit&data_id='.$data_id; ?>" method="post" class="layui-form">
 	<div class="layui-form-item">
 	<input name="steel" type="hidden" value="" />
-		<?php foreach($data_cols as $key => $row){
-				if(!isset($data[$key])){
-					if($row['Field'] == 'm_addtime' || $row['Field'] == 'm_datetime'){
-						$data[$key] = date('Y-m-d H:i:s', TIMESTAMP);
-					}else if($row['Default'] != '(NULL)'){
-						$data[$key] = $row['Default'];
-					}else{
-						$data[$key] = '';
-					}
+	</div>
+	<?php 
+		foreach($data_cols as $key => $row){
+	?>
+		<div class="layui-form-item">
+	<?php
+			if(!isset($data[$key])){
+				if($row['Field'] == 'm_addtime' || $row['Field'] == 'm_datetime'){
+					$data[$key] = date('Y-m-d H:i:s', TIMESTAMP);
+				}else if($row['Default'] != '(NULL)'){
+					$data[$key] = $row['Default'];
+				}else{
+					$data[$key] = '';
 				}
-				switch($row['Type']){
-					case 'int':
-					case 'tinyint':
-					case 'varchar':
-					case 'datetime':
-		?>
-						<label class="layui-form-label" for="<?php echo $key;?>"><?php echo $key?></label>
+			}
+			switch($row['Type']){
+				case 'int':
+				case 'tinyint':
+				case 'varchar':
+				case 'datetime':
+	?>
+					<label class="layui-form-label" for="<?php echo $key;?>"><?php echo get_fieldname_dict_show($key, 'data');?></label>
+					<div class="layui-input-block">
+						<input <?php if($key=='m_id'){echo 'disabled="disabled"';}?>class="layui-input" id="<?php echo $key;?>" name="<?php echo $key;?>" value="<?php echo htmlspecialchars($data[$key]);?>" size="40" />
+					</div>
+				<?php
+					break;
+				case 'longtext':
+				?>
+					<div class="layui-form-item layui-form-text">
+						<label class="layui-form-label"><?php echo get_fieldname_dict_show($key, 'data');?></label>
 						<div class="layui-input-block">
-							<input <?php if($key=='m_id'){echo 'disabled="disabled"';}?>class="layui-input" id="<?php echo $key;?>" name="<?php echo $key;?>" value="<?php echo htmlspecialchars($data[$key]);?>" size="40" />
+							<textarea name="<?php echo $key;?>" id="<?php echo $key;?>" placeholder="" class="layui-textarea"><?php echo htmlspecialchars($data[$key]);?></textarea>
 						</div>
-					<?php
-						break;
-					case 'longtext':
-					?>
-						<div class="layui-form-item layui-form-text">
-							<label class="layui-form-label"><?php echo $key;?></label>
-							<div class="layui-input-block">
-								<textarea name="<?php echo $key;?>" id="<?php echo $key;?>" placeholder="" class="layui-textarea"><?php echo htmlspecialchars($data[$key]);?></textarea>
-							</div>
-						</div>
-					<?php
-						break;
-					default:
-						echo '<p title="'.$row['Type'].'">'.$key.':'.$data[$key].'</p>';
-					?>
-		<?php 	}?>
-		<?php }?>
-		<button type="submit" class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+					</div>
+				<?php
+					break;
+				default:
+					echo '<p title="'.$row['Type'].'">'.$key.':'.$data[$key].'</p>';
+				
+			}
+		?>
+	</div><!-- form item end-->
+	<?php }?>
+	<div class="layui-form-item">
+		<label class="layui-form-label" for="submit"> </label>
+		<div class="layui-input-block">
+			<button type="submit" class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+		</div>
 	</div>
 </form>
 
@@ -76,10 +87,15 @@ $field_dict = array(); //字段的中文名称词典。
 		$('#m_des').froalaEditor() 
 	}); 
 </script>
-<form action="index.php?action=upload" method="post">
-	<label for="pic">图片</label>
-	<input id="new_file" type="file" name="fileToUpload" />
-	<button class="layui-btn">上传图片</button><span id="upload_tip"></span>
+<hr class="layui-bg-gray" />
+<form action="index.php?action=upload" method="post" class="layui-form">
+	<div class="layui-form-item">
+		<label for="fileToUpload" class="layui-form-label">图片</label>
+		<div class="layui-input-block">
+			<input id="new_file" type="file" name="fileToUpload" />
+			<button class="layui-btn">上传图片</button><span id="upload_tip"></span>
+		</div>
+	</div>
 </form>
 <img id="preview_img" src="" />
 <script>
