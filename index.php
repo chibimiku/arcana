@@ -32,24 +32,7 @@ include ('common_header.php');
 		<!-- 第一行 TAB展示 5格切换 大家观看/观看记录 start -->
 		<div class="page_content">
 			<div class="box720 fl">
-				<div id="index_ppt_box" style="float:left; width:230px; height:328px;">
-					<div class="flash">
-						<div id="focus">
-							<div id="au">
-								<?php $pic_data = DB::query('SELECT * FROM '.table('index_picblock')." WHERE 1=1");?>
-								<?php $line_count = 0?>
-								<?php foreach($pic_data as $row){?>
-									<div <?php if($line_count == 0){echo 'style="display:block"';}?>>
-										<a href="<?php echo htmlspecialchars($row['m_link']);?>" target="_blank">
-											<img src="<?php echo $row['m_pic'];?>" alt="<?php echo htmlspecialchars($row['m_name']);?>" height="290" width="220" />
-										</a>
-									</div>
-								<?php ++$line_count;?>
-								<?php }?>
-							</div>
-						</div>
-					</div>
-				</div>
+				<?php include 'block/block_index_pic.inc.php';?>
 				<div class="update">
 					<div class="serial">
 						<div class="tabs">
@@ -133,7 +116,7 @@ include ('common_header.php');
 							<li><a href="detail.php?id=<?php echo $row['m_id'];?>" target="_blank">
 								<img src="<?php echo htmlspecialchars($row['m_pic']);?>" title="<?php echo htmlspecialchars($row['m_name']);?>"/>
 								<span><?php echo htmlspecialchars($row['m_name']);?></span>
-								<em>#最近更新</em>
+								<em><?php echo $row['m_note'];?></em>
 							</li></a>
 						<?php }?>
 					</ul>
@@ -150,7 +133,7 @@ include ('common_header.php');
 				</div>
 			</div>
 			<div class="box230 fr">
-				<h3 class="titbar"></h3>
+				<h3 class="titbar"><em class="topdhp"><a href="#">动漫热播榜</a></em></h3>
 				<?php $top_data = get_data_by_cata_id(0,13,0);?>
 				<?php $line_count = 0;?>
 				<div class="top_other">
@@ -176,7 +159,7 @@ include ('common_header.php');
 				<!-- cata block start -->
 				<div class="page_content">
 					<div class="box_960">
-						<h3 class="title-bar"><?php echo get_cata_name_by_id($cata_id);?></h3>
+						<h3 class="titbar"><?php echo get_cata_name_by_id($cata_id);?></h3>
 						<div class="home-plist">
 							<ul class="fix">
 								<?php foreach($p_data as $p_row){ ?>
