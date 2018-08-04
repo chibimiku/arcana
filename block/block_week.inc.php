@@ -5,7 +5,8 @@ if(!defined('IN_ARCANA')){
 }
 
 //每周新番动画数据推荐的格子
-
+//选取的方式boss说不好用，这个style可以放开限制，然后下面调用 show_day_link 就行了
+/*
 $week_data = DB::query('SELECT m_id,m_name,m_week,m_color FROM '.table('data')." WHERE m_show_week>0");
 $week_show_data = array();
 for($i=0;$i<7;$i++){
@@ -14,6 +15,7 @@ for($i=0;$i<7;$i++){
 foreach($week_data as $row){
 	$week_show_data[$row['m_week']][] = $row;
 }
+*/
 
 $index_array = array('周日', '周一', '周二', '周三', '周四', '周五', '周六', );
 
@@ -29,20 +31,25 @@ function show_day_link($data){
 	return $return_str;
 }
 
+function show_day_link_full($week_id){
+	$rs = DB::queryFirstRow('SELECT * FROM '.table('week_board')." WHERE m_week_id=%i", $week_id);
+	return $rs['html'];
+}
+
 ?>
 
 <div class="page_content">
 	<h3 class="titbar"><span></span><em>动漫新番更新</em></h3>
 	<div class="anime_1 week_box">
 		<span><?php echo $index_array[$before_order];?></span>
-		<?php echo show_day_link($week_show_data[$before_order]);?>
+		<?php echo show_day_link_full($before_order);?>
 	</div>
 	<div class="anime_2 week_box">
 		<span><?php echo $index_array[$today_order];?></span>
-		<?php echo show_day_link($week_show_data[$today_order]);?>
+		<?php echo show_day_link_full($today_order);?>
 	</div>
 	<div class="anime_3 week_box">
 		<span><?php echo $index_array[$after_order];?></span>
-		<?php echo show_day_link($week_show_data[$after_order]);?>
+		<?php echo show_day_link_full($after_order);?>
 	</div>
 </div>

@@ -17,22 +17,26 @@ $html_sp_key = array('m_html'); //需要htmlspecialchar加工的key集合
 switch($type){
 	case 'banner':
 		$table_name = 'ads';
-		$table_head = array('ID', '中文名称', '英文ID', '描述', 'HTML正文', '修改时间', '提交');
+		$table_head = array('ID', '中文名称', '英文ID', '描述', 'HTML正文', '修改时间', '编辑');
 		break;
 	case 'player':
 		$table_name = 'player';
-		$table_head = array('ID', '播放器英文标识', '播放器HTML', '提交');
+		$table_head = array('ID', '播放器英文标识', '播放器HTML', '编辑');
 		break;
 	case 'pic':
 		$table_name = 'index_picblock';
-		$table_head = array('ID', '图片地址', '图片链接', '中文名称', '提交');
+		$table_head = array('ID', '图片地址', '图片链接', '中文名称', '编辑');
 		break;
 	case 'nav':
 		$table_name = 'nav';
-		$table_head = array('ID', '中文名称', '链接', '颜色(#CCCCCC)', '新窗口打开', '显示顺序(从大到小)', '提交');
+		$table_head = array('ID', '中文名称', '链接', '颜色(#CCCCCC)', '新窗口打开', '显示顺序(从大到小)', '编辑');
+		break;
+	case 'week':
+		$table_name = 'week_board';
+		$table_head = array('ID', '周期(0是周日)', 'HTML', '编辑');
 		break;
 	default:
-		showmesage('错误：空的类型');
+		showmessage('错误：空的类型');
 }
 
 if(isset($_GET['editid'])){
