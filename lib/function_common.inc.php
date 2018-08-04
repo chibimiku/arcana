@@ -301,7 +301,7 @@ function get_comment_data($data_id, $page, $tpp = 20){
 		$limit_cond = 'LIMIT '.$limit_start.', '.$tpp;
 	}
 	$total_page_num = $lc / $tpp;
-	$data = DB::query('SELECT * FROM '.table('review')." WHERE m_videoid=%i ".$limit_cond, $data_id);
+	$data = DB::query('SELECT * FROM '.table('review')." WHERE m_videoid=%i ORDER BY m_addtime DESC ".$limit_cond, $data_id);
 	return array('total_num' => $lc, 'total_page_num' => $total_page_num, 'data' => $data);
 }
 

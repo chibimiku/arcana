@@ -12,8 +12,11 @@ if(isset($_GET['type'])){
 //
 $html_sp_key = array('m_html'); //需要htmlspecialchar加工的key集合
 
-//直接一口气编辑所有的表格
+//根据查询参数添加一些东西做个性化
+$where_cond = '';
+$url_append = '';
 
+//直接一口气编辑所有的表格
 switch($type){
 	case 'banner':
 		$table_name = 'ads';
@@ -34,6 +37,19 @@ switch($type){
 	case 'week':
 		$table_name = 'week_board';
 		$table_head = array('ID', '周期(0是周日)', 'HTML', '编辑');
+		break;
+	case 'leaveword':
+		$table_name = 'leaveword';
+		$table_head = array('ID', '回复ID', '作者', 'QQ', '邮箱', '正文', 'IP', '添加时间', '编辑');
+		break;
+	case 'review':
+		$table_name = 'review';
+		$table_head = array('ID', '作者', '类型', '对应视频ID', '正文', 'IP', '添加时间', '回复ID', '赞', '反', '图片', 'vote', '检查' , '编辑');
+		if(isset($_GET['videoid'])){
+			$videoid = intval($_GET['videoid']);
+			$where_cond = ' WHERE m_videoid='.$videoid;
+		}
+		$url_append = '&videoid='.$videoid;
 		break;
 	default:
 		showmessage('错误：空的类型');
@@ -91,7 +107,19 @@ if(isset($_GET['editid'])){
 	DB::insert(table($table_name),$update_array);
 	showmessage('添加完成。', 'index.php?action=links&type='.$type);
 }else{
-	$data = DB::query('SELECT * FROM '.table($table_name));
+	//解析page
+	$tpp = 30;
+	$page = 1; //处理页数
+	if(isset($_GET['page'])){
+		$page = max(1, intval($_GET['page']));
+	}
+	$limit_cond = ' LIMIT '.$tpp;
+	if($page > 1){
+		$limit_cond = ' LIMIT '.($page-1)*$tpp.', '.$tpp;
+	}
+	
+	$data_count = DB::queryFirstField('SELECT count(*) FROM '.table($table_name).$where_cond);
+	$data = DB::query('SELECT * FROM '.table($table_name).$where_cond.' ORDER BY m_id DESC '.$limit_cond);
 	foreach($data as &$row){
 		$row[] = '<a href="index.php?action=links&type='.$type.'&editid='.$row['m_id'].'">编辑</a>';
 		foreach($html_sp_key as $sk){
@@ -102,6 +130,7 @@ if(isset($_GET['editid'])){
 	}
 	echo create_link('创建新数据', 'index.php?action=links&add=1&type='.$type, '', '#777777');
 	echo draw_table($table_head, $data, 'layui-table');
+	echo multi($data_count, $tpp, $page, 'index.php?action=links&type='.$type.$url_append);
 	
 }
 ?>

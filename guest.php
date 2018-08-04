@@ -14,6 +14,9 @@ if(isset($_GET['action'])){
 			$need_vars = array('videoid', 'content', 'reply');
 			$get_vars = read_user_info($need_vars, 0); //0是POST
 			$get_vars = set_intval($get_vars, array('videoid', 'reply'));
+			if(!$get_vars['videoid']){
+				showmessage_json('添加失败，没有videoID。');
+			}
 			DB::insert(table('review'), array(
 				'm_author' => '',
 				'm_type' => 1,
@@ -23,7 +26,7 @@ if(isset($_GET['action'])){
 				'm_reply' => $get_vars['reply'],
 				'm_pic' => '',
 			));
-			showmessage_json('添加成功！');
+			showmessage_json('评论添加成功！刷新可见。');
 			break;
 		case 'levaeword_post':
 			//检查历史输入

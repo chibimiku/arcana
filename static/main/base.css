@@ -883,6 +883,10 @@ a { color: #222;
     padding-left: 15px;
 }
 
+.comment_author {
+	margin-left: 4px;
+}
+
 /* 评论区底部 */
 #comment_footer {
     width: 100%;

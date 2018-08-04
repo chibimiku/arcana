@@ -22,6 +22,9 @@ $data_cols = get_table_field('data');
 $data_cols['m_id']['Disabled'] = true;
 $data_cols['m_des']['Big'] = true; //big表示用较大的textarea.
 
+//hidden field 是需要隐藏的输入字段，主要是意义不明
+$hidden_field = array('m_state', 'm_digg', 'm_topic', 'm_wrong', 'm_publisharea', 'm_isunion', 'm_tread', 'm_director', 'm_lang', 'm_recycle', 'm_score', 'm_week', 'm_show_week');
+
 $field_dict = array(); //字段的中文名称词典。
 layui_load_module('form');
 ?>
@@ -33,7 +36,7 @@ layui_load_module('form');
 	<?php 
 		foreach($data_cols as $key => $row){
 	?>
-		<div class="layui-form-item">
+		<div class="layui-form-item" <?php if(in_array($key, $hidden_field)){echo 'style="display:none"';}?>>
 	<?php
 			if(!isset($data[$key])){
 				if($row['Field'] == 'm_addtime' || $row['Field'] == 'm_datetime'){
@@ -52,7 +55,7 @@ layui_load_module('form');
 	?>
 					<label class="layui-form-label" for="<?php echo $key;?>"><?php echo get_fieldname_dict_show($key, 'data');?></label>
 					<div class="layui-input-block">
-						<input <?php if($key=='m_id'){echo 'disabled="disabled"';}?>class="layui-input" id="<?php echo $key;?>" name="<?php echo $key;?>" value="<?php echo htmlspecialchars($data[$key]);?>" size="40" />
+						<input type="<?php echo in_array($key, $hidden_field) ? 'hidden' : 'text';?>" <?php if($key=='m_id'){echo 'disabled="disabled"';}?>class="layui-input" id="<?php echo $key;?>" name="<?php echo $key;?>" value="<?php echo htmlspecialchars($data[$key]);?>" size="40" />
 					</div>
 				<?php
 					break;
@@ -98,6 +101,8 @@ layui_load_module('form');
 	</div>
 </form>
 <img id="preview_img" src="" />
+
+<a href="index.php?action=links&type=review&videoid=<?php echo $data_id;?>">【编辑评论】</a>
 <script>
 
 var eleFile = document.querySelector('#new_file');
