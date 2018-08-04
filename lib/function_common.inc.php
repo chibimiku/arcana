@@ -4,6 +4,24 @@ if(!defined('IN_ARCANA')){
 	exit('Access Deined.');
 }
 
+//读取留言板列表
+function get_leaveword($page = 1, $tpp = 30){
+	$where_cond = ' WHERE m_replyid=0';
+	$limit_cond = ' LIMIT '.$tpp;
+	if($page > 1){
+		$limit_cond = ' LIMIT '.($page-1)*$tpp.', '.$tpp;
+	}
+	$rs = DB::query('SELECT * FROM '.table('leaveword').$where_cond.' ORDER BY m_addtime DESC'.$limit_cond);
+	foreach($rs as &$row){
+		$reply_content = DB::queryFirstRow('SELECT * FROM '.table('leaveword')." WHERE m_replyid=$row[m_id]");
+		if($reply_content){
+			$row['re'] = $reply_content['m_content'];
+		}
+	}
+	return $rs;
+}
+
+//读取cookie中的播放列表
 function get_playlist(){
 	//保存数据结构：每条key是di， array('name' => 名称, 'note' => 进度, 'timestamp' => 当时看的时间)
 	if(!isset($_COOKIE['playlist'])){

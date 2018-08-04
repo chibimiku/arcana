@@ -57,6 +57,20 @@ a { color: #222;
 	display:none;
 }
 
+.pages a, .pages span, .pages strong{
+    float: left;
+    font-family: Tahoma;
+    height: 22px;
+    line-height: 22px;
+    padding: 0 8px;
+    margin-left: 3px;
+    border: 1px solid #296cb3;
+}
+
+.pages em, .pages kbd{
+	display:none;
+}
+
 /* 公用头部 */
 #head {
     width: 960px;
@@ -1108,4 +1122,59 @@ a { color: #222;
     color: #666;
     padding-left: 8px;
     background: url(../image/icon.png) no-repeat 0 -21px;
+}
+
+/* 留言板 */
+#leavewordlist ul {
+    width: 954px;
+    overflow: hidden;
+    background-color: #FCFCFC;
+    margin-bottom: 5px;
+    padding: 2px;
+    text-align: left;
+    border: 1px solid #ccc;
+}
+
+#leavewordlist li {
+    word-wrap: break-word;
+    word-break: normal;
+    overflow: hidden;
+}
+
+#leavewordlist li.topwords {
+    line-height: 25px;
+    text-align: right;
+    padding: 0 5px 0 30px;
+    color: #333;
+    font-size: 14px;
+}
+
+#leavewordlist li.words {
+    color: #333;
+    padding: 8px;
+    line-height: 120%;
+    font-size: 14px;
+    text-indent: 24px;
+}
+
+#leavewordlist li.rewords {
+    margin: .5em 2em;
+    padding: 8px;
+    line-height: 150%;
+    background-color: #fff;
+    color: #FF6C94;
+    border: 1px solid #ccc;
+    border-width: 1px;
+    padding-left: 72px;
+    text-indent: -55px;
+}
+
+#leavewordlist li em {
+    color: #FF6C94;
+    font-weight: 600;
+    font-style: normal;
+}
+
+#leavewordlist li span {
+    float: left;
 }
