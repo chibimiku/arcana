@@ -371,6 +371,7 @@ a { color: #222;
     height: 31px;
     line-height: 31px;
     background: url(../image/sprite.png) left top no-repeat;
+	padding-left: 10px;
 }
 
 
@@ -587,6 +588,18 @@ a { color: #222;
     background: url(../image/sprite.png) no-repeat -130px -303px;
 }
 
+.titbar em {
+    font-weight: bold;
+    padding-left: 8px;
+    display: block;
+    float: left;
+}
+
+.bottomrank {
+    width: 145px;
+    margin-left: 5px;
+	font-weight: 700;
+}
 
 /* 详情页 */
 

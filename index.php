@@ -108,7 +108,7 @@ include ('common_header.php');
 		<!-- 第二行 动漫 / 热播榜 start -->
 		<div class="page_content">
 			<div class="box720 fl">
-				<h3 class="titbar"><em class="dhp"><a href="#" target="_blank">天使动漫 - 最近更新</a></em></h3>
+				<h3 class="titbar"><em class="dhp"><a href="search.php" target="_blank">最近更新</a></em></h3>
 				<div class="home-plist fix">
 					<?php $ht_data = get_data_by_cata_id(0, 6, 2);?>
 					<ul class="fix">
