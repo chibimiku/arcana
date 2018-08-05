@@ -4,6 +4,19 @@ if(!defined('IN_ARCANA')){
 	exit('Access Deined.');
 }
 
+function init_type(){
+	global $config;
+	//往config里放入缓存
+	//同时支持正排查询和倒排查询
+	$config['type_reverse'] = array();
+	$c_type = DB::query('SELECT * FROM '.table('type').' WHERE 1=1');
+	foreach($c_type as $row){
+		$config['type'][$row['m_id']] = $row;
+		$config['type_reverse'][$row['m_name']] = $row['m_id'];
+	}
+	return true;
+}
+
 //读取留言板列表
 function get_leaveword($page = 1, $tpp = 30){
 	$where_cond = ' WHERE m_replyid=0';
@@ -271,6 +284,21 @@ function draw_table($table_head, $table_data, $table_class = ''){
 function create_link($content, $url, $new_window = false, $color = ''){
 	$addtional_blank = $new_window ? ' target="_blank "' : '';
 	return '<a style="color:'.$color.'" href="'.$url.'"'.$addtional_blank.'>'.htmlspecialchars($content).'</a>';
+}
+
+//制作options
+//options_list为一系列 key=>value 对
+function draw_options($options_list, $my_option, $in_name, $class=''){
+	$ret_str = '<select name="'.$in_name.'" class="'.$class.'">';
+	foreach($options_list as $key => $value){
+		if($my_option == $value){
+			$ret_str = $ret_str.'<option selected="selected" value="'.$value.'">'.$key.'</option>';
+		}else{
+			$ret_str = $ret_str.'<option value="'.$value.'">'.$key.'</option>';
+		}
+	}
+	$ret_str = $ret_str.'</select>';
+	return $ret_str;
 }
 
 //返回单条数据的a标签展示

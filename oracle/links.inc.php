@@ -42,6 +42,10 @@ switch($type){
 		$table_name = 'leaveword';
 		$table_head = array('ID', '回复ID', '作者', 'QQ', '邮箱', '正文', 'IP', '添加时间', '编辑');
 		break;
+	case 'type':
+		$table_name = 'type';
+		$table_head = array('ID', '名称', '英文名', '排序', 'UPID', '隐藏', '模板', 'unionid', 'keyword', '描述', 'TYPE', '子模板', '编辑');
+		break;
 	case 'review':
 		$table_name = 'review';
 		$table_head = array('ID', '作者', '类型', '对应视频ID', '正文', 'IP', '添加时间', '回复ID', '赞', '反', '图片', 'vote', '检查' , '编辑');

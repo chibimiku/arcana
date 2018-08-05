@@ -11,6 +11,8 @@ include '../conf/db.inc.php';
 include '../lib/function_common.inc.php'; //一些常见的公用函数
 include 'data_fieldname.inc.php'; //加载一下表格字段名称的中文
 
+init_type(); //载入type中文名称
+
 $uid = 0;
 $username = '';
 //检查是否登录
@@ -63,6 +65,7 @@ if(isset($_COOKIE['ssid']) && isset($_COOKIE['uid'])){
   <li class="layui-nav-item"><a href="./index.php?action=links&type=nav">导航编辑</a></li>
   <li class="layui-nav-item"><a href="./index.php?action=links&type=week">周番编辑</a></li>
   <li class="layui-nav-item"><a href="./index.php?action=links&type=leaveword">留言板编辑</a></li>
+  <li class="layui-nav-item"><a href="./index.php?action=links&type=type">分类编辑</a></li>
   <?php if($uid){?>
 	<li class="layui-nav-item login_btn">
 		 <a href="javascript:;"><?php echo $username?></a>

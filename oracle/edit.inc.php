@@ -11,7 +11,6 @@ if(!$data){
 	$data = array();
 	$add_data = true; //如果没有原来的data则认为是添加。
 }
-
 //编辑器介绍
 //https://www.jianshu.com/p/23532c7424ce
 //这个依靠的弱智jq需要woff2字体，记得加mime配置
@@ -26,9 +25,9 @@ $data_cols['m_des']['Big'] = true; //big表示用较大的textarea.
 $hidden_field = array('m_state', 'm_digg', 'm_topic', 'm_wrong', 'm_publisharea', 'm_isunion', 'm_tread', 'm_director', 'm_lang', 'm_recycle', 'm_score', 'm_week', 'm_show_week');
 
 $field_dict = array(); //字段的中文名称词典。
-layui_load_module('form');
 ?>
 
+<?php layui_load_module('form');?>
 <form action="<?php echo $_SERVER['PHP_SELF'].'?action=edit_submit&data_id='.$data_id; ?>" method="post" class="layui-form" onsubmit="return refresh_all();">
 	<div class="layui-form-item">
 	<input name="steel" type="hidden" value="" />
@@ -55,7 +54,11 @@ layui_load_module('form');
 	?>
 					<label class="layui-form-label" for="<?php echo $key;?>"><?php echo get_fieldname_dict_show($key, 'data');?></label>
 					<div class="layui-input-block">
+						<?php if($key == 'm_type'){?>
+							<?php echo draw_options($config['type_reverse'],$data[$key], $key);?>
+						<?php }else{?>
 						<input type="<?php echo in_array($key, $hidden_field) ? 'hidden' : 'text';?>" <?php if($key=='m_id'){echo 'disabled="disabled"';}?>class="layui-input" id="<?php echo $key;?>" name="<?php echo $key;?>" value="<?php echo htmlspecialchars($data[$key]);?>" size="40" />
+						<?php }?>
 					</div>
 				<?php
 					break;
@@ -168,7 +171,6 @@ img.onload = function () {
 </script>
 
 <script>
-
 //添加那两个输入节点
 function clone_datanode(c_name){
 	var seek_name = '#' + c_name + '_prototype';

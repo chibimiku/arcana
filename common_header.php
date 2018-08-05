@@ -42,12 +42,7 @@ ob_start();
 
 <?php if(!isset($_POST['ajax']) && !isset($_GET['ajax'])){ob_flush();} //输出头部?>
 
-<?php 
-	$c_type = DB::query('SELECT * FROM '.table('type').' WHERE 1=1');
-	foreach($c_type as $row){
-		$config['type'][$row['m_id']] = $row;
-	}
-?>
+<?php init_type(); //读取配置里的分类中文名称 ?>
 <?php include 'block/block_header.inc.php';?>
 <?php include 'block/block_week.inc.php'; //每周新番的block显示，remastered. ?>
 
