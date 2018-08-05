@@ -44,6 +44,18 @@ if(isset($_GET['action'])){
 			));
 			showmessage('添加成功！');
 			break;
+		case 'vote':
+			if(!isset($_GET['gid'])){
+				showmessage_json('没有提交评论ID。');
+			}
+			$comment_id = intval($_GET['gid']);
+			$upd_field = 'm_agree';
+			if(isset($_GET['type']) && $_GET['type'] == '3'){
+				$upd_field = 'm_anti';
+			}
+			DB::query('UPDATE '.table('review')." SET ".$upd_field.'='.$upd_field.'+1 WHERE m_id=%i', $comment_id);
+			showmessage_json('更新评分完成。');
+			break;
 		default:
 			showmessage_json('没有正确的 action .', -1);
 	}

@@ -305,6 +305,39 @@ function get_comment_data($data_id, $page, $tpp = 20){
 	return array('total_num' => $lc, 'total_page_num' => $total_page_num, 'data' => $data);
 }
 
+//获取那一大堆评论数据的回复叠加框
+//其实我觉得这个设计挺傻的
+function get_comment_block_data($data_id, $max_depth = 10){
+	$final_ret = '';
+	$get_box = true;
+	$block_datas = array();
+	$depth = 0;
+	while($get_box){
+		$single_data = DB::queryFirstRow('SELECT * FROM '.table('review')." WHERE m_id=%i", $data_id);
+		if(!$single_data){
+			$get_box = false;
+			break;
+		}
+		$block_datas[] = $single_data;
+		if(!$single_data['m_reply']){
+			$get_box = false;
+			break;
+		}
+		if($depth >= $max_depth){
+			$get_box = false; //最大深度10层，免得有弱智加太多回复
+		}
+		$data_id = $single_data['m_reply'];
+		++$depth;
+	}
+	foreach($block_datas as $row){
+		$final_ret = $final_ret.'<div class="reply">';
+	}
+	foreach($block_datas as $row){
+		$final_ret = $final_ret.'<h4><span>'.htmlspecialchars($row['m_author'] ? $row['m_author'] : '无名氏').'</span></h4><p>'.htmlspecialchars($row['m_content']).'</p></div>';
+	}
+	return $final_ret;
+}
+
 //获取按分类ID的前x条儿结果
 function get_data_by_cata_id($cata_id, $limit = 10, $by_type = -1){
 	$cata_id = intval($cata_id);

@@ -887,6 +887,50 @@ a { color: #222;
 	margin-left: 4px;
 }
 
+.reply {
+    border: 1px solid #D1D5DB;
+    background: #FFFEF5;
+    padding: 3px;
+    margin-bottom: 8px;
+}
+
+.reply h4 {
+    height: 25px;
+    line-height: 25px;
+    margin-bottom: 8px;
+    padding: 0 5px;
+    overflow: hidden;
+    font-size: 12px;
+    text-align: left;
+    color: #8D8D8D;
+}
+
+.reply p {
+    line-height: 25px;
+    margin: 0;
+    padding: 0 5px;
+    border: 0;
+    text-align: left;
+}
+
+.reply h4 span {
+    margin-right: 8px;
+    float: left;
+}
+
+.reply h4 label {
+    float: right;
+    font-weight: normal;
+}
+
+.reply p {
+    line-height: 25px;
+    margin: 0;
+    padding: 0 5px;
+    border: 0;
+    text-align: left;
+}
+
 /* 评论区底部 */
 #comment_footer {
     width: 100%;

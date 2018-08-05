@@ -28,14 +28,15 @@ if(!defined('IN_ARCANA')){
 					<label><?php echo $re_row['m_addtime']?></label>
 				</h3>
 				<div class="con">
+					<?php echo get_comment_block_data($re_row['m_reply']);?>
 					<div class="mycon">
 						<?php echo parse_comment_face(htmlspecialchars($re_row['m_content']));?>
 					</div>
 				</div>
 				<div class="menu">
-					<a href="#" onclick="return clk(this,<?php echo $re_row['m_id']?>,0,3);" class="item3">反对[-<?php echo $re_row['m_anti'];?>]</a>
-					<a href="#" onclick="return clk(this,<?php echo $re_row['m_id']?>,1,2);" class="item2">同意[+<?php echo $re_row['m_agree']?>]</a>
-					<a href="#cmt" onclick="reply(<?php echo $re_row['m_id']?>,'<?php echo htmlspecialchars($re_row['m_content']);?>');" class="item1">回复</a>
+					<a href="javascript:void(0);" onclick="return clk(this,<?php echo $re_row['m_id']?>,<?php echo $re_row['m_anti'];?>,3);" class="item3">反对[-<?php echo $re_row['m_anti'];?>]</a>
+					<a href="javascript:void(0);" onclick="return clk(this,<?php echo $re_row['m_id']?>,<?php echo $re_row['m_agree']?>,2);" class="item2">同意[+<?php echo $re_row['m_agree']?>]</a>
+					<a href="javascript:void(0);" onclick="reply(<?php echo $re_row['m_id']?>,'<?php echo htmlspecialchars($re_row['m_content']);?>');" class="item1">回复</a>
 				</div>
 			</div>
 		<?php }?>
@@ -45,12 +46,34 @@ if(!defined('IN_ARCANA')){
 	</div>
 </div>
 
+<script>
+function clk(o,i,n,t){
+	if(typeof o.num == "undefined")o.num = n;
+	o.num = parseInt(o.num)+1;
+	o.innerHTML = (t==2)?"已同意[+"+o.num+"]":(t==3)?"已反对[-"+o.num+"]":"已献花["+o.num+"]";
+	$(o).removeAttr("onclick");
+	$(o).bind("click",function(e){return false;});
+	$.get("guest.php",{"gid":i, "action":"vote","ran":Math.random(), "type": t});
+	//(new Image()).src='api/send.asp?gid='+i+'&action='+t+'&ran='+Math.random();
+	return false;
+}
+
+function reply(cmid,cmcon){
+	$("#i_reply").val(cmid);
+	$("#cancel").show();
+	$("#cancel").html("回复："+cmcon+"&nbsp;&nbsp;<a href=\"#\" onclick=\"$('#cancel').html('');$('#i_reply').val(0);$('#cancel').hide();return false;\">取消</a>");
+	$('html, body').animate({
+		scrollTop: $("#comment_form").offset().top
+	}, 1000);
+}
+</script>
+
 <div id="comment_footer">
 	<h5><a name="cmt"></a>发表评论&nbsp;<span style="display:none">本站为防止低俗内容出现，用户发表的评论需本站审核后才能显示出来</span></h5>
 	<div id="talk">
 		<div id="uploadpic"></div>
 		<div id="face"><?php for($i=0;$i<20;++$i){echo '<img onclick="insert_emo('.($i+1).')" src="static/image/cmt/'.($i+1).'.gif" />';}?></div>
-		<div id="cancel"></div>
+		<div id="cancel" style="display:none"></div>
 		<form name="comment_form" id="comment_form" action="guest.php?action=comment_post" method="post">
 			<input type="hidden" name="ajax" value="1" />
 			<input id="i_videoid" type="hidden" name="videoid" value="<?php echo $playid;?>" />
@@ -58,7 +81,7 @@ if(!defined('IN_ARCANA')){
 			<div class="tc">
 				<textarea name="content" id="content" placeholder="说点儿什么吧…"></textarea></div>
 			<div class="btn">
-				<input type="submit" name="submit1" id="submit1" value=" 发表评论" style="*padding-top:2px;cursor:pointer;">
+				<input type="submit" name="submit1" id="submit1" value="发表评论" style="*padding-top:2px;cursor:pointer;">
 				<span id="re_message"></span>
 			</div>
 		</form>
