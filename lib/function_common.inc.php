@@ -379,7 +379,7 @@ function parse_playdata_detail($in_str, $debug = false){
 			);
 			++$row2_count;
 		}
-		$playdata[] = array('source_name' => $data_1[0], 'data' => $input_array, 'source_id' => $row1_count);
+		$playdata[] = array('source_name' => $data_1[0], 'data' => $input_array, 'source_id' => $row1_count, 'ori_data' => $data_1[1]);
 		++$row1_count;
 	}
 	return $playdata;

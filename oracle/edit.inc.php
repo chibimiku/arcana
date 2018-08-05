@@ -64,10 +64,19 @@ layui_load_module('form');
 					<div class="layui-form-item layui-form-text">
 						<label class="layui-form-label"><?php echo get_fieldname_dict_show($key, 'data');?></label>
 						<div class="layui-input-block">
-							<textarea name="<?php echo $key;?>" id="<?php echo $key;?>" placeholder="" class="layui-textarea"><?php echo htmlspecialchars($data[$key]);?></textarea>
+							<?php 
+								if(in_array($key, array('m_playdata', 'm_downdata'))){ //对播放和下载数据单独处理
+									echo parse_playdata_box($data[$key], $key);
+									echo '<div><a href="javascript:void(0)" onclick="clone_datanode(\''.$key.'\')">【添加一组数据】（不需要的话留空即可）</a></div>';
+									echo '<hr /><div><h3>原始数据</h3><textarea name="'.$key.'" id="'.$key.'" placeholder="" class="layui-textarea">'.htmlspecialchars($data[$key]).'</textarea></div>';
+								}else{
+							?>
+								<textarea name="<?php echo $key;?>" id="<?php echo $key;?>" placeholder="" class="layui-textarea"><?php echo htmlspecialchars($data[$key]);?></textarea>
+							<?php }?>
 						</div>
 					</div>
 				<?php
+					
 					break;
 				default:
 					echo '<p title="'.$row['Type'].'">'.$key.':'.$data[$key].'</p>';
@@ -156,3 +165,82 @@ img.onload = function () {
 
 
 </script>
+
+<script>
+
+//添加那两个输入节点
+function clone_datanode(c_name){
+	var seek_name = '#' + c_name + '_prototype';
+	console.log("seek name is:" + seek_name);
+	var c_el = $(seek_name).clone();
+	c_el.appendTo('#block_' + c_name);
+	c_el.show();
+}
+
+//获取所有播放/下载区列的数据，拼接在真实输入框里面
+
+//狗屎JS不支持全部替换，简直是弱智
+//https://stackoverflow.com/questions/1144783/how-to-replace-all-occurrences-of-a-string-in-javascript
+String.prototype.replaceAll = function(search, replacement) {
+    var target = this;
+    return target.split(search).join(replacement);
+};
+
+function refresh_val(s_name){
+	var downdata_source_slice = $('.' + s_name + ' option:selected');
+	var downdata_content_slice = $('.' + s_name + ' textarea');
+	var new_downdata = '';
+	for(var i=0;i<downdata_source_slice.length;i++){
+		//检查是否为空
+		if(downdata_source_slice[i].text.length > 0){
+			new_downdata = new_downdata + downdata_source_slice[i].text + '$$' + downdata_content_slice[i].value.replaceAll("\n", "#"); 
+		}
+	}
+	//console.log(new_downdata);
+	$('#' + s_name).val(new_downdata);
+}
+
+</script>
+
+<?php 
+
+//把播放数据和下载数据分解成多个输入框+选择框的组合.
+//name选择play或download
+function parse_playdata_box($playdata, $name = 'm_playdata'){
+	$index_table_name = 'player';
+	if($name == 'm_downdata'){
+		$index_table_name = 'download';
+	}
+	$ret_string = '<div id="block_'.$name.'">';
+	$de_playdata = parse_playdata_detail($playdata);
+	foreach($de_playdata as $source_row){
+		$ret_string = $ret_string.'<div class="'.$name.'" id="'.$name.'_'.$source_row['source_id'].'">';
+		$ret_string = $ret_string.'<select name="'.$name.'_source_'.$source_row['source_id'].'">';
+		$ret_string = $ret_string.get_source_option($source_row['source_name'], $index_table_name);
+		$ret_string = $ret_string.'</select><textarea name="'.$name.'_content_'.$source_row['source_id'].'" class="layui-textarea">'.htmlspecialchars(str_replace('#',"\n", $source_row['ori_data'])).'</textarea>';
+		$ret_string = $ret_string.'</div>';
+	}
+	$ret_string = $ret_string.'</div>';
+	//追加prototype用于添加数据
+	$ret_string = $ret_string.'<div class="'.$name.'" style="display:none;" id="'.$name.'_prototype">';
+	$ret_string = $ret_string.'<select name="'.$name.'_source_prototype'.'">';
+	$ret_string = $ret_string.get_source_option('', $index_table_name);
+	$ret_string = $ret_string.'</select><textarea name="'.$name.'_content_prototype" class="layui-textarea"></textarea>';
+	$ret_string = $ret_string.'</div>';
+	return $ret_string;
+}
+
+function get_source_option($source_name, $index_table_name = 'player'){ //默认是选择player表
+	$players = DB::query('SELECT * FROM '.table($index_table_name));
+	$retstr = '';
+	foreach($players as $row){
+		if($row['m_name'] == $source_name){
+			$retstr = $retstr.'<option selected="selected">'.$row['m_name'].'</option>';
+		}else{
+		$retstr = $retstr.'<option>'.$row['m_name'].'</option>';
+		}
+	}
+	return $retstr;
+}
+
+?>
