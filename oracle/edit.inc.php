@@ -29,7 +29,7 @@ $field_dict = array(); //字段的中文名称词典。
 layui_load_module('form');
 ?>
 
-<form action="<?php echo $_SERVER['PHP_SELF'].'?action=edit_submit&data_id='.$data_id; ?>" method="post" class="layui-form">
+<form action="<?php echo $_SERVER['PHP_SELF'].'?action=edit_submit&data_id='.$data_id; ?>" method="post" class="layui-form" onsubmit="return refresh_all();">
 	<div class="layui-form-item">
 	<input name="steel" type="hidden" value="" />
 	</div>
@@ -88,10 +88,11 @@ layui_load_module('form');
 	<div class="layui-form-item">
 		<label class="layui-form-label" for="submit"> </label>
 		<div class="layui-input-block">
-			<button type="submit" class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+			<button id="data_submit" type="submit" class="layui-btn">立即提交</button>
 		</div>
 	</div>
 </form>
+
 
 <!-- Initialize the editor. -->
 <script>
@@ -174,6 +175,7 @@ function clone_datanode(c_name){
 	console.log("seek name is:" + seek_name);
 	var c_el = $(seek_name).clone();
 	c_el.appendTo('#block_' + c_name);
+	layui.form.render('select'); //刷新select选择框渲染
 	c_el.show();
 }
 
@@ -186,19 +188,36 @@ String.prototype.replaceAll = function(search, replacement) {
     return target.split(search).join(replacement);
 };
 
+function refresh_all(){
+	refresh_val('m_playdata');
+	refresh_val('m_downdata');
+	console.log("Refresh oridata.");
+	return true;
+}
+
 function refresh_val(s_name){
 	var downdata_source_slice = $('.' + s_name + ' option:selected');
 	var downdata_content_slice = $('.' + s_name + ' textarea');
 	var new_downdata = '';
 	for(var i=0;i<downdata_source_slice.length;i++){
 		//检查是否为空
-		if(downdata_source_slice[i].text.length > 0){
+		if(downdata_content_slice[i].value.length > 0){
+			if(new_downdata.length > 0){
+				new_downdata = new_downdata + '$$$'; //当不止一条结果的时候，用$$$组分开
+			}
 			new_downdata = new_downdata + downdata_source_slice[i].text + '$$' + downdata_content_slice[i].value.replaceAll("\n", "#"); 
 		}
 	}
 	//console.log(new_downdata);
 	$('#' + s_name).val(new_downdata);
 }
+
+//把上述更新绑定给提交方法
+/*
+$("#data_submit").submit(function(){
+	return refresh_all();
+});
+*/
 
 </script>
 
@@ -237,7 +256,7 @@ function get_source_option($source_name, $index_table_name = 'player'){ //默认
 		if($row['m_name'] == $source_name){
 			$retstr = $retstr.'<option selected="selected">'.$row['m_name'].'</option>';
 		}else{
-		$retstr = $retstr.'<option>'.$row['m_name'].'</option>';
+			$retstr = $retstr.'<option>'.$row['m_name'].'</option>';
 		}
 	}
 	return $retstr;
