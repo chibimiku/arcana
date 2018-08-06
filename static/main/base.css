@@ -377,6 +377,10 @@ a { color: #222;
 
 /* 首页 */
 
+#pic_box {
+	border: #66CCFF solid 2px;
+}
+
 .box720 {
     width: 720px;
     overflow: hidden;

@@ -1,7 +1,6 @@
 <?php 
 
 //simple player site on route.
-
 include ('common_header.php');
 ?>
 
