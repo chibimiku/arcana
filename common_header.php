@@ -7,6 +7,8 @@ include 'lib/meekrodb.2.3.class.php'; //db lib需要在db conf前面加载
 include 'conf/db.inc.php';
 include 'lib/function_common.inc.php'; //一些常见的公用函数
 include 'lib/function_cache.inc.php'; //一些常见的公用函数
+
+$start_time = get_millisecond();
 ob_start();
 ?>
 

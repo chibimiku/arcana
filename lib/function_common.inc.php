@@ -4,6 +4,12 @@ if(!defined('IN_ARCANA')){
 	exit('Access Deined.');
 }
 
+//获取毫秒级时间戳
+function get_millisecond() {
+	list($t1, $t2) = explode(' ', microtime());
+	return (float)sprintf('%.0f', (floatval($t1) + floatval($t2)) * 1000);
+}
+
 function init_type(){
 	global $config;
 	//往config里放入缓存
