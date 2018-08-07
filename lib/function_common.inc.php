@@ -288,6 +288,7 @@ function create_link($content, $url, $new_window = false, $color = ''){
 
 //制作options
 //options_list为一系列 key=>value 对
+//$my_option 为我当前选中的value
 function draw_options($options_list, $my_option, $in_name, $class=''){
 	$ret_str = '<select name="'.$in_name.'" class="'.$class.'">';
 	foreach($options_list as $key => $value){
@@ -313,8 +314,9 @@ function output_row_a($s_row, $new_window = true){
 //带limit的替换
 //来自https://stackoverflow.com/questions/8510223
 function str_replace_limit($find, $replacement, $subject, $limit = 0){
-  if ($limit == 0)
-    return str_replace($find, $replacement, $subject);
+  if($limit == 0){
+	return str_replace($find, $replacement, $subject);
+  }
   $ptn = '/' . preg_quote($find,'/') . '/';
   return preg_replace($ptn, $replacement, $subject, $limit);
 }
@@ -446,7 +448,7 @@ function parse_playdata_detail($in_str, $debug = false){
 	return $playdata;
 }
 
-//读入post变量
+//以array批量读入post变量
 //0是post，1是get
 function read_user_info($var_names, $var_type = 0){
 	$ret_array = array();
