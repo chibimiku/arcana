@@ -113,7 +113,7 @@ a { color: #222;
 }
 
 .search {
-    top: 35px;
+	margin-top: 5px;
 	float:right;
 }
 
@@ -379,6 +379,8 @@ a { color: #222;
 
 #pic_box {
 	border: #66CCFF solid 2px;
+	width: 220px;
+	height: 318px;
 }
 
 .box720 {
@@ -667,6 +669,14 @@ a { color: #222;
     border-left: 1px solid #CFE3F4;
     border-right: 1px solid #CFE3F4;
     background: #fff;
+}
+
+.ts_new_em {
+    background: url(../image/new.png) no-repeat;
+    margin-top: -5px;
+    position: absolute;
+    width: 17px;
+    height: 20px;
 }
 
 .cl {
@@ -1045,6 +1055,76 @@ a { color: #222;
     padding: 5px;
 }
 
+/* 播放页顶部 */
+#player_head {
+    width: 100%;
+    min-width: 1000px;
+    height: 38px;
+    line-height: 38px;
+    background: url(../image/play_topnav.png) repeat-x top;
+}
+
+#headbox {
+    width: 1000px;
+    margin: 0 auto;
+}
+
+#headbox .logo a {
+    margin: 3px 10px 0 0;
+    display: block;
+    text-indent: -9999px;
+    float: left;
+    width: 112px;
+    height: 30px;
+    background: url(../image/play_logo.gif) no-repeat;
+}
+
+#site-nav {
+    width: 590px;
+    float: left;
+    color: #000;
+    position: relative;
+	font: 12px Verdana, Arial, Helvetica, sans-serif;
+}
+
+#site-nav .quick-menu {
+    left: 0px;
+    position: absolute;
+    top: 0px;
+}
+
+#site-nav .quick-menu li {
+    height: 35px;
+    line-height: 35px;
+    padding: 0 10px;
+    background-position: right 6px;
+    float: left;
+    margin-left: -1px;
+    background: url(../image/play_topnav.png) no-repeat right -73px;
+}
+
+.search-form input.text {
+    float: left;
+    width: 200px;
+    height: 22px;
+    line-height: 22px;
+    padding: 1px 4px;
+    color: #ccc;
+    border: 1px solid #42B4E8;
+    background: url(../image/head.gif) no-repeat 0 -150px;
+}
+
+.search-form input.button {
+    float: left;
+    width: 60px;
+    height: 26px;
+    border: 0;
+    font-size: 0;
+    text-indent: -9999px;
+    background: #eee url(../image/head.gif) no-repeat 0 -210px;
+    cursor: pointer;
+}
+
 /* play.php 播放页 */
 .play-box {
     width: 980px;
@@ -1056,18 +1136,14 @@ a { color: #222;
 
 .play {
     float: left;
-    width: 644px;
-    height: 525px;
+}
+
+.play_right {
+	float: right;
 }
 
 #ccplay {
-
 	border: 1px solid #EEE
-}
-
-.ccplay_norm {
-	width: 692px;
-    height: 525px;
 }
 
 .play_control {

@@ -60,6 +60,8 @@ $page_cost = get_millisecond() - $start_time;
 </body>
 </html>
 <?php 
-
+if(isset($save_index_content_cache)){
+	cache_save(INDEX_CACHE_KEY, $cache_front.ob_get_contents(), 600); //缓存首页内容5分钟，头部用 $cache_front 追加，因为顶部那里有个额外的ob_flush();
+}
 ob_end_flush(); //最后完成输出
 ?>

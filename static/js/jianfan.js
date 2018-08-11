@@ -1,4 +1,4 @@
-document.write(" <a href=\"javascript:void(null)\" name=\"StranLink\">繁體中文</a>");
+//document.write(" <a href=\"javascript:void(0)\" id=\"StranLink\" name=\"StranLink\">繁體中文</a>");
 var Default_isFT = 0		//默认是否繁体，0-简体，1-繁体
 var StranIt_Delay = 50 //翻译延时毫秒（设这个的目的是让网页先流畅的显现出来）
 

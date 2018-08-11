@@ -34,7 +34,7 @@ if(!$s_input || $s_input == '/'){
 }
 
 if(!$found){
-	exit('Cannot found.');
+	header('Location: index.php'); //没找到就跳首页
 }
 
 function get_last_i($in_url){

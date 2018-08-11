@@ -40,7 +40,7 @@ switch($type){
 		break;
 	case 'leaveword':
 		$table_name = 'leaveword';
-		$table_head = array('ID', '回复ID', '作者', 'QQ', '邮箱', '正文', 'IP', '添加时间', '编辑');
+		$table_head = array('ID', '回复ID', '作者', 'QQ', '邮箱', '正文', 'IP', '添加时间', '回复', '编辑');
 		break;
 	case 'type':
 		$table_name = 'type';
@@ -68,6 +68,9 @@ if(isset($_GET['editid'])){
 	$data_r = array(); 
 	foreach($data as $key => $value){
 		$data_r[] = array('name' => $key, 'value' => $value, 'type' => $data_cols[$key]['Type']);
+	}
+	if($type == 'player'){
+		echo '<div>变量说明：__P_VAR__ 是视频播放地址，会替换视频编辑里的播放地址。宽高需要在config.inc.php里配置。目前宽高：'.$config['vod_width'].'/'.$config['vod_height'].'</div>';
 	}
 	echo draw_form($data_r, 'index.php?action=links&type='.$type."&update_id=".$editid, $table_name, 'layui-form', array('m_id'), 'k_delete');
 }else if(isset($_GET['update_id'])){
@@ -125,6 +128,9 @@ if(isset($_GET['editid'])){
 	$data_count = DB::queryFirstField('SELECT count(*) FROM '.table($table_name).$where_cond);
 	$data = DB::query('SELECT * FROM '.table($table_name).$where_cond.' ORDER BY m_id DESC '.$limit_cond);
 	foreach($data as &$row){
+		if($type == 'leaveword'){
+			$row[] = '<a href="index.php?action=reply&id='.$row['m_id'].'" target="_blank">回复</a>';
+		}
 		$row[] = '<a href="index.php?action=links&type='.$type.'&editid='.$row['m_id'].'">编辑</a>';
 		foreach($html_sp_key as $sk){
 			if(isset($row[$sk])){

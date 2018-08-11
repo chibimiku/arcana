@@ -1,11 +1,11 @@
-<?php 
+<?php
+define ('IN_INDEX', true); //首页预定义，在common_header里以预先读取全页缓存
 
 //simple player site on route.
 include ('common_header.php');
 ?>
 
 <div class="page_content">
-	
 	<!-- ad area. 好汉饶命系列 -->
 	<div class="adbox">
 		<div class="page_content">

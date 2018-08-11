@@ -23,6 +23,16 @@ function init_type(){
 	return true;
 }
 
+//获取播放器的详情
+function get_player_desc($name){
+	$rs = DB::queryFirstRow('SELECT * FROM '.table('player')." WHERE m_name=%s", $name);
+	if(!$rs){
+		return '';
+	}else{
+		return $rs['m_desc'];
+	}
+}
+
 //读取留言板列表
 function get_leaveword($page = 1, $tpp = 30){
 	$where_cond = ' WHERE m_replyid=0';
@@ -435,6 +445,9 @@ function parse_playdata_detail($in_str, $debug = false){
 	foreach($play_sources as $row1){
 		$data_1 = explode("$$", $row1);
 		//用 $$ 分割之后，前面是整个source的名字，后面是播放数据.各行以#分割
+		if(!isset($data_1[1])){ //分割之后没有东西就返回空了
+			continue;
+		}
 		$data_2 = explode("#", $data_1[1]); //每个源里按行分割的数据
 		$input_array = array(); 
 		$row2_count = 0;
@@ -487,7 +500,8 @@ function set_intval($in_array, $intval_keys){
 //显示错误信息
 function showmessage($message, $jump_url = '', $title = '提示'){
 	ob_end_clean();
-	echo "<div id=\"error\"><h3>$title</h3><div id=\"error_content\">";
+	echo '<div style="margin: 0 auto;">';
+	echo "<div id=\"error\" class=\"layui-bg-gray\"><h3 class=\"layui-bg-black\">$title</h3><div id=\"error_content\">";
 	echo '<span>'.htmlspecialchars($message).'</span>';
 	echo '</div>';
 	if($jump_url){
@@ -497,6 +511,7 @@ function showmessage($message, $jump_url = '', $title = '提示'){
 	if($jump_url){
 		echo '<script>setTimeout(function(){window.location.href = "'.$jump_url.'"}, 3000);</script>';
 	}
+	echo '</div>';
 	echo '</body></html>';
 	exit();
 }

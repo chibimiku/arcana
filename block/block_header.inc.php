@@ -32,7 +32,8 @@ foreach($nav_tmp as $row){
 				<div class="uInfo head_block head_info">
 					<a onclick="var strHref=window.location.href;this.style.behavior='url(#default#homepage)';this.setHomePage('http://www.tsdm.me');" href="#">设为主页</a> | 
 					<a href="javascript:void(0)" onclick="addFavorite('http://www.tsdm.me','S-DM 新番动漫在线 BD无修动漫在线 ,最新美剧在线-www.tsdm.me');">收藏本站</a> | 
-					<a href="/help.html" target="_blank">网站帮助</a> |
+					<a href="help.php" target="_blank">网站帮助</a> |
+					<a href="javascript:void(0)" id="StranLink" name="StranLink">繁體中文</a>
 					<script type="text/javascript" src="static/js/jianfan.js"></script>
 				</div>
 				<div class="search"> 

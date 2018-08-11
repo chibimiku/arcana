@@ -28,7 +28,7 @@ $field_dict = array(); //字段的中文名称词典。
 ?>
 
 <?php layui_load_module('form');?>
-<form action="<?php echo $_SERVER['PHP_SELF'].'?action=edit_submit&data_id='.$data_id; ?>" method="post" class="layui-form" onsubmit="return refresh_all();">
+<form id="all_data_base" action="<?php echo $_SERVER['PHP_SELF'].'?action=edit_submit&data_id='.$data_id; ?>" method="post" class="layui-form" onsubmit="return refresh_all();">
 	<div class="layui-form-item">
 	<input name="steel" type="hidden" value="" />
 	</div>
@@ -58,6 +58,9 @@ $field_dict = array(); //字段的中文名称词典。
 							<?php echo draw_options($config['type_reverse'],$data[$key], $key);?>
 						<?php }else{?>
 						<input type="<?php echo in_array($key, $hidden_field) ? 'hidden' : 'text';?>" <?php if($key=='m_id'){echo 'disabled="disabled"';}?>class="layui-input" id="<?php echo $key;?>" name="<?php echo $key;?>" value="<?php echo htmlspecialchars($data[$key]);?>" size="40" />
+							<?php if($key == 'm_pic'){ ?>
+								<div id="pic_great_pos" style="height:1px;width:100%"></div>
+							<?php }?>
 						<?php }?>
 					</div>
 				<?php
@@ -104,20 +107,28 @@ $field_dict = array(); //字段的中文名称词典。
 	}); 
 </script>
 <hr class="layui-bg-gray" />
-<form action="index.php?action=upload" method="post" class="layui-form">
-	<div class="layui-form-item">
-		<label for="fileToUpload" class="layui-form-label">图片</label>
-		<div class="layui-input-block">
-			<input id="new_file" type="file" name="fileToUpload" />
-			<button class="layui-btn">上传图片</button><span id="upload_tip"></span>
+
+<div id="pic_upload_form_box">
+	<form id="pic_upload_form" action="index.php?action=upload" method="post" class="layui-form" style="float:left">
+		<div class="layui-form-item">
+			<label for="fileToUpload" class="layui-form-label">图片</label>
+			<div class="layui-input-block">
+				<input id="new_file" type="file" name="fileToUpload" />
+				<button class="layui-btn">上传图片</button><span id="upload_tip"></span>
+			</div>
 		</div>
-	</div>
-</form>
-<img id="preview_img" src="" />
-
+	</form>
+	<img id="preview_img" src="" style="max-height:170px;float:right;"/>
+</div>
 <a href="index.php?action=links&type=review&videoid=<?php echo $data_id;?>">【编辑评论】</a>
-<script>
 
+<script>
+$('#pic_upload_form_box').css("position", "absolute");
+$('#pic_upload_form_box').css("top", $('#pic_great_pos').offset().top + "px");
+$('#pic_upload_form_box').css("left", $('#pic_great_pos').offset().left + "px");
+</script>
+
+<script>
 var eleFile = document.querySelector('#new_file');
 img = document.getElementById("preview_img");
 var reader = new FileReader();
@@ -136,6 +147,9 @@ reader.readAsDataURL(file);
 
 // base64地址图片加载完毕后
 img.onload = function () {
+	//把upload框显示出来
+	$("#pic_great_pos").css("height", "175px");
+	
 	image_type_str = file.type;
 	console.log(image_type_str);
 	// canvas转为blob并上传
@@ -212,6 +226,7 @@ function refresh_val(s_name){
 	}
 	//console.log(new_downdata);
 	$('#' + s_name).val(new_downdata);
+	console.log("refresh " + s_name + " completed.");
 }
 
 //把上述更新绑定给提交方法

@@ -38,6 +38,9 @@ switch($_GET['action']){
 	case 'upload':
 		include 'upload.inc.php';
 		break;
+	case 'reply':
+		include 'reply.inc.php';
+		break;
 	default:
 		include 'main.inc.php';
 }

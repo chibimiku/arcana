@@ -72,6 +72,8 @@ if($_GET['action'] == 'upload'){
 			if($upload_done === 0){
 				rename ($upload_temp_file_path, $real_filename.'.'.$image_ext); //把临时文件挪到真正的上传目录下。
 				$my_dir = $real_filename.'.'.$image_ext;
+				//干掉 ../
+				$my_dir = str_replace('../', '', $my_dir);
 				$upload_done = 1;
 				$msg = '上传成功、';
 			}

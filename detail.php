@@ -81,11 +81,14 @@ insert_playlist($data);
 			<!-- 播放器数据展示 start -->
 			<?php foreach($play_show_data as $play_row){?>
 				<div class="playurl">
-					<div class="title"><span class="ckpdirect" name="1"></span><span class="ckpdirect">720P播放海外线路 如无法播放请F5刷新</span></div>
+					<div class="title"><span class="player_desc <?php echo $play_row['source_name']?>"><?php echo get_player_desc($play_row['source_name']);?></span></div>
 					<div class="bfdz">
 						<ul>
+							<?php $num_playdata = count($play_row['data']); $i_count = 0;?>
 							<?php foreach($play_row['data'] as $p_row){?>
-								<li><a href="play.php?id=<?php echo $playid;?>&source_id=<?php echo $play_row['source_id'];?>&row_id=<?php echo $p_row['row_id'];?>"><?php echo $p_row['name'];?></a></li>
+								<li><a href="play.php?id=<?php echo $playid;?>&source_id=<?php echo $play_row['source_id'];?>&row_id=<?php echo $p_row['row_id'];?>"><?php echo $p_row['name'];?>
+								<?php if(++$i_count === $num_playdata) {echo '<em class="ts_new_em"></em>';}?>
+								</a></li>
 							<?php }?>
 						</ul>
 					</div>

@@ -38,72 +38,83 @@ if(!isset($_GET['page'])){
 
 $tpp = 20;
 $result_array = array(); //公用存放结果的集合
-$cache_key = md5($query.'_'.$letter.'_'.$type);
 
 $query_field = array('m_id','m_name','m_pic','m_note','m_type','m_hit','m_datetime');
-$search_url = '';
-switch ($mode){
-	case 'letter':
-		if(empty($letter)){
-			showmessage('错误，没有字母。');
-		}
-		$allow_letter = array();
-		for($i=65;$i<91;$i++){  
-			$allow_letter[] = chr($i);
-		}
-		
-		if(!in_array($letter, $allow_letter)){
-			showmessage('错误的查询字母。');
-		}
-		$result_tmp = DB::query('SELECT '.implode(',', $query_field).' FROM '.table('data')." WHERE m_letter=%s", $letter);
-		foreach($result_tmp as $row){
-			if(!isset($result_array[$row['m_id']])){
-				$result_array[$row['m_id']] = $row;
+$search_url = init_search_url($mode, array('letter' => $letter, 'type' => $type, 'query' => $query));
+
+$cache_key = 'SEARCH_'.md5($query.'_'.$letter.'_'.$type);
+
+$need_save_cache = false;
+//尝试读取缓存
+$cache_result = cache_load($cache_key);
+if(!$cache_result){ //没有读取到缓存，开始从db里面读取数据
+	switch ($mode){
+		case 'letter':
+			if(empty($letter)){
+				showmessage('错误，没有字母。');
 			}
-		}
-		unset($result_tmp);
-		$result_tmp = DB::query('SELECT '.implode(',', $query_field).' FROM '.table('data')." WHERE m_letter=%s", strtolower($letter)); //同时包含大小写数据
-		foreach($result_tmp as $row){
-			if(!isset($result_array[$row['m_id']])){
-				$result_array[$row['m_id']] = $row;
+			$allow_letter = array();
+			for($i=65;$i<91;$i++){  
+				$allow_letter[] = chr($i);
 			}
-		}
-		unset($result_tmp);
-		$search_url = '&letter='.$letter;
-		break;
-	case 'type':
-		$result_tmp = DB::query('SELECT '.implode(',', $query_field).' FROM '.table('data')." WHERE m_type=%i", $type); //同时包含大小写数据
-		foreach($result_tmp as $row){
-			if(!isset($result_array[$row['m_id']])){
-				$result_array[$row['m_id']] = $row;
+			
+			if(!in_array($letter, $allow_letter)){
+				showmessage('错误的查询字母。');
 			}
-		}
-		$search_url = '&type='.$type;
-		break;
-	default:
-		if(empty($query)){
-			showmessage('错误，没有查询词。');
-		}
-		$query_part = explode(' ', $query, 5);
-		foreach($query_part as $query_single){
-			$result_tmp = DB::query('SELECT '.implode(',', $query_field).' FROM '.table('data')." WHERE m_name LIKE %ss", $query_single); //依次query出来所有的数据
-			foreach($result_tmp as $result_row){
-				if(!isset($result_array[$result_row['m_id']])){
-					$result_array['m_id'] = $result_row;
+			$result_tmp = DB::query('SELECT '.implode(',', $query_field).' FROM '.table('data')." WHERE m_letter=%s", $letter);
+			foreach($result_tmp as $row){
+				if(!isset($result_array[$row['m_id']])){
+					$result_array[$row['m_id']] = $row;
 				}
 			}
-		}
-		$search_url = '&query='.$query;
-		//提取出全部结果
-		//TODO：缓存结果
+			unset($result_tmp);
+			$result_tmp = DB::query('SELECT '.implode(',', $query_field).' FROM '.table('data')." WHERE m_letter=%s", strtolower($letter)); //同时包含大小写数据
+			foreach($result_tmp as $row){
+				if(!isset($result_array[$row['m_id']])){
+					$result_array[$row['m_id']] = $row;
+				}
+			}
+			unset($result_tmp);
+			break;
+		case 'type':
+			$result_tmp = DB::query('SELECT '.implode(',', $query_field).' FROM '.table('data')." WHERE m_type=%i", $type); //同时包含大小写数据
+			foreach($result_tmp as $row){
+				if(!isset($result_array[$row['m_id']])){
+					$result_array[$row['m_id']] = $row;
+				}
+			}
+			break;
+		default:
+			if(empty($query)){
+				showmessage('错误，没有查询词。');
+			}
+			$query_part = explode(' ', $query, 5);
+			foreach($query_part as $query_single){
+				$result_tmp = DB::query('SELECT '.implode(',', $query_field).' FROM '.table('data')." WHERE m_name LIKE %ss", $query_single); //依次query出来所有的数据
+				foreach($result_tmp as $result_row){
+					if(!isset($result_array[$result_row['m_id']])){
+						$result_array['m_id'] = $result_row;
+					}
+				}
+			}
+			//提取出全部结果
+	}
+	$need_save_cache = true;
+}else{
+	$result_array = unserialize($cache_result);
 }
 
 //记录总结果数
 $total_item = count($result_array);
 
+//保存缓存
+if($need_save_cache){
+	cache_save($cache_key,serialize($result_array),3600);
+}
+
 //进行分页
 $offset = ($page - 1) * $tpp;
-$result_array= array_slice($result_array, $offset, $tpp, true);
+$result_array = array_slice($result_array, $offset, $tpp, true);
 
 //记录日志
 DB::insert(table('search_log'), array('query' => $query, 'from_ip' => $info['userip'], 'timestamp' => TIMESTAMP));
@@ -119,7 +130,7 @@ DB::insert(table('search_log'), array('query' => $query, 'from_ip' => $info['use
 						<a href="detail.php?id=<?php echo $row['m_id'];?>"><img src="<?php echo $row['m_pic'];?>" /></a>
 					</div>
 					<div class="intro">
-						<h6><a href="<?php echo $row['m_id'];?>"><?php echo htmlspecialchars($row['m_name']);?></a></h6>
+						<h6><a href="detail.php?id=<?php echo $row['m_id'];?>"><?php echo htmlspecialchars($row['m_name']);?></a></h6>
 						<em>状态：<span><?php echo $row['m_note'];?></span></em>
 						<em>类型：<?php echo get_cata_name_by_id($row['m_type']);?></em>
 						<em>人气：<?php echo $row['m_hit'];?></em>
@@ -170,6 +181,20 @@ function init_var($var_s_name){
 	return $in_var;
 }
 
+//设置 search_url 翻页url参数
+function init_search_url($mode, $s_var){
+	switch ($mode){
+		case 'letter':
+			$search_url = '&letter='.$s_var['letter'];
+			break;
+		case 'type':
+			$search_url = '&type='.$s_var['type'];
+			break;
+		default:
+			$search_url = '&query='.$s_var['query'];
+	}
+	return $search_url;
+}
 
 include ('common_footer.php');
 ?>
