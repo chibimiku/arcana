@@ -12,15 +12,20 @@ $row_id = intval($_GET['row_id']);
 //读取播放数据
 $playid = intval($_GET['id']);
 $data = DB::queryFirstRow('SELECT * FROM '.table('data')." WHERE m_id=%i", intval($playid));
+if(!$data){
+	showmessage("无法找到数据，请在留言板回馈错误ID。", 'guest.php');
+}
 //解析数据
 $play_show_data = parse_playdata_detail($data['m_playdata']);
 //获取parse之后的playdata里面的数据
 $rs = $play_show_data[$source_id]['data'][$row_id];
 $has_next = isset($play_show_data[$source_id]['data'][$row_id + 1]) ? true : false;
 $has_prev = isset($play_show_data[$source_id]['data'][$row_id -1 ]) ? true : false;
-echo '<br /><br />';
+update_hitnum($playid); //更新点击数
 ?>
 
+<br />
+<br />
 <div class="phere">
 	<div id="crumblink" class="channel">
 		<a href="/">首页</a>»
@@ -36,10 +41,8 @@ echo '<br /><br />';
 		<div class="playable_box">
 			<div>
 				<div>
-					<script type="text/javascript" language="javascript" src="/js/ads/play_640-40-2.js"></script>
-					<a class="topban_1" id="topban" href="http://www.acmoba.com/download.html?from=tssp" target="_blank">
-						<img id="topbanimg" src="http://wx3.sinaimg.cn/large/7044f931gy1fqi9hcwr4hj20go02iq4i.jpg" alt="天使动漫" width="640" height="90" />
-					</a>
+					<div><?php echo draw_ad('play_box_bottom_01');?></div>
+					<div><?php echo draw_ad('play_box_bottom_02');?></div>
 				</div>
 				<div id="play_control">
 					<a href="<?php echo $has_prev ? 'play.php?id='.$playid.'&source_id='.$source_id.'&row_id='.($row_id-1) : 'javascript:void(0)'?>">
@@ -53,22 +56,17 @@ echo '<br /><br />';
 					</a>
 					<a id="w_switcher" href="javascript:void(0);" onclick="switch_wide();">【宽屏模式】</a>
 				</div>
+				<div>
+					<?php echo draw_ad('play_box_bottom_sp');?>
+				</div>
 			</div>
 		</div>
 	</div>
 	<div class="a300 play_right">
 		<div>
-			<script type="text/javascript" language="javascript" src="/js/ads/play_300-250.js"></script>
-			<a class="topban_1" id="topban" href="https://show.bilibili.com/platform/detail.html?id=12967&amp;from=pc" target="_blank"><img id="topbanimg" src="http://wx1.sinaimg.cn/large/7044f931gy1ft5pl8wfkbj208c06yace.jpg" alt="天使动漫" width="300" height="250">
-			</a>
+			<div><?php echo draw_ad('play_right_01');?></div>
+			<div style="margin-top:5px;"><?php echo draw_ad('play_right_02');?></div>
 		</div>
-		<table border="0" cellpadding="0" cellspacing="0" width="100%">
-		<tbody><tr><td></td></tr>
-		<tr>
-			<td>
-				<div><script type="text/javascript" language="javascript" src="/js/ads/play_300-250-2.js"></script><script src="http://js.wo-x.cn/29604"></script></div>
-			</td>
-		</tr></tbody></table>
 	</div>
 	<div class="cl"></div>
 </div>
@@ -135,6 +133,14 @@ function make_player_by_name($player_name, $player_vars, $insert_key = '__P_VAR_
 	$player_info['m_html'] = str_replace_limit('__P_WIDTH__', $re_width, $player_info['m_html'], 1);
 	$player_info['m_html'] = str_replace_limit('__P_HEIGHT__', $re_height, $player_info['m_html'], 1);
 	return $player_info['m_html'];
+}
+
+//更新播放数
+function update_hitnum($p_id){
+	DB::query('UPDATE '.table('data')." SET m_hit=m_hit+1 WHERE m_id=%i", $p_id);
+	DB::query('UPDATE '.table('data')." SET m_dayhit=m_dayhit+1 WHERE m_id=%i", $p_id);
+	DB::query('UPDATE '.table('data')." SET m_weekhit=m_weekhit+1 WHERE m_id=%i", $p_id);
+	DB::query('UPDATE '.table('data')." SET m_monthhit=m_monthhit+1 WHERE m_id=%i", $p_id);
 }
 
 include ('common_footer.php');

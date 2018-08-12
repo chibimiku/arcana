@@ -8,6 +8,7 @@ include 'lib/meekrodb.2.3.class.php'; //db lib需要在db conf前面加载
 include 'conf/db.inc.php';
 include 'lib/function_common.inc.php'; //一些常见的公用函数
 include 'lib/function_cache.inc.php'; //一些常见的公用函数
+include 'lib/function_template.inc.php'; //用于处理公用的模板函数
 
 //首页缓存
 if(defined('IN_INDEX')){

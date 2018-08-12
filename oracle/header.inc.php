@@ -9,6 +9,7 @@ include '../conf/config.inc.php';
 include '../lib/meekrodb.2.3.class.php'; //db lib需要在db conf前面加载
 include '../conf/db.inc.php';
 include '../lib/function_common.inc.php'; //一些常见的公用函数
+include '../lib/function_template.inc.php'; //一些常见的公用函数
 include 'data_fieldname.inc.php'; //加载一下表格字段名称的中文
 
 init_type(); //载入type中文名称
