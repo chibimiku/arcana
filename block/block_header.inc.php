@@ -22,7 +22,7 @@ foreach($nav_tmp as $row){
 <div id="header">
 	<!-- 顶部第一个广告 start-->
 	<div class="box_960 box">
-		<script type="text/javascript" language="javascript" src="static/js/ads/long_title1.js"></script>
+		<?php echo draw_ad('common_header_top_01');?>
 	</div>
 	<!-- 顶部第一个广告 end-->
 	<div id="head">
@@ -64,10 +64,15 @@ foreach($nav_tmp as $row){
 				}
 			?>
 			</p>
-
 		</div>	
 	</div>
 	<div class="cl"></div>
+	<div class="page_content">
+		<?php echo draw_ad('common_header_01');?>
+	</div>
+	<div class="page_content">
+		<?php echo draw_ad('common_header_02');?>
+	</div>
 </div>
 
 <!-- block header end -->

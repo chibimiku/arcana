@@ -3,6 +3,10 @@ ol, ul, li, dl, dt, dd {
     list-style: none;
 }
 
+address, cite, dfn, em, code, var, caption, th {
+	font-style: normal;
+}
+
 a { color: #222;
     text-decoration: none;
 }

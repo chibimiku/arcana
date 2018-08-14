@@ -24,19 +24,6 @@ insert_playlist($data);
 		<h3>当前位置：<a href="/">首页</a> » <?php echo output_type_a($data['m_type']);?> » <big><?php echo $data['m_name'];?></big></h3>
 	</div>
 	
-	<!-- 啊！ start -->
-	<div class="page_content">
-		<div class="a960">
-			<script type="text/javascript" language="javascript" src="static/js/ads/top2_96090.js"></script>
-		</div>
-	</div>
-	<div class="page_content">
-		<div class="a960">
-			<script type="text/javascript" language="javascript" src="static/js/ads/top96090.js"></script>
-		</div>
-	</div>
-	<!-- 啊！ end-->
-	
 	<div class="box960-top"></div>
 	<div class="box960-mid-box fix">
 		<div class="box960-mid-minfo fix">
@@ -44,7 +31,7 @@ insert_playlist($data);
 				<div class="mimg"><img src="<?php echo $data['m_pic'];?>" alt="<?php echo $data['m_name'];?>" /></div>
 				<div class="mtext">
 					<ul>
-						<li><h1><?php echo $data['m_name']?></h1> <em>最新10集连载中 只是+一个播放</em></li>
+						<li><h1><?php echo $data['m_name']?></h1> <em><?php echo $data['m_note'];?></em></li>
 						<li><span>分类：</span><?php echo output_type_a($data['m_type']);?></li>
 						<li><span>更新：</span><?php echo $data['m_datetime']?></li>
 						<li><span>分享：</span>
@@ -52,17 +39,17 @@ insert_playlist($data);
 							<input type="button" onclick="copyToClipboard($('page_url').value)" value="复制地址" class="addresbt" name="Button" />
 						</li>
 					</ul>
-					<div><script type="text/javascript" language="javascript" src="static/js/ads/content_450-70.js"></script></div>
+					<div><?php echo draw_ad('detail_middle_02');?></div>
 				</div>
 				<div class="blank5"></div>
 				<div id="content_box_60090">
-					<script type="text/javascript" language="javascript" src="static/js/ads/60090.js"></script>
+					<?php echo draw_ad('detail_middle_01');?>
 				</div>
 				<div class="cl"></div>
 			</div>
 			<div class="m-ads">
 				<div id="content_box_300250">
-					<p align="center"><script type="text/javascript" language="javascript" src="static/js/ads/300250.js"></script></p>
+					<p align="center"><?php echo draw_ad('detail_middle_03');?></p>
 				</div>
 			</div>
 		</div>
@@ -75,7 +62,7 @@ insert_playlist($data);
 			<!-- 一股邪恶力量 -->
 			<div id="content_box_72890_out">
 				<div id="content_box_72890">
-					<p align="center"><script type="text/javascript" language="javascript" src="static/js/ads/index72890.js"></script></p>
+					<p align="center"><?php echo draw_ad('detail_middle_04');?></p>
 				</div>
 			</div>
 			<!-- 播放器数据展示 start -->
@@ -144,7 +131,6 @@ insert_playlist($data);
 	<!-- 介绍块 end -->
 	
 	<div class="box960-mid"></div>
-	<div class="sucks"><script type="text/javascript" language="javascript" src="static/js/ads/468_15.js"></script></div>
 	<div class="box960-mid-box">
 		<div class="box960-mid-minfo">
 		<?php include 'block/block_comment.inc.php'; ?>

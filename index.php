@@ -11,14 +11,14 @@ include ('common_header.php');
 		<div class="page_content">
 			<div class="a960" style="padding:5px 0;">
 				<center>
-					<script type="text/javascript" language="javascript" src="/js/ads/top2_96090.js"></script>
+					<?php echo draw_ad('index_top_01');?>
 				</center>
 			</div>
 		</div>
 		<div class="page_content">
 			<div class="a960" style="padding:5px 0;">
 				<center>
-					<script type="text/javascript" language="javascript" src="/js/ads/top96090.js"></script>
+					<?php echo draw_ad('index_top_02');?>
 				</center>
 			</div>
 		</div>
@@ -202,13 +202,13 @@ include ('common_header.php');
 </div>
 
 <script language="javascript" type="text/javascript">
-		function Show_TabMenu(tabid_num,tabnum){
-			for(var i=0;i<5;i++){document.getElementById("tabcontent_"+tabid_num+i).style.display="none";}
-			for(var i=0;i<5;i++){document.getElementById("tabmenu_"+tabid_num+i).className="";}
-			document.getElementById("tabmenu_"+tabid_num+tabnum).className="TabsOn";
-			document.getElementById("tabcontent_"+tabid_num+tabnum).style.display="block";
-		}
-		</script>
+	function Show_TabMenu(tabid_num,tabnum){
+		for(var i=0;i<5;i++){document.getElementById("tabcontent_"+tabid_num+i).style.display="none";}
+		for(var i=0;i<5;i++){document.getElementById("tabmenu_"+tabid_num+i).className="";}
+		document.getElementById("tabmenu_"+tabid_num+tabnum).className="TabsOn";
+		document.getElementById("tabcontent_"+tabid_num+tabnum).style.display="block";
+	}
+</script>
 
 <div class="page_content">
 	<div class="flink .box_960">
@@ -224,7 +224,7 @@ include ('common_header.php');
 		</ul>
 	</div>
 </div>
-
+<?php include 'block/block_index_pic_footer.inc.php';?>
 <?php 
 include ('common_footer.php');
 ?>

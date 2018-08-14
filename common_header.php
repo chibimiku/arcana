@@ -68,5 +68,8 @@ if(!defined('IN_PLAYER')){
 	include 'block/block_header.inc.php';
 	include 'block/block_week.inc.php'; //每周新番的block显示，remastered. 
 }
+
+//加载cron
+include 'lib/cron_hit.inc.php';
 ?>
 
