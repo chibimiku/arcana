@@ -24,6 +24,14 @@ a { color: #222;
     overflow: hidden;
 }
 
+.blank10 {
+	height: 10px;
+}
+
+.blank5 {
+	height: 5px;
+}
+
 .cl {
     clear: both;
 }
@@ -1253,10 +1261,24 @@ a { color: #222;
     overflow: hidden;
 }
 
+
+
 .list-rec ul {
     width: 92%;
     margin: 0 auto;
     padding: 3px 0 3px;
+}
+
+.list-rec li span{
+	float:right;
+	width:70px;
+	overflow:hidden;
+}
+
+.list-rec li a{
+	max-width: 148px;
+	overflow:hidden;
+	float:left;
 }
 
 .list-rec li {

@@ -24,7 +24,7 @@ include ('common_header.php');
 		</div>
 	</div>
 	<!-- ad area end -->
-	
+	<div class="blank10"></div>
 	<!-- 新宝岛框架 -->
 	<div class="page_content">
 		
@@ -103,7 +103,7 @@ include ('common_header.php');
 			</div>
 		</div>
 		<!-- 第一行 TAB展示 5格切换 大家观看/观看记录 end -->
-		
+		<div class="blank10"></div>
 		<!-- 第二行 动漫 / 热播榜 start -->
 		<div class="page_content">
 			<div class="box720 fl">
@@ -149,7 +149,7 @@ include ('common_header.php');
 			</div>
 		</div>
 		<!-- 第二行 动漫 / 热播榜 end -->
-		
+		<div class="blank10"></div>
 		<!-- 横向的方格类型展示，图片block -->
 		<?php $pic_block_cata_ids = array(35,58,69);?>
 		<?php foreach($pic_block_cata_ids as $cata_id){
@@ -169,8 +169,11 @@ include ('common_header.php');
 					</div>
 				</div>
 				<!-- cata block end -->
+				<div class="blank10"></div>
+				<div class="blank10"></div>
 			<?php }?>
 		<!-- 横向的方格类型展示，图片block END -->
+		<div class="blank10"></div>
 		<!-- xx排行榜 -->
 		<?php $xx_rank_cata = array(69 => '无修', 51 => '后宫', 54 => '热血', 53 => '恋爱', 56 => '奇幻', 61 => '冒险');?>
 		<div class="page_content">

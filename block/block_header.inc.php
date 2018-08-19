@@ -66,13 +66,9 @@ foreach($nav_tmp as $row){
 			</p>
 		</div>	
 	</div>
+	
 	<div class="cl"></div>
-	<div class="page_content">
-		<?php echo draw_ad('common_header_01');?>
-	</div>
-	<div class="page_content">
-		<?php echo draw_ad('common_header_02');?>
-	</div>
+
 </div>
 
 <!-- block header end -->

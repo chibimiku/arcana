@@ -14,6 +14,26 @@ function draw_ad($en_name){
 	return '<div class="ad_'.$info['m_id'].'">'.$info['m_content'].'</div>';
 }
 
+//根据数据data生成ul数据，和最下面的块方式 generate_ul_block() 不一样
+function draw_data_ul($data, $ul_class = '', $li_class = ''){
+	$ret_str = '<ul class="'.$ul_class.'">';
+	foreach($data as $row){
+		$ret_str = $ret_str.'<li class="'.$li_class.'"><a title="'.htmlspecialchars($row['m_name']).'" href="detail.php?id='.$row['m_id'].'">'.htmlspecialchars($row['m_name']).'</a><span title="'.htmlspecialchars($row['m_note']).'">'.htmlspecialchars($row['m_note']).'</span></li>';
+	}
+	$ret_str = $ret_str.'</ul>';
+	return $ret_str;
+}
+
+function draw_recommend_list($limit = 20, $ul_class = '', $li_class = ''){
+	$data = DB::query('SELECT * FROM '.table('data')." ORDER BY m_commend DESC LIMIT %i", $limit);
+	return draw_data_ul($data, $ul_class, $li_class);
+}
+
+function draw_hit_list($limit = 20, $ul_class = '', $li_class = ''){
+	$data = DB::query('SELECT * FROM '.table('data')." ORDER BY m_hit DESC LIMIT %i", $limit);
+	return draw_data_ul($data, $ul_class, $li_class);
+}
+
 //借用discuz的分页函数
 function multi($num, $perpage, $curpage, $mpurl, $maxpages = 0, $page = 10, $autogoto = TRUE, $simple = FALSE) {
 	//参考 https://blog.csdn.net/zyyr365/article/details/4083053 不过这个人注释写的不是很好
@@ -250,9 +270,7 @@ function get_comment_block_data($data_id, $max_depth = 10){
 function generate_ul_block($title, $data, $class='', $id=''){
 	$return_str = '<div id="'.$id.'" class="'.$class.'"><h3 class="block_title">'.htmlspecialchars($title).'</h3><ul>';
 	foreach($data as $row){
-		$return_str = $return_str.'<li>';
-		$return_str = $return_str.'<a href="'.$row['link'].'" title="'.$row['name'].'"><img src="'.$row['image'].'" /><span>'.$row['name'].'</span></a>';
-		$return_str = $return_str.'</li>';
+		$return_str = $return_str.'<li><a href="'.$row['link'].'" title="'.$row['name'].'"><img src="'.$row['image'].'" /><span>'.$row['name'].'</span></a></li>';
 	}
 	$return_str = $return_str.'</ul></div>';
 }

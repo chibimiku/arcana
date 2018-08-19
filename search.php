@@ -5,13 +5,16 @@ include ('common_header.php');
 
 define('SEARCH_INTERVAL_MAX_COUNT', 3);
 define('SEARCH_INTERVAL_TIME', 2);
+define('SEARCH_TOO_MANY_MESSAGE', '您搜索太过频繁，请过几秒再来吧。');
 
 //检查该IP以前的查询记录
 $last_timestamp = TIMESTAMP - SEARCH_INTERVAL_TIME;
 $search_times = DB::query('SELECT * FROM '.table('search_log')." WHERE from_ip=%s AND timestamp > ".$last_timestamp.' ORDER BY timestamp DESC', $info['userip']);
 if(count($search_times) >= SEARCH_INTERVAL_MAX_COUNT){
-	showmessage('您搜索太过频繁，请过几秒再来吧。');
+	showmessage(SEARCH_TOO_MANY_MESSAGE);
 }
+
+$show_hit = true; //是否显示点击数人气
 
 //对传入query做加工
 $query = init_var('query');
@@ -27,7 +30,11 @@ if(!isset($_GET['mode'])){
 		$mode = '';
 	}
 }else{
-	$mode = $_GET['mode'];
+	$mode = $_GET['mode']; //需要限制GET来的mode在正常的范围内
+}
+
+if($mode == 'type'){
+	$show_hit = false; //当类型检索时不显示人气
 }
 
 if(!isset($_GET['page'])){
@@ -132,8 +139,8 @@ DB::insert(table('search_log'), array('query' => $query, 'from_ip' => $info['use
 					<div class="intro">
 						<h6><a href="detail.php?id=<?php echo $row['m_id'];?>"><?php echo htmlspecialchars($row['m_name']);?></a></h6>
 						<em>状态：<span><?php echo $row['m_note'];?></span></em>
-						<em>类型：<?php echo get_cata_name_by_id($row['m_type']);?></em>
-						<em>人气：<?php echo $row['m_hit'];?></em>
+						<em>类型：<a href="search.php?type=<?php echo $row['m_type'];?>"><?php echo get_cata_name_by_id($row['m_type']);?></a></em>
+						<?php if($show_hit){?><em>人气：<?php echo $row['m_hit'];?></em><?php }?>
 						<em>更新：<?php echo $row['m_datetime'];?></em>
 					</div>
 				</li>
@@ -144,7 +151,7 @@ DB::insert(table('search_log'), array('query' => $query, 'from_ip' => $info['use
 	<!-- 右侧推荐 start -->
 	<div class="box250 fr">
 		<div class="search_right_box">
-			<script type="text/javascript" language="javascript" src="static/js/ads/250200.js"></script>
+			<?php echo draw_ad('search_right_01');?>
 		</div>
 		<div class="blank10"></div>
 		<h3 class="titbar"><span>&nbsp;</span><em class="hkdsj">推荐</em></h3>
@@ -156,8 +163,18 @@ DB::insert(table('search_log'), array('query' => $query, 'from_ip' => $info['use
 				<?php }?>
 			</ul>
 		</div>
+		<div class="blank10"></div>
+		<h3 class="titbar"><em>推荐</em></h3>
+		<div class="list-rec fix">
+			<?php echo draw_recommend_list(20, 'fix', '');?>
+		</div>
+		<div class="blank10"></div>
+		<h3 class="titbar"><em>点击排行</em></h3>
+		<div class="list-rec fix">
+			<?php echo draw_hit_list(20, 'fix', '');?>
+		</div>
 	</div>
-	<!-- 右侧推荐 emd -->
+	<!-- 右侧推荐 end -->
 	<div class="cl"></div>
 </div>
 <div class="page_content">
