@@ -41,6 +41,9 @@ switch($_GET['action']){
 	case 'reply':
 		include 'reply.inc.php';
 		break;
+	case 'delete':
+		include 'delete.inc.php';
+		break;
 	default:
 		include 'main.inc.php';
 }

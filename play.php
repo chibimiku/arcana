@@ -15,6 +15,10 @@ $data = DB::queryFirstRow('SELECT * FROM '.table('data')." WHERE m_id=%i", intva
 if(!$data){
 	showmessage("无法找到数据，请在留言板回馈错误ID。", 'guest.php');
 }
+
+if(!$data['m_enabled']){
+	showmessage("无法找到正常数据，请在留言板回馈错误ID。", 'guest.php');
+}
 //解析数据
 $play_show_data = parse_playdata_detail($data['m_playdata']);
 //获取parse之后的playdata里面的数据

@@ -4,6 +4,10 @@ if(!defined('IN_ARCANA_ADMIN')){
 	exit('Access Deined.');
 }
 
+if(!isset($_GET['data_id'])){
+	showmessage('没有输入正确的data_id。', 'index.php');
+}
+
 $add_data = false;
 $data_id = intval($_GET['data_id']);
 $data = DB::queryFirstRow('SELECT * FROM '.table('data')." WHERE m_id=%i", $data_id);

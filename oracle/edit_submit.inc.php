@@ -22,8 +22,20 @@ if($is_update){
 	DB::insert(table('data'), $insert_data);
 	$new_id = DB::insertId(); 
 	showmessage('添加数据完成，新的ID是：'.$new_id, 'index.php?action=list&type=video');
+}else if(isset($_GET['delete_id'])){
+	$delete_id = intval($_GET['delete_id']);
+	$rs_del = DB::queryFirstRow('SELECT * FROM '.table('data')." WHERE m_id=%i", $delete_id);
+	if(!$rs_del){
+		showmessage('找不到'.$delete_id, 'index.php');
+	}
+	if(!$rs_del['m_enabled']){
+		DB::update(table('data'), array('m_enabled' => 1), "m_id=%i", $delete_id);
+	}else{
+		DB::update(table('data'), array('m_enabled' => 0), "m_id=%i", $delete_id);
+	}
+	showmessage('屏蔽/恢复数据'.$delete_id.'完成，', 'index.php?action=list&type=video');
 }else{
-	showmessage('error');
+	showmessage('错误，没有正确的输入', 'index.php');
 }
 
 //根据表格内容，找post里面的数据进行填充

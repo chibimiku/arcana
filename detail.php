@@ -8,6 +8,10 @@ $data = DB::queryFirstRow('SELECT * FROM '.table('data')." WHERE m_id=%i", intva
 if(!$data){
 	showmessage('错误：无法找到数据。');
 }
+if(!$data['m_enabled']){
+	showmessage('错误：无法找到数据。');
+}
+
 //解析数据
 $play_show_data = parse_playdata_detail($data['m_playdata'], false);
 
